@@ -1,0 +1,53 @@
+site_name: Documentations et cours BTS SIO Loris-R
+extra_css:
+  - stylesheets/extra.css
+theme:
+  name: material
+  custom_dir: overrides
+  language: fr # <-- Traduit l'interface en français
+  features:
+    - content.code.copy
+    - navigation.tracking # <-- La ToC met en surbrillance le titre où tu te trouves
+    - navigation.top      # <-- Ajoute un bouton "Retour en haut" au scroll
+    - toc.follow          # <-- La ToC défile automatiquement avec ta lecture
+    
+  palette: 
+    - scheme: slate
+      primary: green
+      accent: green
+      
+
+nav:
+  - Accueil: index.md
+  - B2 (SISR):
+      - Documentation d'installation GLPI: InstallationGLPI.md
+  - B1 (Dev):
+      - À venir: b1-dev.md
+  - B3 (Cybersécurité):
+      - À venir: b3-cyber.md
+  - Stages:
+      - À venir: stage.md
+  - Linux:
+      - À venir: linux.md
+  - Windows:
+      - À venir: windows.md
+
+markdown_extensions:
+  - toc:
+      permalink: true # <-- Ajoute un petit lien d'ancrage (¶) très élégant au survol des titres
+  - admonition
+  - pymdownx.details  # Permet de faire des blocs dépliants
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - tables            # Active les tableaux
+  - pymdownx.superfences: # Appel unique de l'extension avec sa configuration
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg

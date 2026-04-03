@@ -1,0 +1,12 @@
+.md-grid {
+  max-width: 85rem; /* Par défaut c'est environ 61rem ou 76rem. 85rem donne cet effet "large" parfait. */
+}
+
+/* Effet de bloc en surbrillance sur le menu de navigation (adaptatif) */
+.md-sidebar--primary .md-nav__item--active > .md-nav__link {
+    /* Mélange ta couleur principale actuelle avec du transparent (à 15%) */
+    background-color: color-mix(in srgb, var(--md-primary-fg-color) 15%, transparent);
+    border-radius: 0.2rem;
+    padding-left: 0.5rem;
+    margin-left: -0.5rem;
+}
