@@ -1,4 +1,5 @@
 
+```markdown
 # Documentation : Installation GLPI 9.5.6 sur Debian 13
 
 **Auteur :** Loris.R   
@@ -8,7 +9,7 @@
 ---
 
 !!! abstract "Introduction : Environnement et Objectifs"
-    Pour réaliser ce TP, l'objectif était d'installer la version spécifique **GLPI 9.5.6** sur un serveur fraîchement installé sous **Debian 13**. Ce document retrace l'intégralité du processus de réflexion, les obstacles liés à l'obsolescence logicielle, et la transition vers une architecture moderne par conteneurisation pour résoudre ces conflits.
+    Pour réaliser ce TP, l'objectif était d'installer la version spécifique **GLPI 9.5.6** sur un serveur fraîchement installé sous **Debian 13**. Ce document retrace l'intégralité de mon processus de réflexion, les obstacles liés à l'obsolescence logicielle rencontrés, et la transition vers une architecture moderne par conteneurisation pour résoudre ces conflits.
 
 ---
 
@@ -46,7 +47,7 @@ flowchart LR
 
 ## Tentative d'installation native
 
-Initialement, la démarche a consisté à installer les paquets nativement sur l'OS (Apache2, MariaDB, PHP). Cependant, la première exécution du script d'installation web de GLPI a retourné une erreur bloquante à l'étape 3 (Initialisation de la base de données).
+Initialement, ma démarche a consisté à installer les paquets nativement sur l'OS (Apache2, MariaDB, PHP). Cependant, la première exécution du script d'installation web de GLPI a retourné une erreur bloquante à l'étape 3 (Initialisation de la base de données).
 
 ### Le problème de syntaxe MariaDB
 
@@ -60,7 +61,7 @@ Cette erreur s'explique par un fossé générationnel entre GLPI 9.5.6 (sorti ve
 
 ### Contournement SQL
 
-Pour forcer l'installation, plusieurs commandes de modification directe ont été tapées :
+Pour forcer l'installation, j'ai exécuté plusieurs commandes de modification directe :
 
 ```bash
 sed -i 's/TYPE=InnoDB/ENGINE=InnoDB/g' /var/www/html/glpi/install/mysql/*.sql
@@ -76,7 +77,7 @@ SET GLOBAL innodb_strict_mode = OFF;
 * **Effet :** Baisse temporairement la sécurité et la rigueur de MariaDB pour qu'il ignore les erreurs liées aux mots réservés.
 
 !!! warning "Résultat de l'approche native"
-    Cependant, malgré ces hacks et le remplacement des fichiers SQL, l'architecture native PHP/MariaDB continuait de générer des requêtes corrompues à la volée, rendant l'installation impossible.
+    Cependant, malgré ces ajustements et le remplacement des fichiers SQL, l'architecture native PHP/MariaDB continuait de générer des requêtes corrompues à la volée, rendant l'installation impossible.
 
 ---
 
@@ -86,7 +87,7 @@ Face aux échecs SQL, le problème racine a été identifié : **GLPI 9.5.6 exig
 
 ### L'obsolescence de PHP 7.4
 
-Il a fallu tenter d'importer PHP 7.4 via un dépôt externe (le dépôt officiel Sury).
+J'ai dû tenter d'importer PHP 7.4 via un dépôt externe (le dépôt officiel Sury).
 
 ```bash
 echo "deb [https://packages.sury.org/php/](https://packages.sury.org/php/) bookworm main" > /etc/apt/sources.list.d/php.list
@@ -99,7 +100,7 @@ apt install php7.4
     Cette tentative s'est soldée par une erreur critique d'apt :  
     `Impossible de satisfaire les dépendances : php7.4-intl : Dépend: libicu72 mais il n'est pas installable`
     
-    **Pourquoi cela a échoué :** Debian 13 utilise des bibliothèques systèmes (les fondations de l'OS) très récentes. PHP 7.4 cherche des composants anciens (comme `libldap-2.5-0`) qui n'existent plus. Forcer l'installation aurait cassé le noyau du système d'exploitation. **L'installation native est donc matériellement impossible.**
+    **Pourquoi cela a échoué :** Debian 13 utilise des bibliothèques systèmes (les fondations de l'OS) très récentes. PHP 7.4 cherche des composants anciens (comme `libldap-2.5-0`) qui n'existent plus. Forcer l'installation aurait cassé le noyau du système d'exploitation. **L'installation native m'était donc matériellement impossible.**
 
 ```mermaid
 graph TD
@@ -120,7 +121,7 @@ graph TD
 
 ## Solution de conteneurisation
 
-Pour exécuter un logiciel obsolète sur un système ultra-récent, la seule solution viable est d'isoler l'application.
+Pour exécuter un logiciel obsolète sur un système ultra-récent, la seule solution viable a été d'isoler l'application.
 
 ### Pourquoi utiliser Docker ?
 
@@ -139,7 +140,7 @@ apt autoremove -y
 ```
 * **Effet :** Supprime complètement Apache, MariaDB, PHP et leurs dépendances orphelines, rendant le serveur à nouveau "propre".
 
-Ensuite, nous avons installé et activé l'environnement Docker :
+Ensuite, l'environnement Docker a été installé et activé :
 
 ```bash
 apt install -y docker.io docker-compose
@@ -153,7 +154,7 @@ systemctl enable --now docker
 
 ### L'Infrastructure as Code
 
-Au lieu de taper de longues commandes complexes dans le terminal pour créer nos conteneurs, Docker Compose permet de définir toute notre infrastructure dans un seul fichier texte lisible : `docker-compose.yml`.
+Au lieu de taper de longues commandes complexes dans le terminal pour créer les conteneurs, Docker Compose permet de définir toute l'infrastructure dans un seul fichier texte lisible : `docker-compose.yml`.
 
 ### Décorticage du fichier docker-compose.yml
 
@@ -162,7 +163,7 @@ Voici l'explication ligne par ligne de la configuration déployée :
 ```yaml
 services:
 ```
-> *Déclare le début de la liste de nos "machines" virtuelles. Nous en avons deux : mariadb et glpi.*
+> *Déclare le début de la liste des "machines" virtuelles. Il y en a deux : mariadb et glpi.*
 
 ```yaml
   mariadb:
@@ -170,7 +171,7 @@ services:
     container_name: glpi-mariadb
 ```
 > * **image :** Demande à Docker de télécharger la version exacte 10.5 de MariaDB depuis le Docker Hub. C'est la version idéale pour GLPI 9.5.
-> * **container_name :** Attribue un nom lisible à notre bulle pour faciliter sa gestion future.
+> * **container_name :** Attribue un nom lisible à la bulle pour faciliter sa gestion future.
 
 ```yaml
     environment:
@@ -179,14 +180,14 @@ services:
       - MARIADB_USER=glpi_user
       - MARIADB_PASSWORD=glpi2026
 ```
-> * **environment :** C'est ici que l'on injecte des variables lors du tout premier démarrage. MariaDB lira ces variables et créera automatiquement la base `glpi` et l'utilisateur associé, nous évitant de le faire à la main en ligne de commande SQL.
+> * **environment :** C'est ici que sont injectées les variables lors du tout premier démarrage. MariaDB lira ces paramètres et créera automatiquement la base `glpi` et l'utilisateur associé, évitant ainsi de le faire à la main en ligne de commande SQL.
 
 ```yaml
     volumes:
       - ./mysql_data:/var/lib/mysql
     restart: always
 ```
-> * **volumes :** C'est la persistance des données. Un conteneur est amnésique. Cette ligne crée un pont entre le dossier réel `./mysql_data` sur notre Debian 13 et le dossier virtuel `/var/lib/mysql` dans le conteneur. Les données sont ainsi sauvegardées sur le disque physique.
+> * **volumes :** C'est la persistance des données. Un conteneur est amnésique. Cette ligne crée un pont entre le dossier réel `./mysql_data` sur le serveur Debian 13 et le dossier virtuel `/var/lib/mysql` dans le conteneur. Les données sont ainsi sauvegardées sur le disque physique.
 > * **restart :** Si le serveur redémarre ou plante, Docker le relancera automatiquement.
 
 ```yaml
@@ -196,8 +197,8 @@ services:
     ports:
       - "80:80"
 ```
-> * **image :** On utilise l'image communautaire `diouxx/glpi` avec le tag explicite `php7.4`.
-> * **ports :** Mécanisme de redirection réseau (expliqué en détail dans la section 6).
+> * **image :** L'image communautaire `diouxx/glpi` est utilisée, avec le tag explicite `php7.4`.
+> * **ports :** Mécanisme de redirection réseau (expliqué en détail dans la section sur la redirection de ports).
 
 ```yaml
     environment:
@@ -218,21 +219,21 @@ services:
 
 ## Le piège du moteur PHP
 
-Lors du premier lancement du conteneur avec l'image `diouxx/glpi:latest`, l'installation a planté de nouveau avec une erreur SQL très similaire à nos premiers essais (`near ''0'`).
+Lors du premier lancement du conteneur avec l'image `diouxx/glpi:latest`, l'installation a planté de nouveau avec une erreur SQL très similaire aux premiers essais (`near ''0'`).
 
 ### Erreur d'injection SQL
 
-Le problème venait du tag `:latest` que nous avions initialement utilisé dans notre compose pour l'image GLPI. Le conteneur téléchargeait la dernière version de son propre système, embarquant PHP 8.3. 
+Le problème venait du tag `:latest` que j'avais initialement utilisé dans le fichier compose pour l'image GLPI. Le conteneur téléchargeait la dernière version de son propre système, embarquant PHP 8.3. 
 
 !!! bug "Le changement de comportement de PHP"
     Depuis PHP 8.1, la fonction interne de traitement de texte `htmlentities()` a changé de comportement. Lorsqu'elle lit le script d'installation de GLPI 9.5.6, elle transforme involontairement les guillemets simples en code HTML, ce qui corrompt la requête avant même qu'elle ne soit envoyée à la base de données.
 
 ### Conteneur basé sur Debian 12
 
-C'est pourquoi, dans la configuration finale, nous avons spécifié l'image `diouxx/glpi:php7.4`. La particularité de cette image spécifique est qu'elle contient une architecture logicielle basée sur **Debian 12 (Bookworm)**. 
+C'est pourquoi, dans la configuration finale, j'ai spécifié l'image `diouxx/glpi:php7.4`. La particularité de cette image spécifique est qu'elle contient une architecture logicielle basée sur **Debian 12 (Bookworm)**. 
 
 !!! tip "La magie de l'isolation"
-    Notre serveur hôte tourne sous un OS ultra-récent (Debian 13), mais à l'intérieur de sa bulle isolée, le conteneur fait tourner son propre sous-système Debian 12. Cela a permis au créateur de l'image de fournir proprement PHP 7.4 (qui n'existe plus sous Debian 13) avec toutes ses anciennes dépendances, sans jamais interférer avec notre OS hôte.
+    Le serveur hôte tourne sous un OS ultra-récent (Debian 13), mais à l'intérieur de sa bulle isolée, le conteneur fait tourner son propre sous-système Debian 12. Cela a permis au créateur de l'image de fournir proprement PHP 7.4 (qui n'existe plus sous Debian 13) avec toutes ses anciennes dépendances, sans jamais interférer avec l'OS hôte.
 
 ### Exécution et test final
 
@@ -249,7 +250,7 @@ L'installation web de GLPI a ensuite pu aboutir parfaitement, validant la pertin
 
 ## La redirection de ports
 
-Une fois le conteneur démarré, l'application GLPI est instantanément accessible en tapant simplement l'adresse IP du serveur Debian physique dans un navigateur web. Tout repose sur la directive `ports` du docker-compose.
+Une fois le conteneur démarré, l'application GLPI est instantanément accessible en tapant simplement l'adresse IP du serveur Debian physique dans un navigateur web. Tout repose sur la directive `ports` du fichier docker-compose.
 
 ### Le port HTTP par défaut
 
@@ -343,7 +344,7 @@ apt update
 
 ### 2. Installation de la pile LAMP (Linux,Apache,MariaDB,PHP)
 
-Nous procédons à l'installation du serveur web, du moteur de base de données, et de l'interpréteur PHP accompagné de tous les modules requis par l'application.
+L'étape suivante consiste à installer le serveur web, le moteur de base de données, et l'interpréteur PHP accompagné de tous les modules requis par l'application.
 
 ```bash
 # Installation des moteurs Web et SQL
@@ -405,7 +406,7 @@ chmod -R 755 /var/www/html/glpi
 ```
 
 !!! success "Prêt pour la configuration graphique"
-    L'infrastructure système est désormais totalement déployée et configurée. La suite de l'installation s'effectue via l'assistant web, accessible en tapant `http://[IP_DU_SERVEUR]/glpi` dans un navigateur. (En l'occurence, depuis le 'PC Client' sous Windows)
+    L'infrastructure système est désormais totalement déployée et configurée. La suite de l'installation s'effectue via l'assistant web, accessible en tapant `http://[IP_DU_SERVEUR]/glpi` dans un navigateur. (En l'occurrence, depuis le 'PC Client' sous Windows)
 
 ### 6. Initialisation de Glpi
 
@@ -422,5 +423,3 @@ Lors de l'installation initiale de GLPI, plusieurs comptes sont créés automati
 
 !!! warning "Rappel de sécurité"
     Dès votre première connexion avec le compte `glpi`, il est impératif de modifier ces mots de passe ou de désactiver/supprimer les comptes dont vous n'aurez pas l'utilité. Tant que ces identifiants par défaut sont actifs sur le serveur, GLPI affichera un avertissement de sécurité orange persistant sur le tableau de bord !
-
-
