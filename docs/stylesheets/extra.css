@@ -10,3 +10,8 @@
     padding-left: 0.5rem;
     margin-left: -0.5rem;
 }
+
+/* Justifier le texte de tous les paragraphes de la documentation */
+.md-typeset p {
+    text-align: justify;
+}
