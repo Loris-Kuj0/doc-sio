@@ -362,10 +362,10 @@ Il est nécessaire de provisionner un espace de stockage pour GLPI.
 Dans le terminal Debian, lancez l'invite de commande SQL via `mysql -u root` et exécutez les requêtes suivantes :
 
 ```sql
--- Création de la base de données (avec un encodage universel moderne)
+-- Création de la base de données 
 CREATE DATABASE glpi_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- Création d'un utilisateur dédié (sans mot de passe)
+-- Création d'un utilisateur dédié 
 CREATE USER 'glpi_user'@'localhost' IDENTIFIED BY 'Glpiglpi0';
 
 -- Octroi de tous les privilèges à cet utilisateur sur la base GLPI
