@@ -314,6 +314,22 @@ Puisque les deux services sont séparés dans deux bulles différentes, ils doiv
 
 Dans ce réseau isolé, le moteur Docker agit comme un véritable **serveur DNS interne**. Ainsi, lors de la configuration web finale de GLPI, il n'est pas nécessaire de renseigner une adresse IP complexe pour connecter l'application à la base de données. Le conteneur `glpi-app` peut joindre son voisin en utilisant simplement son nom de service défini dans le fichier YAML : **`mariadb`**. Docker se charge d'intercepter cette requête et de la résoudre en adresse IP interne de manière totalement transparente.
 
+
+
+Installation native (switch vers glpi 10.0.15 et php 8.3)
+
+Tour d'horizon de Glpi
+
+-focus sur la base des conaissances 
+-test de la base de conaissances avec un 
+-installation plugin deux methode: marketplace et wget + scp ssh 
+-fichier csv def et importation grace au plugin data injection
+
+
+
+
+
+
 ---
 
 ## Identifiants de connexion par défaut
@@ -327,4 +343,5 @@ Lors de l'installation initiale de GLPI, plusieurs comptes sont créés automati
 
 !!! warning "Rappel de sécurité"
     Dès votre première connexion avec le compte `glpi`, il est impératif de modifier ces mots de passe ou de désactiver/supprimer les comptes dont vous n'aurez pas l'utilité. Tant que ces identifiants par défaut sont actifs sur le serveur, GLPI affichera un avertissement de sécurité orange persistant sur le tableau de bord !
+
 

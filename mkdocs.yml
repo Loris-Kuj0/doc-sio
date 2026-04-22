@@ -1,3 +1,10 @@
+# Ajoute l'URL de ton dépôt GitHub
+repo_url: https://github.com/Loris-Kuj0/doc-sio
+repo_name: Loris-Kuj0/doc-sio
+
+# Indique le chemin vers tes fichiers (souvent docs/)
+edit_uri: edit/main/docs/
+
 site_name: Documentations et cours BTS SIO Loris-R
 extra_css:
   - stylesheets/extra.css

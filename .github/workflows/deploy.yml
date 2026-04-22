@@ -1,0 +1,28 @@
+name: Déploiement MkDocs
+
+# Dis au robot de se déclencher à chaque modification sur la branche "main"
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Le robot récupère ton code
+      - uses: actions/checkout@v4
+      
+      # 2. Le robot installe Python
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.x
+          
+      # 3. Le robot installe MkDocs et le thème Material
+      - run: pip install mkdocs-material
+      
+      # 4. Le robot déploie le site à ta place !
+      - run: mkdocs gh-deploy --force
