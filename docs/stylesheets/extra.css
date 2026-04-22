@@ -11,12 +11,6 @@
     margin-left: -0.5rem;
 }
 
-/* 1. Par défaut, on justifie tous les paragraphes de la documentation */
 .md-typeset p {
     text-align: justify;
-}
-
-/* 2. Exception : on remet l'alignement à gauche pour les pages avec la classe 'no-justify' */
-.no-justify .md-typeset p {
-    text-align: left;
 }

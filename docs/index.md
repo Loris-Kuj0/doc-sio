@@ -1,7 +1,8 @@
----
-classes:
-  - no-justify
----
+<style>
+  .md-typeset p {
+      text-align: left !important;
+  }
+</style>
 
 # Accueil
 
