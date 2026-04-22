@@ -1,3 +1,4 @@
+
 # Documentation : Installation GLPI 9.5.6 sur Debian 13
 
 **Auteur :** Loris.R   
@@ -16,7 +17,7 @@
 Le schéma ci-dessous illustre l'architecture réseau mise en place entre les différentes machines virtuelles de l'environnement :
 
 ```mermaid
-flowchart LR
+    flowchart LR
     %% Définition des noeuds (Machines et Réseaux)
     Internet(("🌐 INTERNET"))
     
