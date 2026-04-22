@@ -321,35 +321,6 @@ Dans ce réseau isolé, le moteur Docker agit comme un véritable **serveur DNS 
 !!! abstract "Objectif de la migration"
     Face aux limites de la version 9.5.6 (obsolescence logicielle, incompatibilité matérielle), le déploiement d'un **nouveau serveur** avec **GLPI 10.0.15** a été acté.
 
-### Nouvelle Topologie Native
-
-L'abandon de Docker simplifie considérablement les flux. Tous les services s'exécutent désormais directement sur le système hôte, éliminant la nécessité de faire du *Port Forwarding* ou d'utiliser un DNS interne.
-
-```mermaid
-graph TD
-    Debian["🖥️ Serveur Hôte\n(Debian 13)"]
-    
-    subgraph "Pile LAMP Native"
-        Apache["🌐 Apache2\n(Serveur Web)"]
-        PHP["⚙️ PHP 8.3\n(Moteur d'exécution)"]
-        MariaDB["🗄️ MariaDB\n(Base de données)"]
-    end
-    
-    GLPI["📦 GLPI 10.0.15\n(/var/www/html/glpi)"]
-    
-    Debian --> Apache
-    Apache --> PHP
-    PHP --> GLPI
-    GLPI <--> MariaDB
-    
-    %% Style visuel adapté au thème sombre
-    style Debian fill:#2d333b,color:#ffffff,stroke:#4caf50,stroke-width:2px
-    style Apache fill:#2d333b,color:#ffffff,stroke:#29b6f6,stroke-width:2px
-    style PHP fill:#2d333b,color:#ffffff,stroke:#ab47bc,stroke-width:2px
-    style MariaDB fill:#2d333b,color:#ffffff,stroke:#ef5350,stroke-width:2px
-    style GLPI fill:#2d333b,color:#ffffff,stroke:#ffca28,stroke-width:2px
-```
-
 ---
 
 ### 1. Préparation du système et dépôt SURY
@@ -388,9 +359,6 @@ apt install -y php8.3 php8.3-core php8.3-mysql php8.3-xml php8.3-cli php8.3-cas 
 
 Il est nécessaire de provisionner un espace de stockage pour GLPI.
 
-!!! warning "Sécurité des accès SQL"
-    Dans le cadre de ce TP, l'utilisateur de la base de données est volontairement créé **sans mot de passe** pour simplifier l'installation. En environnement de production réel, il est impératif de sécuriser ce compte avec la directive `IDENTIFIED BY 'MotDePasseComplexe'`.
-
 Dans le terminal Debian, lancez l'invite de commande SQL via `mysql -u root` et exécutez les requêtes suivantes :
 
 ```sql
@@ -398,21 +366,13 @@ Dans le terminal Debian, lancez l'invite de commande SQL via `mysql -u root` et 
 CREATE DATABASE glpi10 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Création d'un utilisateur dédié (sans mot de passe)
-CREATE USER 'glpi_user'@'localhost' IDENTIFIED BY '';
+CREATE USER 'glpi_user'@'localhost' IDENTIFIED BY 'Glpiglpi0';
 
 -- Octroi de tous les privilèges à cet utilisateur sur la base GLPI
 GRANT ALL PRIVILEGES ON glpi10.* TO 'glpi_user'@'localhost';
 
--- Application immédiate des nouveaux droits
-FLUSH PRIVILEGES;
-EXIT;
 ```
 
-!!! tip "Injection des Timezones"
-    Afin d'assurer un horodatage précis des tickets et éviter les erreurs dans l'interface, la base de données doit connaître les fuseaux horaires du système. Exécutez cette commande système :
-    ```bash
-    mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql
-    ```
 
 ### 4. Déploiement de GLPI 10.0.15
 
@@ -422,7 +382,7 @@ L'archive officielle est récupérée depuis GitHub et décompressée directemen
 # Se placer dans le répertoire racine web
 cd /var/www/html/
 
-# Téléchargement de l'archive tarball
+# Téléchargement de l'archive
 wget [https://github.com/glpi-project/glpi/releases/download/10.0.15/glpi-10.0.15.tgz](https://github.com/glpi-project/glpi/releases/download/10.0.15/glpi-10.0.15.tgz)
 
 # Extraction (génère automatiquement le dossier /glpi)
@@ -445,7 +405,7 @@ chmod -R 755 /var/www/html/glpi
 ```
 
 !!! success "Prêt pour la configuration graphique"
-    L'infrastructure système est désormais totalement déployée et configurée. La suite de l'installation s'effectue via l'assistant web, accessible en tapant `http://[IP_DU_SERVEUR]/glpi` dans un navigateur.
+    L'infrastructure système est désormais totalement déployée et configurée. La suite de l'installation s'effectue via l'assistant web, accessible en tapant `http://[IP_DU_SERVEUR]/glpi` dans un navigateur. (En l'occurence, depuis le 'PC Client' sous Windows)
 
 
 
