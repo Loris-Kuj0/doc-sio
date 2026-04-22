@@ -46,7 +46,7 @@ Le schéma ci-dessous illustre l'architecture réseau mise en place entre les di
 
 ## Tentative d'installation native
 
-Initialement, ma démarche a consisté à installer les paquets nativement sur l'OS (Apache2, MariaDB, PHP). Cependant, la première exécution du script d'installation web de GLPI a retourné une erreur bloquante à l'étape 3 (Initialisation de la base de données).
+Initialement, La démarche consistait à installer les paquets nativement sur l'OS (Apache2, MariaDB, PHP). Cependant, la première exécution du script d'installation web de GLPI a retourné une erreur bloquante à l'étape 3 (Initialisation de la base de données).
 
 ### Le problème de syntaxe MariaDB
 
