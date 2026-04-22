@@ -315,13 +315,7 @@ Puisque les deux services sont séparés dans deux bulles différentes, ils doiv
 Dans ce réseau isolé, le moteur Docker agit comme un véritable **serveur DNS interne**. Ainsi, lors de la configuration web finale de GLPI, il n'est pas nécessaire de renseigner une adresse IP complexe pour connecter l'application à la base de données. Le conteneur `glpi-app` peut joindre son voisin en utilisant simplement son nom de service défini dans le fichier YAML : **`mariadb`**. Docker se charge d'intercepter cette requête et de la résoudre en adresse IP interne de manière totalement transparente.
 
 
-
-Installation native (switch vers glpi 10.0.15 et php 8.3)
-
-
-
-
-
+88
 
 
 ---
