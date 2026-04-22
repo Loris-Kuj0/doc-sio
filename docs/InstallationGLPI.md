@@ -341,7 +341,7 @@ apt update
 ```
 * **Effet :** Autorise le gestionnaire APT à télécharger des paquets fiables depuis un serveur externe spécialisé dans le maintien des dernières versions de PHP.
 
-### 2. Installation de la pile LAMP
+### 2. Installation de la pile LAMP (Linux,Apache,MariaDB,PHP)
 
 Nous procédons à l'installation du serveur web, du moteur de base de données, et de l'interpréteur PHP accompagné de tous les modules requis par l'application.
 
@@ -363,13 +363,13 @@ Dans le terminal Debian, lancez l'invite de commande SQL via `mysql -u root` et 
 
 ```sql
 -- Création de la base de données (avec un encodage universel moderne)
-CREATE DATABASE glpi10 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE glpi_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Création d'un utilisateur dédié (sans mot de passe)
 CREATE USER 'glpi_user'@'localhost' IDENTIFIED BY 'Glpiglpi0';
 
 -- Octroi de tous les privilèges à cet utilisateur sur la base GLPI
-GRANT ALL PRIVILEGES ON glpi10.* TO 'glpi_user'@'localhost';
+GRANT ALL PRIVILEGES ON glpi_db.* TO 'glpi_user'@'localhost';
 
 ```
 
@@ -394,7 +394,7 @@ rm glpi-10.0.15.tgz
 
 ### 5. Sécurisation des droits d'accès
 
-Pour que le serveur web Apache puisse interagir avec les dossiers (upload de documents, mise à jour des plugins, génération de logs), l'utilisateur système qui fait tourner le processus web doit en devenir le propriétaire légitime.
+Pour que le serveur web Apache puisse interagir avec les dossiers (upload de documents, mise à jour des plugins, génération de logs), l'utilisateur système qui fait tourner le processus web doit en devenir le propriétaire.
 
 ```bash
 # Attribution du dossier GLPI à l'utilisateur système d'Apache (www-data)
@@ -407,7 +407,7 @@ chmod -R 755 /var/www/html/glpi
 !!! success "Prêt pour la configuration graphique"
     L'infrastructure système est désormais totalement déployée et configurée. La suite de l'installation s'effectue via l'assistant web, accessible en tapant `http://[IP_DU_SERVEUR]/glpi` dans un navigateur. (En l'occurence, depuis le 'PC Client' sous Windows)
 
-
+### 6. Initialisation de Glpi
 
 ---
 
