@@ -1,3 +1,8 @@
+---
+classes:
+  - no-justify
+---
+
 # Accueil
 
 Documentation BTS SIO de Loris-R. Choisissez une catégorie ci-dessous pour commencer :
