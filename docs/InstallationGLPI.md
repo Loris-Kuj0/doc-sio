@@ -315,7 +315,100 @@ Puisque les deux services sont séparés dans deux bulles différentes, ils doiv
 Dans ce réseau isolé, le moteur Docker agit comme un véritable **serveur DNS interne**. Ainsi, lors de la configuration web finale de GLPI, il n'est pas nécessaire de renseigner une adresse IP complexe pour connecter l'application à la base de données. Le conteneur `glpi-app` peut joindre son voisin en utilisant simplement son nom de service défini dans le fichier YAML : **`mariadb`**. Docker se charge d'intercepter cette requête et de la résoudre en adresse IP interne de manière totalement transparente.
 
 
-88
+## Évolution : Migration vers GLPI 10.0.15 en natif (PHP 8.3)
+
+Face aux limites de la version 9.5.6 (notamment son obsolescence et son incompatibilité avec les systèmes modernes), le déploiement d'un **nouveau serveur** avec GLPI 10.0.15 a été décidé. Cette version étant parfaitement compatible avec les standards actuels, la conteneurisation n'est plus requise : nous repassons sur une architecture native, plus performante et plus simple à maintenir.
+
+### 1. Préparation du système et installation du dépôt SURY
+
+Debian 13 intégrant nativement PHP 8.2, il est nécessaire d'ajouter le dépôt officiel de paquets PHP (SURY) pour forcer l'installation de la version **8.3** requise pour cette architecture.
+
+```bash
+# Mise à jour de base et installation des prérequis pour ajouter des dépôts
+apt update && apt upgrade -y
+apt install -y lsb-release apt-transport-https ca-certificates curl wget
+
+# Ajout de la clé de sécurité et du dépôt SURY pour PHP 8.3
+curl -sSLo /usr/share/keyrings/deb.sury.org-php.gpg [https://packages.sury.org/php/apt.gpg](https://packages.sury.org/php/apt.gpg)
+sh -c 'echo "deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] [https://packages.sury.org/php/](https://packages.sury.org/php/) $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list'
+
+# Mise à jour de la liste des paquets avec le nouveau dépôt
+apt update
+```
+* **Effet :** Ces commandes autorisent Debian à télécharger des paquets fiables depuis un serveur externe (SURY) qui maintient les toutes dernières versions de PHP.
+
+### 2. Installation de la pile LAMP (Linux, Apache, MariaDB, PHP)
+
+Nous installons le serveur web, le moteur de base de données, et PHP avec l'intégralité des modules spécifiques exigés par l'installateur de GLPI 10.
+
+```bash
+# Installation d'Apache2 et MariaDB
+apt install -y apache2 mariadb-server
+
+# Installation de PHP 8.3 et de ses extensions
+apt install -y php8.3 php8.3-core php8.3-mysql php8.3-xml php8.3-cli php8.3-cas php8.3-bz2 php8.3-curl php8.3-mbstring php8.3-intl php8.3-gd php8.3-zip php8.3-ldap
+```
+* **`apache2` & `mariadb-server` :** Le duo classique pour héberger le site et stocker les données.
+* **`php8.3-*` :** GLPI a besoin de manipuler des images (`gd`), des archives (`zip`, `bz2`), des caractères internationaux (`intl`, `mbstring`) et de communiquer avec des annuaires Active Directory (`ldap`). Ces extensions évitent les erreurs bloquantes lors de l'installation.
+
+### 3. Configuration de la base de données MariaDB
+
+Il faut créer un espace de stockage pour l'application. Puisqu'aucun mot de passe n'a été défini pour la base, nous créons un utilisateur avec un mot de passe vide (il sera également possible d'utiliser le compte `root` par défaut de MariaDB lors de l'installation web).
+
+Dans votre terminal Debian, tapez `mysql -u root` pour entrer dans l'invite de commande SQL, puis saisissez les requêtes suivantes :
+
+```sql
+-- Création de la base de données (avec encodage universel moderne)
+CREATE DATABASE glpi10 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Création d'un utilisateur dédié SANS mot de passe
+CREATE USER 'glpi_user'@'localhost' IDENTIFIED BY '';
+
+-- Octroi de tous les droits à cet utilisateur uniquement sur la base GLPI
+GRANT ALL PRIVILEGES ON glpi10.* TO 'glpi_user'@'localhost';
+
+-- Application immédiate des nouveaux droits
+FLUSH PRIVILEGES;
+EXIT;
+```
+
+!!! tip "Gestion des fuseaux horaires (Timezones)"
+    GLPI 10 exige que la base de données connaisse les fuseaux horaires pour horodater les tickets correctement. Lancez cette commande dans votre terminal Debian (en dehors de MySQL) pour injecter les fuseaux horaires de l'OS dans MariaDB :
+    ```bash
+    mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql
+    ```
+
+### 4. Téléchargement et déploiement de GLPI 10.0.15
+
+On récupère la version exacte depuis le dépôt officiel GitHub, puis on la décompresse dans le dossier d'hébergement web.
+
+```bash
+# Se placer dans le dossier web
+cd /var/www/html/
+
+# Téléchargement de l'archive officielle
+wget [https://github.com/glpi-project/glpi/releases/download/10.0.15/glpi-10.0.15.tgz](https://github.com/glpi-project/glpi/releases/download/10.0.15/glpi-10.0.15.tgz)
+
+# Extraction de l'archive (cela crée un dossier /var/www/html/glpi)
+tar -xvf glpi-10.0.15.tgz
+
+# Nettoyage de l'archive téléchargée
+rm glpi-10.0.15.tgz
+```
+
+### 5. Sécurisation des dossiers et droits d'accès
+
+Pour que le serveur web Apache puisse lire et modifier les fichiers de GLPI (pour uploader des documents ou mettre à jour la configuration), il faut lui en donner la propriété.
+
+```bash
+# Attribution du dossier GLPI à l'utilisateur système d'Apache (www-data)
+chown -R www-data:www-data /var/www/html/glpi
+
+# Sécurisation des permissions standards
+chmod -R 755 /var/www/html/glpi
+```
+
+L'infrastructure native est désormais totalement opérationnelle. L'installation se finalise en tapant l'adresse `http://[IP_DU_SERVEUR]/glpi` dans un navigateur web.
 
 
 ---
