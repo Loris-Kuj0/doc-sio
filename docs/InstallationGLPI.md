@@ -318,12 +318,6 @@ Dans ce réseau isolé, le moteur Docker agit comme un véritable **serveur DNS 
 
 Installation native (switch vers glpi 10.0.15 et php 8.3)
 
-Tour d'horizon de Glpi
-
--focus sur la base des conaissances 
--test de la base de conaissances avec un 
--installation plugin deux methode: marketplace et wget + scp ssh 
--fichier csv def et importation grace au plugin data injection
 
 
 
