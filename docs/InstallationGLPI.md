@@ -1,5 +1,3 @@
-
-```markdown
 # Documentation : Installation GLPI 9.5.6 sur Debian 13
 
 **Auteur :** Loris.R   
