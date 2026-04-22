@@ -9,7 +9,7 @@
 ---
 
 !!! abstract "Introduction : Environnement et Objectifs"
-    Pour réaliser ce TP, l'objectif était d'installer la version spécifique **GLPI 9.5.6** sur un serveur fraîchement installé sous **Debian 13**. Ce document retrace l'intégralité de mon processus de réflexion, les obstacles liés à l'obsolescence logicielle rencontrés, et la transition vers une architecture moderne par conteneurisation pour résoudre ces conflits.
+    Pour réaliser ce TP, l'objectif était d'installer la version spécifique GLPI 9.5.6 sur un serveur fraîchement installé sous Debian 13. Ce document retrace l'intégralité du processus de réflexion, les obstacles liés à l'obsolescence logicielle, et la transition vers une architecture moderne par conteneurisation pour résoudre ces conflits.
 
 ---
 
