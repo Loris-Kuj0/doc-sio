@@ -363,13 +363,13 @@ Dans le terminal Debian, lancez l'invite de commande SQL via `mysql -u root` et 
 
 ```sql
 -- Création de la base de données 
-CREATE DATABASE glpi_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE db_glpi CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- Création d'un utilisateur dédié 
-CREATE USER 'glpi_user'@'localhost' IDENTIFIED BY 'Glpiglpi0';
+CREATE USER 'admindb_glpi'@'localhost' IDENTIFIED BY 'Glpiglpi0';
 
 -- Octroi de tous les privilèges à cet utilisateur sur la base GLPI
-GRANT ALL PRIVILEGES ON glpi_db.* TO 'glpi_user'@'localhost';
+GRANT ALL PRIVILEGES ON db_glpi.* TO 'admindb_glpi'@'localhost';
 
 ```
 
@@ -409,6 +409,7 @@ chmod -R 755 /var/www/html/glpi
 
 ### 6. Initialisation de Glpi
 
+![GLPI1](../images/GLPI1.png)
 ---
 
 ## Identifiants de connexion par défaut
