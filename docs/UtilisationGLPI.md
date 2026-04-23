@@ -6,7 +6,7 @@
 
 ---
 
-## Installation de plugins
+## Installation de plugins (Data Injection)
 
 ## Ajout de Catégories ITIL
 
