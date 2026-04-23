@@ -8,6 +8,8 @@
 
 ## Installation de plugins
 
+---
+
 ## Création de Tickets : Situaton 1
 
 ![GLPI1](../images/GLPIT1.png)
@@ -21,5 +23,6 @@
 ![GLPI5](../images/GLPIT9.png)
 ![GLPI5](../images/GLPIT10.png)
 
+---
 
 ## Création de Tickets : Situaton 2
