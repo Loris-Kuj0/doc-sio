@@ -36,6 +36,3 @@
 ![GLPI5](../images/GLPIT25.png)
 ![GLPI5](../images/GLPIT26.png)
 ![GLPI5](../images/GLPIT27.png)
-![GLPI5](../images/GLPIT28.png)
-![GLPI5](../images/GLPIT29.png)
-![GLPI5](../images/GLPIT210.png)
