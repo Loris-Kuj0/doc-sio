@@ -26,6 +26,8 @@ nav:
   - Accueil: index.md
   - B2 (SISR):
       - Documentation d'installation GLPI: InstallationGLPI.md
+      - Documentation Utilisation GLPI: UtilisationGLPI.md
+
   - B1 (Dev):
       - À venir: b1-dev.md
   - B3 (Cybersécurité):
