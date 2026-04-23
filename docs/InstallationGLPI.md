@@ -410,6 +410,11 @@ chmod -R 755 /var/www/html/glpi
 ### 6. Initialisation de Glpi
 
 ![GLPI1](../images/GLPI1.png)
+![GLPI2](../images/GLPI2.png)
+![GLPI3](../images/GLPI3.png)
+![GLPI4](../images/GLPI4.png)
+![GLPI5](../images/GLPI5.png)
+
 ---
 
 ## Identifiants de connexion par défaut
