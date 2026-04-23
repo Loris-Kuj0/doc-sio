@@ -8,6 +8,8 @@
 
 ## Installation de plugins
 
+## Ajout de Catégories ITIL
+
 ---
 
 ## Création de Tickets : Situaton 1
@@ -26,3 +28,14 @@
 ---
 
 ## Création de Tickets : Situaton 2
+
+![GLPI1](../images/GLPIT21.png)
+![GLPI2](../images/GLPIT22.png)
+![GLPI3](../images/GLPIT23.png)
+![GLPI4](../images/GLPIT24.png)
+![GLPI5](../images/GLPIT25.png)
+![GLPI5](../images/GLPIT26.png)
+![GLPI5](../images/GLPIT27.png)
+![GLPI5](../images/GLPIT28.png)
+![GLPI5](../images/GLPIT29.png)
+![GLPI5](../images/GLPIT210.png)
