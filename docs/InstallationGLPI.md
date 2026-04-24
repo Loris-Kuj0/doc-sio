@@ -245,6 +245,8 @@ docker-compose up -d
 
 L'installation web de GLPI a ensuite pu aboutir parfaitement, validant la pertinence de la conteneurisation.
 
+![GLPI956](../images/GLPI956.png)
+
 ---
 
 ## La redirection de ports
