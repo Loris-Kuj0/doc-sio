@@ -4,7 +4,7 @@
 
 # 0.
 
-Ce guide présente les bases fondamentales pour créer des scripts d'automatisation sous Linux et macOS.
+Ce guide présente les bases fondamentales pour créer des scripts d'automatisation sous Linux.
 
 ## 1. Structure d'un script
 Tout script Bash doit commencer par le **Shebang**. Cette ligne indique au système que le fichier doit être interprété par Bash.
