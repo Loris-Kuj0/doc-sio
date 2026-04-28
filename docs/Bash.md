@@ -85,15 +85,12 @@ Les boucles permettent de répéter des tâches sur des listes de fichiers ou de
 ### Boucle For
 ```bash
 # Boucle sur une plage de nombres
-for i in {1..5}; do
-    echo "Étape $i"
-done
-
-# Boucle sur les fichiers du répertoire courant
-for fichier in *.txt; do
-    echo "Traitement de $fichier"
+for i in 10 11 12 13
+do
+eho "Chiffre : $CHIFFRES"
 done
 ```
+![BASH7](Bash7.png)
 
 ### Boucle While
 ```bash
