@@ -45,6 +45,7 @@ echo "Quel âge as-tu ?"
 read AGE
 echo "Tu as ${AGE}ans."
 ```
+![BASH1](../images/bash1.png)
 
 ## 3. Les Conditions
 Les conditions s'écrivent entre crochets `[ ]`. **Attention :** les espaces après `[` et avant `]` sont obligatoires.
