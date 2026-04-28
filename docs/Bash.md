@@ -50,6 +50,8 @@ echo "Tu as ${AGE}ans."
 ## 3. Les Conditions
 Les conditions s'écrivent entre crochets `[ ]`. **Attention :** les espaces après `[` et avant `]` sont obligatoires.
 
+![BASH2](../images/Bash2.png)
+
 ### Comparateurs numériques
 | Opérateur | Signification |
 | :--- | :--- |
