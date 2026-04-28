@@ -1,7 +1,5 @@
 # Documentation : Scripting en Bash
 
-Voici une version optimisée pour **MkDocs**. J'ai structuré le contenu avec des balises Markdown standards et ajouté des blocs d'avertissement/astuces (Admonitions) qui sont très utilisés avec le thème `Material for MkDocs`.
-
 ---
 
 # 0.
