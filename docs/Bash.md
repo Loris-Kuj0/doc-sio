@@ -43,7 +43,7 @@ echo "Vous êtes en BTS SIO, $NOM"
 # Lecture d'une entrée utilisateur
 echo "Quel âge as-tu ?"
 read AGE
-echo "Tu as $AGE ans."
+echo "Tu as ${AGE}ans."
 ```
 
 ## 3. Les Conditions
