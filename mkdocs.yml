@@ -9,7 +9,7 @@ extra_css:
 theme:
   name: material
   custom_dir: overrides
-  language: fr # <-- Traduit l'interface en français
+  language: fr
   features:
     - content.code.copy
     - navigation.tracking # <-- La ToC met en surbrillance le titre où tu te trouves
@@ -36,6 +36,7 @@ nav:
       - À venir: stage.md
   - Linux:
       - À venir: linux.md
+      - Bash: Bash.md
   - Windows:
       - À venir: windows.md
 

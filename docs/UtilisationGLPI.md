@@ -36,3 +36,12 @@
 ![GLPI5](../images/GLPIT25.png)
 ![GLPI5](../images/GLPIT26.png)
 ![GLPI5](../images/GLPIT27.png)
+
+---
+
+## Sauvergardes
+
+-site de l'état sur les durées de conservation
+-différence entre sauvegarde et archivage 
+-les différent type de sauvegrde: complète, incrémentale, diférentiel |avanage et inconvénients
+-installation cobian reflector,
