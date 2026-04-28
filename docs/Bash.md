@@ -66,6 +66,8 @@ ex:2
 | `-ge` | Supérieur ou égal |
 | `-le` | Inférieur ou égal |
 
+
+
 ### Exemple
 ```bash
 if [ $AGE -ge 18 ]; then
@@ -74,6 +76,8 @@ else
     echo "Accès refusé : vous êtes mineur."
 fi
 ```
+![BASH4](Bash4.png)
+![BASH5](Bash5.png)
 
 ## 4. Les Boucles
 Les boucles permettent de répéter des tâches sur des listes de fichiers ou des plages de nombres.
