@@ -38,7 +38,7 @@ En Bash, la gestion des espaces est cruciale : **aucun espace** autour du signe 
 
 # Déclaration
 NOM="Utilisateur"
-echo "Salut $NOM"
+echo "Vous êtes en BTS SIO"
 
 # Lecture d'une entrée utilisateur
 echo "Quel âge as-tu ?"
