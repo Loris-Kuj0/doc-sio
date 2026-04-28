@@ -13,7 +13,7 @@ Tout script Bash doit commencer par le **Shebang**. Cette ligne indique au syst�
 #!/bin/bash
 
 # Ceci est un commentaire
-echo "Bonjour, monde !"
+echo "Vous êtes en BTS SIO"
 ```
 
 ### Exécution
@@ -37,8 +37,8 @@ En Bash, la gestion des espaces est cruciale : **aucun espace** autour du signe 
 #!/bin/bash
 
 # Déclaration
-NOM="Utilisateur"
-echo "Vous êtes en BTS SIO"
+NOM="Loris"
+echo "Vous êtes en BTS SIO, $NOM"
 
 # Lecture d'une entrée utilisateur
 echo "Quel âge as-tu ?"
