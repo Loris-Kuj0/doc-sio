@@ -138,5 +138,59 @@ else
 fi
 ```
 
-!!! warning "Attention"
-    Testez toujours vos scripts dans un environnement sécurisé avant de les utiliser sur des données de production.
+---
+
+## 7. Les Variables de Position (Arguments)
+
+Les variables de position sont des variables spéciales créées automatiquement par Bash dès que tu passes des arguments à ton script lors de son exécution.
+
+### Les variables clés
+
+| Variable | Rôle |
+| :--- | :--- |
+| **`$0`** | Le nom du script lui-même. |
+| **`$1`** | Le **premier** argument passé. |
+| **`$2`** | Le **deuxième** argument passé (et ainsi de suite jusqu'à `$9`). |
+| **`${10}`** | Le dixième argument (les accolades sont obligatoires après 9). |
+| **`$#`** | Le **nombre total** d'arguments fournis. |
+| **`$@`** | La liste de **tous** les arguments (traités comme des mots séparés). |
+| **`$?`** | Le code de retour de la dernière commande (0 = succès). |
+
+### Exemple d'utilisation
+Imaginons un script nommé `config_user.sh` :
+
+```bash
+#!/bin/bash
+
+# Vérifier si on a assez d'arguments
+if [ $# -lt 2 ]; then
+    echo "Usage: $0 <prenom> <nom>"
+    exit 1
+fi
+
+echo "Nom du script : $0"
+echo "Traitement de l'utilisateur : $1 $2"
+echo "Nombre total d'arguments : $#"
+```
+
+**Appel du script :**
+```bash
+./config_user.sh Jean Dupont
+```
+
+### La commande `shift`
+La commande `shift` est une astuce souvent utilisée dans les scripts complexes. Elle permet de "décaler" les arguments vers la gauche : `$2` devient `$1`, `$3` devient `$2`, etc. C'est très utile pour traiter le premier argument puis boucler sur le reste.
+
+```bash
+#!/bin/bash
+echo "Premier argument : $1"
+shift
+echo "L'ancien deuxième argument est maintenant le premier : $1"
+```
+
+!!! info "Le saviez-vous ?"
+    La variable **`$@`** est généralement préférée à **`$*`**. Pourquoi ? Parce que `"$@"` protège les arguments contenant des espaces, les gardant bien séparés, alors que `"$*"` les fusionne en une seule grande chaîne de caractères.
+
+---
+
+Souhaites-tu que l'on aborde la gestion des **tableaux** ou la création de **fonctions** pour organiser ton code ?
