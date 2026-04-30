@@ -192,5 +192,3 @@ echo "L'ancien deuxième argument est maintenant le premier : $1"
     La variable **`$@`** est généralement préférée à **`$*`**. Pourquoi ? Parce que `"$@"` protège les arguments contenant des espaces, les gardant bien séparés, alors que `"$*"` les fusionne en une seule grande chaîne de caractères.
 
 ---
-
-Souhaites-tu que l'on aborde la gestion des **tableaux** ou la création de **fonctions** pour organiser ton code ?
