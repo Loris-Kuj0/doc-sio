@@ -1,0 +1,2088 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../UtilisationGLPI/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Documentation d'installation GLPI - Documentations et cours BTS SIO Loris-R</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#documentation-installation-glpi-956-sur-debian-13" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href=".." title="Documentations et cours BTS SIO Loris-R" class="md-header__button md-logo" aria-label="Documentations et cours BTS SIO Loris-R" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentations et cours BTS SIO Loris-R
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Documentation d'installation GLPI
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Loris-Kuj0/doc-sio" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Loris-Kuj0/doc-sio
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Documentations et cours BTS SIO Loris-R" class="md-nav__button md-logo" aria-label="Documentations et cours BTS SIO Loris-R" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Documentations et cours BTS SIO Loris-R
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Loris-Kuj0/doc-sio" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Loris-Kuj0/doc-sio
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B2 (SISR)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    B2 (SISR)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation d'installation GLPI
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation d'installation GLPI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#topologie-reseau" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topologie Réseau
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tentative-dinstallation-native" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tentative d'installation native
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tentative d&#39;installation native">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#le-probleme-de-syntaxe-mariadb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le problème de syntaxe MariaDB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contournement-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contournement SQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#le-mur-des-dependances" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le mur des dépendances
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Le mur des dépendances">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lobsolescence-de-php-74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L'obsolescence de PHP 7.4
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solution-de-conteneurisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution de conteneurisation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Solution de conteneurisation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pourquoi-utiliser-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pourquoi utiliser Docker ?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nettoyage-et-installation-de-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nettoyage et installation de Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-du-docker-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration du Docker Compose
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration du Docker Compose">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linfrastructure-as-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L'Infrastructure as Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decorticage-du-fichier-docker-composeyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Décorticage du fichier docker-compose.yml
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#le-piege-du-moteur-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le piège du moteur PHP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Le piège du moteur PHP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#erreur-dinjection-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erreur d'injection SQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conteneur-base-sur-debian-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conteneur basé sur Debian 12
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execution-et-test-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exécution et test final
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-redirection-de-ports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La redirection de ports
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="La redirection de ports">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#le-port-http-par-defaut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le port HTTP par défaut
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-mecanisme-de-port-forwarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le mécanisme de Port Forwarding
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-multi-conteneurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture multi-conteneurs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture multi-conteneurs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deux-roles-distincts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deux rôles distincts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#avantages-de-lapproche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Avantages de l'approche
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#communication-interne-dns-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Communication interne (DNS Docker)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-vers-glpi-10015-en-natif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration vers GLPI 10.0.15 en natif
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration vers GLPI 10.0.15 en natif">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-preparation-du-systeme-et-depot-sury" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Préparation du système et dépôt SURY
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-installation-de-la-pile-lamp-linuxapachemariadbphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Installation de la pile LAMP (Linux,Apache,MariaDB,PHP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-configuration-de-mariadb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Configuration de MariaDB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-deploiement-de-glpi-10015" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Déploiement de GLPI 10.0.15
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-securisation-des-droits-dacces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Sécurisation des droits d'accès
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-initialisation-de-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Initialisation de Glpi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identifiants-de-connexion-par-defaut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identifiants de connexion par défaut
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UtilisationGLPI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Documentation Utilisation GLPI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B1 (Dev)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    B1 (Dev)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../b1-dev/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    À venir
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B3 (Cybersécurité)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    B3 (Cybersécurité)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../b3-cyber/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    À venir
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stages
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stages
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    À venir
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Linux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    À venir
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Bash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Windows
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    À venir
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#topologie-reseau" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topologie Réseau
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tentative-dinstallation-native" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tentative d'installation native
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tentative d&#39;installation native">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#le-probleme-de-syntaxe-mariadb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le problème de syntaxe MariaDB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contournement-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contournement SQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#le-mur-des-dependances" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le mur des dépendances
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Le mur des dépendances">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#lobsolescence-de-php-74" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L'obsolescence de PHP 7.4
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#solution-de-conteneurisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Solution de conteneurisation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Solution de conteneurisation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pourquoi-utiliser-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pourquoi utiliser Docker ?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nettoyage-et-installation-de-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nettoyage et installation de Docker
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-du-docker-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration du Docker Compose
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration du Docker Compose">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linfrastructure-as-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L'Infrastructure as Code
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decorticage-du-fichier-docker-composeyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Décorticage du fichier docker-compose.yml
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#le-piege-du-moteur-php" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le piège du moteur PHP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Le piège du moteur PHP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#erreur-dinjection-sql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Erreur d'injection SQL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conteneur-base-sur-debian-12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Conteneur basé sur Debian 12
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#execution-et-test-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exécution et test final
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-redirection-de-ports" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La redirection de ports
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="La redirection de ports">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#le-port-http-par-defaut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le port HTTP par défaut
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-mecanisme-de-port-forwarding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le mécanisme de Port Forwarding
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture-multi-conteneurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Architecture multi-conteneurs
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Architecture multi-conteneurs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deux-roles-distincts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deux rôles distincts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#avantages-de-lapproche" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Avantages de l'approche
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#communication-interne-dns-docker" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Communication interne (DNS Docker)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-vers-glpi-10015-en-natif" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Migration vers GLPI 10.0.15 en natif
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration vers GLPI 10.0.15 en natif">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-preparation-du-systeme-et-depot-sury" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Préparation du système et dépôt SURY
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-installation-de-la-pile-lamp-linuxapachemariadbphp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Installation de la pile LAMP (Linux,Apache,MariaDB,PHP)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-configuration-de-mariadb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Configuration de MariaDB
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-deploiement-de-glpi-10015" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Déploiement de GLPI 10.0.15
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-securisation-des-droits-dacces" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Sécurisation des droits d'accès
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6-initialisation-de-glpi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Initialisation de Glpi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#identifiants-de-connexion-par-defaut" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Identifiants de connexion par défaut
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="documentation-installation-glpi-956-sur-debian-13">Documentation : Installation GLPI 9.5.6 sur Debian 13<a class="headerlink" href="#documentation-installation-glpi-956-sur-debian-13" title="Permanent link">&para;</a></h1>
+<p><strong>Auteur :</strong> Loris.R <br />
+<strong>Module :</strong> B2<br />
+<strong>Sujet :</strong> Configuration Serveur GLPI 9.5.6 sur Debian 13</p>
+<hr />
+<div class="admonition abstract">
+<p class="admonition-title">Introduction : Environnement et Objectifs</p>
+<p>Pour réaliser ce TP, l'objectif était d'installer la version spécifique GLPI 9.5.6 sur un serveur fraîchement installé sous Debian 13. Ce document retrace l'intégralité du processus de réflexion, les obstacles liés à l'obsolescence logicielle, et la transition vers une architecture moderne par conteneurisation pour résoudre ces conflits.</p>
+</div>
+<hr />
+<h2 id="topologie-reseau">Topologie Réseau<a class="headerlink" href="#topologie-reseau" title="Permanent link">&para;</a></h2>
+<p>Le schéma ci-dessous illustre l'architecture réseau mise en place entre les différentes machines virtuelles de l'environnement :</p>
+<pre class="mermaid"><code>    flowchart LR
+    %% Définition des noeuds (Machines et Réseaux)
+    Internet(("🌐 INTERNET"))
+
+    Router["🖥️ ROUTEUR56\n(Debian 13)"]
+
+    Switch(("Réseau Local\n192.168.56.0/24"))
+
+    Client["💻 PC - CLIENT\n(Windows)"]
+    Server["🗄️ Serveur Web\n(Apache / Debian)"]
+
+    %% Définition des liens et des interfaces
+    Internet -- "wan209\n(DHCP)" --- Router
+    Router -- "vmbr...\n.254" --- Switch
+    Switch -- ".99" --- Client
+    Switch -- ".2" --- Server
+
+    %% Style visuel adapté au thème sombre
+    style Internet fill:#0277bd,color:#ffffff,stroke:#01579b,stroke-width:2px
+    style Router fill:#2d333b,color:#ffffff,stroke:#4caf50,stroke-width:2px
+    style Switch fill:#d84315,color:#ffffff,stroke:#bf360c,stroke-width:2px
+    style Client fill:#2d333b,color:#ffffff,stroke:#29b6f6,stroke-width:2px
+    style Server fill:#2d333b,color:#ffffff,stroke:#ef5350,stroke-width:2px</code></pre>
+<hr />
+<h2 id="tentative-dinstallation-native">Tentative d'installation native<a class="headerlink" href="#tentative-dinstallation-native" title="Permanent link">&para;</a></h2>
+<p>Initialement, La démarche consistait à installer les paquets nativement sur l'OS (Apache2, MariaDB, PHP). Cependant, la première exécution du script d'installation web de GLPI a retourné une erreur bloquante à l'étape 3 (Initialisation de la base de données).</p>
+<h3 id="le-probleme-de-syntaxe-mariadb">Le problème de syntaxe MariaDB<a class="headerlink" href="#le-probleme-de-syntaxe-mariadb" title="Permanent link">&para;</a></h3>
+<div class="admonition failure">
+<p class="admonition-title">Erreur affichée par l'installateur GLPI</p>
+<p><code>You have an error in your SQL syntax; check the manual... near '0', type int(11)</code></p>
+</div>
+<p>Cette erreur s'explique par un fossé générationnel entre GLPI 9.5.6 (sorti vers 2021) et la version de MariaDB intégrée à Debian 13 (version 10.11+) :</p>
+<ul>
+<li>Le terme <code>TYPE=InnoDB</code> utilisé dans les anciens scripts SQL de GLPI a été définitivement supprimé des versions récentes de MariaDB (remplacé par <code>ENGINE=InnoDB</code>).</li>
+<li>Le mot <code>type</code> est devenu un mot réservé strict, et la précision de longueur <code>int(11)</code> est désormais considérée comme obsolète, ce qui déclenche une erreur si le serveur est en mode "strict".</li>
+</ul>
+<h3 id="contournement-sql">Contournement SQL<a class="headerlink" href="#contournement-sql" title="Permanent link">&para;</a></h3>
+<p>Pour forcer l'installation, j'ai exécuté plusieurs commandes de modification directe :</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/TYPE=InnoDB/ENGINE=InnoDB/g&#39;</span><span class="w"> </span>/var/www/html/glpi/install/mysql/*.sql
+</code></pre></div>
+* <strong>Effet :</strong> Cette commande lit tous les fichiers d'installation SQL de GLPI et remplace l'ancienne syntaxe <code>TYPE</code> par la nouvelle <code>ENGINE</code>.</p>
+<p>Ensuite, pour forcer MariaDB à accepter des requêtes mal formatées, le comportement du serveur SQL a été altéré :</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">SET</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">sql_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">;</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">SET</span><span class="w"> </span><span class="k">GLOBAL</span><span class="w"> </span><span class="n">innodb_strict_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">OFF</span><span class="p">;</span>
+</code></pre></div>
+* <strong>Effet :</strong> Baisse temporairement la sécurité et la rigueur de MariaDB pour qu'il ignore les erreurs liées aux mots réservés.</p>
+<div class="admonition warning">
+<p class="admonition-title">Résultat de l'approche native</p>
+<p>Cependant, malgré ces ajustements et le remplacement des fichiers SQL, l'architecture native PHP/MariaDB continuait de générer des requêtes corrompues à la volée, rendant l'installation impossible.</p>
+</div>
+<hr />
+<h2 id="le-mur-des-dependances">Le mur des dépendances<a class="headerlink" href="#le-mur-des-dependances" title="Permanent link">&para;</a></h2>
+<p>Face aux échecs SQL, le problème racine a été identifié : <strong>GLPI 9.5.6 exige impérativement PHP 7.4</strong> pour fonctionner correctement, or Debian 13 fournit nativement PHP 8.2+.</p>
+<h3 id="lobsolescence-de-php-74">L'obsolescence de PHP 7.4<a class="headerlink" href="#lobsolescence-de-php-74" title="Permanent link">&para;</a></h3>
+<p>J'ai dû tenter d'importer PHP 7.4 via un dépôt externe (le dépôt officiel Sury).</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;deb [https://packages.sury.org/php/](https://packages.sury.org/php/) bookworm main&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/etc/apt/sources.list.d/php.list
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>apt<span class="w"> </span>update
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>apt<span class="w"> </span>install<span class="w"> </span>php7.4
+</code></pre></div>
+* <strong>Effet :</strong> Demande au gestionnaire de paquets (<code>apt</code>) de télécharger une ancienne version de PHP compilée pour la version précédente de Debian.</p>
+<div class="admonition danger">
+<p class="admonition-title">Erreur critique du gestionnaire de paquets</p>
+<p>Cette tentative s'est soldée par une erreur critique d'apt :<br />
+<code>Impossible de satisfaire les dépendances : php7.4-intl : Dépend: libicu72 mais il n'est pas installable</code></p>
+<p><strong>Pourquoi cela a échoué :</strong> Debian 13 utilise des bibliothèques systèmes (les fondations de l'OS) très récentes. PHP 7.4 cherche des composants anciens (comme <code>libldap-2.5-0</code>) qui n'existent plus. Forcer l'installation aurait cassé le noyau du système d'exploitation. <strong>L'installation native m'était donc matériellement impossible.</strong></p>
+</div>
+<pre class="mermaid"><code>graph TD
+    Debian13["Debian 13 (OS Hôte)"] --&gt; PHP8["PHP 8.2+"]
+    Debian13 --&gt; MariaDB1011["MariaDB 10.11+"]
+    GLPI["GLPI 9.5.6"] -. Exige .-&gt; PHP7["PHP 7.4 (Introuvable)"]
+    GLPI -. Incompatible .-&gt; MariaDB1011
+
+    %% Style visuel adapté au thème sombre
+    style Debian13 fill:#2d333b,color:#ffffff,stroke:#4caf50,stroke-width:2px
+    style PHP8 fill:#2d333b,color:#ffffff,stroke:#9e9e9e,stroke-width:2px
+    style MariaDB1011 fill:#2d333b,color:#ffffff,stroke:#9e9e9e,stroke-width:2px
+    style GLPI fill:#b71c1c,color:#ffffff,stroke:#ff5252,stroke-width:2px
+    style PHP7 fill:#e65100,color:#ffffff,stroke:#ffb74d,stroke-width:2px</code></pre>
+<hr />
+<h2 id="solution-de-conteneurisation">Solution de conteneurisation<a class="headerlink" href="#solution-de-conteneurisation" title="Permanent link">&para;</a></h2>
+<p>Pour exécuter un logiciel obsolète sur un système ultra-récent, la seule solution viable a été d'isoler l'application.</p>
+<h3 id="pourquoi-utiliser-docker">Pourquoi utiliser Docker ?<a class="headerlink" href="#pourquoi-utiliser-docker" title="Permanent link">&para;</a></h3>
+<p>Contrairement à une machine virtuelle complète qui est lourde et consomme beaucoup de RAM, un conteneur est une "bulle" légère qui s'exécute sur l'OS hôte, mais qui possède ses propres dépendances internes. </p>
+<p><strong>Avantage principal :</strong> Docker permet de télécharger un environnement pré-packagé contenant un vieux Linux virtuel avec exactement PHP 7.4 et MariaDB 10.5, sans jamais interférer avec le système Debian 13 de base.</p>
+<h3 id="nettoyage-et-installation-de-docker">Nettoyage et installation de Docker<a class="headerlink" href="#nettoyage-et-installation-de-docker" title="Permanent link">&para;</a></h3>
+<p>Avant de déployer Docker, il a fallu libérer les ports réseau (80 pour le web, 3306 pour SQL) utilisés par l'installation native ratée :</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>systemctl<span class="w"> </span>stop<span class="w"> </span>apache2<span class="w"> </span>mariadb
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>apt<span class="w"> </span>purge<span class="w"> </span>-y<span class="w"> </span>apache2<span class="w"> </span>mariadb-server<span class="w"> </span><span class="s2">&quot;php*&quot;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>apt<span class="w"> </span>autoremove<span class="w"> </span>-y
+</code></pre></div>
+* <strong>Effet :</strong> Supprime complètement Apache, MariaDB, PHP et leurs dépendances orphelines, rendant le serveur à nouveau "propre".</p>
+<p>Ensuite, l'environnement Docker a été installé et activé :</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>docker.io<span class="w"> </span>docker-compose
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>--now<span class="w"> </span>docker
+</code></pre></div>
+* <strong>Effet :</strong> <code>docker.io</code> est le moteur (le service d'arrière-plan qui gère les conteneurs). <code>docker-compose</code> est l'outil qui permet de lancer plusieurs conteneurs en même temps. La commande <code>systemctl enable --now</code> assure que le service démarre immédiatement et se relancera à chaque redémarrage.</p>
+<hr />
+<h2 id="configuration-du-docker-compose">Configuration du Docker Compose<a class="headerlink" href="#configuration-du-docker-compose" title="Permanent link">&para;</a></h2>
+<h3 id="linfrastructure-as-code">L'Infrastructure as Code<a class="headerlink" href="#linfrastructure-as-code" title="Permanent link">&para;</a></h3>
+<p>Au lieu de taper de longues commandes complexes dans le terminal pour créer les conteneurs, Docker Compose permet de définir toute l'infrastructure dans un seul fichier texte lisible : <code>docker-compose.yml</code>.</p>
+<h3 id="decorticage-du-fichier-docker-composeyml">Décorticage du fichier docker-compose.yml<a class="headerlink" href="#decorticage-du-fichier-docker-composeyml" title="Permanent link">&para;</a></h3>
+<p>Voici l'explication ligne par ligne de la configuration déployée :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">services</span><span class="p">:</span>
+</code></pre></div>
+<blockquote>
+<p><em>Déclare le début de la liste des "machines" virtuelles. Il y en a deux : mariadb et glpi.</em></p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="w">  </span><span class="nt">mariadb</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mariadb:10.5</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glpi-mariadb</span>
+</code></pre></div>
+<blockquote>
+<ul>
+<li><strong>image :</strong> Demande à Docker de télécharger la version exacte 10.5 de MariaDB depuis le Docker Hub. C'est la version idéale pour GLPI 9.5.</li>
+<li><strong>container_name :</strong> Attribue un nom lisible à la bulle pour faciliter sa gestion future.</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MARIADB_ROOT_PASSWORD=Secr3tRootPassword!</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MARIADB_DATABASE=glpi</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MARIADB_USER=glpi_user</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MARIADB_PASSWORD=glpi2026</span>
+</code></pre></div>
+<blockquote>
+<ul>
+<li><strong>environment :</strong> C'est ici que sont injectées les variables lors du tout premier démarrage. MariaDB lira ces paramètres et créera automatiquement la base <code>glpi</code> et l'utilisateur associé, évitant ainsi de le faire à la main en ligne de commande SQL.</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./mysql_data:/var/lib/mysql</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">always</span>
+</code></pre></div>
+<blockquote>
+<ul>
+<li><strong>volumes :</strong> C'est la persistance des données. Un conteneur est amnésique. Cette ligne crée un pont entre le dossier réel <code>./mysql_data</code> sur le serveur Debian 13 et le dossier virtuel <code>/var/lib/mysql</code> dans le conteneur. Les données sont ainsi sauvegardées sur le disque physique.</li>
+<li><strong>restart :</strong> Si le serveur redémarre ou plante, Docker le relancera automatiquement.</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="w">  </span><span class="nt">glpi</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">diouxx/glpi:php7.4</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glpi-app</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:80&quot;</span>
+</code></pre></div>
+<blockquote>
+<ul>
+<li><strong>image :</strong> L'image communautaire <code>diouxx/glpi</code> est utilisée, avec le tag explicite <code>php7.4</code>.</li>
+<li><strong>ports :</strong> Mécanisme de redirection réseau (expliqué en détail dans la section sur la redirection de ports).</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="w">    </span><span class="nt">environment</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">TIMEZONE=Europe/Paris</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">VERSION_GLPI=9.5.6</span>
+</code></pre></div>
+<blockquote>
+<ul>
+<li><strong>VERSION_GLPI=9.5.6 :</strong> Le créateur de cette image a inclus un script intelligent. Au lieu d'avoir une image Docker pour chaque micro-version, l'image télécharge et décompresse dynamiquement la version demandée dans cette variable au moment du démarrage.</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./glpi_data:/var/www/html/glpi</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mariadb</span>
+</code></pre></div>
+<blockquote>
+<ul>
+<li><strong>depends_on :</strong> Force le serveur web à attendre que le conteneur <code>mariadb</code> soit complètement allumé avant de démarrer lui-même, évitant ainsi une erreur de connexion à la base.</li>
+</ul>
+</blockquote>
+<hr />
+<h2 id="le-piege-du-moteur-php">Le piège du moteur PHP<a class="headerlink" href="#le-piege-du-moteur-php" title="Permanent link">&para;</a></h2>
+<p>Lors du premier lancement du conteneur avec l'image <code>diouxx/glpi:latest</code>, l'installation a planté de nouveau avec une erreur SQL très similaire aux premiers essais (<code>near ''0'</code>).</p>
+<h3 id="erreur-dinjection-sql">Erreur d'injection SQL<a class="headerlink" href="#erreur-dinjection-sql" title="Permanent link">&para;</a></h3>
+<p>Le problème venait du tag <code>:latest</code> que j'avais initialement utilisé dans le fichier compose pour l'image GLPI. Le conteneur téléchargeait la dernière version de son propre système, embarquant PHP 8.3. </p>
+<div class="admonition bug">
+<p class="admonition-title">Le changement de comportement de PHP</p>
+<p>Depuis PHP 8.1, la fonction interne de traitement de texte <code>htmlentities()</code> a changé de comportement. Lorsqu'elle lit le script d'installation de GLPI 9.5.6, elle transforme involontairement les guillemets simples en code HTML, ce qui corrompt la requête avant même qu'elle ne soit envoyée à la base de données.</p>
+</div>
+<h3 id="conteneur-base-sur-debian-12">Conteneur basé sur Debian 12<a class="headerlink" href="#conteneur-base-sur-debian-12" title="Permanent link">&para;</a></h3>
+<p>C'est pourquoi, dans la configuration finale, j'ai spécifié l'image <code>diouxx/glpi:php7.4</code>. La particularité de cette image spécifique est qu'elle contient une architecture logicielle basée sur <strong>Debian 12 (Bookworm)</strong>. </p>
+<div class="admonition tip">
+<p class="admonition-title">La magie de l'isolation</p>
+<p>Le serveur hôte tourne sous un OS ultra-récent (Debian 13), mais à l'intérieur de sa bulle isolée, le conteneur fait tourner son propre sous-système Debian 12. Cela a permis au créateur de l'image de fournir proprement PHP 7.4 (qui n'existe plus sous Debian 13) avec toutes ses anciennes dépendances, sans jamais interférer avec l'OS hôte.</p>
+</div>
+<h3 id="execution-et-test-final">Exécution et test final<a class="headerlink" href="#execution-et-test-final" title="Permanent link">&para;</a></h3>
+<p>Le déploiement de l'infrastructure complète s'effectue en une seule commande :</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>docker-compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+* <strong>Effet :</strong> Le paramètre <code>-d</code> (detached) exécute les processus en arrière-plan. Docker télécharge les deux OS virtuels, configure le réseau interne, initialise les mots de passe et télécharge la release 9.5.6 de GLPI.</p>
+<p>L'installation web de GLPI a ensuite pu aboutir parfaitement, validant la pertinence de la conteneurisation.</p>
+<p><img alt="GLPI956" src="../images/GLPI956.png" /></p>
+<hr />
+<h2 id="la-redirection-de-ports">La redirection de ports<a class="headerlink" href="#la-redirection-de-ports" title="Permanent link">&para;</a></h2>
+<p>Une fois le conteneur démarré, l'application GLPI est instantanément accessible en tapant simplement l'adresse IP du serveur Debian physique dans un navigateur web. Tout repose sur la directive <code>ports</code> du fichier docker-compose.</p>
+<h3 id="le-port-http-par-defaut">Le port HTTP par défaut<a class="headerlink" href="#le-port-http-par-defaut" title="Permanent link">&para;</a></h3>
+<p>Lorsqu'un utilisateur saisit une adresse telle que <code>http://ip_du_serveur</code>, le préfixe <code>http://</code> indique implicitement au navigateur de se connecter au port web standard : le <strong>port 80</strong>. La requête arrive donc "à la porte numéro 80" du serveur physique Debian 13.</p>
+<h3 id="le-mecanisme-de-port-forwarding">Le mécanisme de Port Forwarding<a class="headerlink" href="#le-mecanisme-de-port-forwarding" title="Permanent link">&para;</a></h3>
+<p>Dans la configuration du service GLPI, la ligne suivante a été déclarée :
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;80:80&quot;</span>
+</code></pre></div>
+Cette syntaxe se lit de gauche à droite : <code>"Port_Physique_Hôte : Port_Interne_Conteneur"</code>.</p>
+<ul>
+<li><strong>Le 80 de gauche :</strong> Il ordonne à Docker de se placer en écoute sur le port 80 de l'interface réseau du serveur Debian physique.</li>
+<li><strong>Le 80 de droite :</strong> Il correspond au port d'écoute du serveur web interne (Apache) qui tourne à l'intérieur du conteneur sous Debian 12.</li>
+</ul>
+<p><strong>Effet global :</strong> Dès qu'une requête arrive sur le port 80 du serveur physique, le service réseau de Docker (qui agit comme un réceptionniste) intercepte cette requête. Il crée un tunnel réseau de manière transparente et la redirige instantanément vers le port 80 du conteneur.</p>
+<div class="admonition info">
+<p class="admonition-title">Exemple de fonctionnement alternatif</p>
+<p>Si le port 80 du serveur Debian était déjà utilisé par un autre service, la configuration aurait pu être : <code>ports: - "8080:80"</code>.
+Dans ce cas, le serveur web du conteneur écouterait toujours sur son port 80 interne de manière identique, mais l'accès depuis l'extérieur nécessiterait de taper <code>http://ip_du_serveur:8080</code>.</p>
+</div>
+<hr />
+<h2 id="architecture-multi-conteneurs">Architecture multi-conteneurs<a class="headerlink" href="#architecture-multi-conteneurs" title="Permanent link">&para;</a></h2>
+<p>L'analyse du fichier <code>docker-compose.yml</code> révèle, sous la balise <code>services:</code>, la présence de deux blocs de configuration distincts (<code>mariadb:</code> et <code>glpi:</code>). L'infrastructure déployée ne repose donc pas sur une seule machine, mais sur <strong>deux conteneurs distincts</strong> travaillant en synergie.</p>
+<pre class="mermaid"><code>graph LR
+    User["Navigateur Web\n(Client)"] -- "Requête HTTP (80)" --&gt; Host["Debian 13\n(Serveur Physique)"]
+
+    subgraph "Environnement Docker (LAN Interne Virtuel)"
+        Host -- "Port Forwarding" --&gt; App["Conteneur: glpi-app\n(Serveur Web)"]
+        App -- "Requête SQL\n(via DNS interne)" --&gt; DB["Conteneur: glpi-mariadb\n(Base de données)"]
+    end
+
+    %% Style visuel adapté au thème sombre
+    style User fill:#2d333b,color:#ffffff,stroke:#29b6f6,stroke-width:2px
+    style Host fill:#2d333b,color:#ffffff,stroke:#4caf50,stroke-width:2px
+    style App fill:#2d333b,color:#ffffff,stroke:#ab47bc,stroke-width:2px
+    style DB fill:#2d333b,color:#ffffff,stroke:#ef5350,stroke-width:2px</code></pre>
+<h3 id="deux-roles-distincts">Deux rôles distincts<a class="headerlink" href="#deux-roles-distincts" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Le conteneur Base de données (<code>glpi-mariadb</code>) :</strong> Sa fonction est strictement limitée à l'exécution du moteur MariaDB 10.5. Il ne contient aucun serveur web ou interpréteur PHP.</li>
+<li><strong>Le conteneur Application (<code>glpi-app</code>) :</strong> Il agit exclusivement comme serveur web. Il fait tourner Apache, PHP 7.4 et héberge le code de GLPI, sans posséder de moteur de base de données en interne.</li>
+</ul>
+<h3 id="avantages-de-lapproche">Avantages de l'approche<a class="headerlink" href="#avantages-de-lapproche" title="Permanent link">&para;</a></h3>
+<p>Cette séparation respecte la règle d'or de la conteneurisation, qui offre trois avantages majeurs :</p>
+<ol>
+<li><strong>Stabilité :</strong> L'isolation des processus garantit que si le serveur web (Apache) rencontre une erreur fatale ou sature, la base de données n'est pas impactée et continue de fonctionner de manière autonome.</li>
+<li><strong>Flexibilité et Évolutivité :</strong> S'il devient nécessaire de passer à une version supérieure de MariaDB, il suffit de détruire et recréer uniquement le conteneur de base de données, sans altérer les fichiers web.</li>
+<li><strong>Sécurité renforcée :</strong> Le conteneur <code>mariadb</code> ne possède aucune directive <code>ports:</code> dans le fichier compose. Il est donc totalement invisible et inaccessible depuis l'extérieur. Seul le conteneur GLPI a l'autorisation technique de lui parler.</li>
+</ol>
+<h3 id="communication-interne-dns-docker">Communication interne (DNS Docker)<a class="headerlink" href="#communication-interne-dns-docker" title="Permanent link">&para;</a></h3>
+<p>Puisque les deux services sont séparés dans deux bulles différentes, ils doivent pouvoir communiquer. Lors du déploiement via la commande <code>docker-compose up -d</code>, Docker crée automatiquement un réseau virtuel privé exclusif à ces deux conteneurs.</p>
+<p>Dans ce réseau isolé, le moteur Docker agit comme un véritable <strong>serveur DNS interne</strong>. Ainsi, lors de la configuration web finale de GLPI, il n'est pas nécessaire de renseigner une adresse IP complexe pour connecter l'application à la base de données. Le conteneur <code>glpi-app</code> peut joindre son voisin en utilisant simplement son nom de service défini dans le fichier YAML : <strong><code>mariadb</code></strong>. Docker se charge d'intercepter cette requête et de la résoudre en adresse IP interne de manière totalement transparente.</p>
+<hr />
+<h2 id="migration-vers-glpi-10015-en-natif">Migration vers GLPI 10.0.15 en natif<a class="headerlink" href="#migration-vers-glpi-10015-en-natif" title="Permanent link">&para;</a></h2>
+<div class="admonition abstract">
+<p class="admonition-title">Objectif de la migration</p>
+<p>Face aux limites de la version 9.5.6 (obsolescence logicielle, incompatibilité matérielle), le déploiement d'un <strong>nouveau serveur</strong> avec <strong>GLPI 10.0.15</strong> a été acté.</p>
+</div>
+<hr />
+<h3 id="1-preparation-du-systeme-et-depot-sury">1. Préparation du système et dépôt SURY<a class="headerlink" href="#1-preparation-du-systeme-et-depot-sury" title="Permanent link">&para;</a></h3>
+<p>Debian 13 intégrant nativement PHP 8.2, il est nécessaire d'ajouter le dépôt officiel <strong>SURY</strong> pour forcer l'installation de <strong>PHP 8.3</strong>, version optimale pour le fonctionnement de GLPI 10.</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># 1. Mise à jour de base et prérequis réseau</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt<span class="w"> </span>upgrade<span class="w"> </span>-y
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>lsb-release<span class="w"> </span>apt-transport-https<span class="w"> </span>ca-certificates<span class="w"> </span>curl<span class="w"> </span>wget
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="c1"># 2. Ajout de la clé de sécurité et du dépôt SURY</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>curl<span class="w"> </span>-sSLo<span class="w"> </span>/usr/share/keyrings/deb.sury.org-php.gpg<span class="w"> </span><span class="o">[</span>https://packages.sury.org/php/apt.gpg<span class="o">](</span>https://packages.sury.org/php/apt.gpg<span class="o">)</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;echo &quot;deb [signed-by=/usr/share/keyrings/deb.sury.org-php.gpg] [https://packages.sury.org/php/](https://packages.sury.org/php/) $(lsb_release -sc) main&quot; &gt; /etc/apt/sources.list.d/php.list&#39;</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="c1"># 3. Rafraîchissement de la liste des paquets</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>apt<span class="w"> </span>update
+</code></pre></div>
+* <strong>Effet :</strong> Autorise le gestionnaire APT à télécharger des paquets fiables depuis un serveur externe spécialisé dans le maintien des dernières versions de PHP.</p>
+<h3 id="2-installation-de-la-pile-lamp-linuxapachemariadbphp">2. Installation de la pile LAMP (Linux,Apache,MariaDB,PHP)<a class="headerlink" href="#2-installation-de-la-pile-lamp-linuxapachemariadbphp" title="Permanent link">&para;</a></h3>
+<p>L'étape suivante consiste à installer le serveur web, le moteur de base de données, et l'interpréteur PHP accompagné de tous les modules requis par l'application.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Installation des moteurs Web et SQL</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>apache2<span class="w"> </span>mariadb-server
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># Installation de PHP 8.3 et de ses dépendances</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>php8.3<span class="w"> </span>php8.3-core<span class="w"> </span>php8.3-mysql<span class="w"> </span>php8.3-xml<span class="w"> </span>php8.3-cli<span class="w"> </span>php8.3-cas<span class="w"> </span>php8.3-bz2<span class="w"> </span>php8.3-curl<span class="w"> </span>php8.3-mbstring<span class="w"> </span>php8.3-intl<span class="w"> </span>php8.3-gd<span class="w"> </span>php8.3-zip<span class="w"> </span>php8.3-ldap
+</code></pre></div>
+<p><strong>Détail des extensions PHP (<code>php8.3-*</code>) :</strong> L'application requiert ces modules spécifiques pour manipuler des images (<code>gd</code>), décompresser des archives (<code>zip</code>, <code>bz2</code>), gérer les caractères internationaux (<code>intl</code>, <code>mbstring</code>) et permettre une future communication avec un annuaire Active Directory (<code>ldap</code>).</p>
+<h3 id="3-configuration-de-mariadb">3. Configuration de MariaDB<a class="headerlink" href="#3-configuration-de-mariadb" title="Permanent link">&para;</a></h3>
+<p>Il est nécessaire de provisionner un espace de stockage pour GLPI.</p>
+<p>Dans le terminal Debian, lancez l'invite de commande SQL via <code>mysql -u root</code> et exécutez les requêtes suivantes :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1">-- Création de la base de données </span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">db_glpi</span><span class="w"> </span><span class="nb">CHARACTER</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="n">utf8mb4</span><span class="w"> </span><span class="k">COLLATE</span><span class="w"> </span><span class="n">utf8mb4_unicode_ci</span><span class="p">;</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1">-- Création d&#39;un utilisateur dédié </span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="k">CREATE</span><span class="w"> </span><span class="k">USER</span><span class="w"> </span><span class="s1">&#39;admindb_glpi&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;Glpiglpi0&#39;</span><span class="p">;</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="c1">-- Octroi de tous les privilèges à cet utilisateur sur la base GLPI</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">db_glpi</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;admindb_glpi&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="4-deploiement-de-glpi-10015">4. Déploiement de GLPI 10.0.15<a class="headerlink" href="#4-deploiement-de-glpi-10015" title="Permanent link">&para;</a></h3>
+<p>L'archive officielle est récupérée depuis GitHub et décompressée directement dans le répertoire d'hébergement du serveur web Apache.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># Se placer dans le répertoire racine web</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nb">cd</span><span class="w"> </span>/var/www/html/
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="c1"># Téléchargement de l&#39;archive</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>wget<span class="w"> </span><span class="o">[</span>https://github.com/glpi-project/glpi/releases/download/10.0.15/glpi-10.0.15.tgz<span class="o">](</span>https://github.com/glpi-project/glpi/releases/download/10.0.15/glpi-10.0.15.tgz<span class="o">)</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="c1"># Extraction (génère automatiquement le dossier /glpi)</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>tar<span class="w"> </span>-xvf<span class="w"> </span>glpi-10.0.15.tgz
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="c1"># Nettoyage de l&#39;archive téléchargée</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>rm<span class="w"> </span>glpi-10.0.15.tgz
+</code></pre></div>
+<h3 id="5-securisation-des-droits-dacces">5. Sécurisation des droits d'accès<a class="headerlink" href="#5-securisation-des-droits-dacces" title="Permanent link">&para;</a></h3>
+<p>Pour que le serveur web Apache puisse interagir avec les dossiers (upload de documents, mise à jour des plugins, génération de logs), l'utilisateur système qui fait tourner le processus web doit en devenir le propriétaire.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1"># Attribution du dossier GLPI à l&#39;utilisateur système d&#39;Apache (www-data)</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>chown<span class="w"> </span>-R<span class="w"> </span>www-data:www-data<span class="w"> </span>/var/www/html/glpi
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="c1"># Sécurisation des permissions (Lecture/Exécution pour tous, Écriture pour le propriétaire)</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>chmod<span class="w"> </span>-R<span class="w"> </span><span class="m">755</span><span class="w"> </span>/var/www/html/glpi
+</code></pre></div>
+<div class="admonition success">
+<p class="admonition-title">Prêt pour la configuration graphique</p>
+<p>L'infrastructure système est désormais totalement déployée et configurée. La suite de l'installation s'effectue via l'assistant web, accessible en tapant <code>http://[IP_DU_SERVEUR]/glpi</code> dans un navigateur. (En l'occurrence, depuis le 'PC Client' sous Windows)</p>
+</div>
+<h3 id="6-initialisation-de-glpi">6. Initialisation de Glpi<a class="headerlink" href="#6-initialisation-de-glpi" title="Permanent link">&para;</a></h3>
+<p><img alt="GLPI1" src="../images/GLPI1.png" />
+<img alt="GLPI2" src="../images/GLPI2.png" />
+<img alt="GLPI3" src="../images/GLPI3.png" />
+<img alt="GLPI4" src="../images/GLPI4.png" />
+<img alt="GLPI5" src="../images/GLPI5.png" /></p>
+<hr />
+<h2 id="identifiants-de-connexion-par-defaut">Identifiants de connexion par défaut<a class="headerlink" href="#identifiants-de-connexion-par-defaut" title="Permanent link">&para;</a></h2>
+<p>Lors de l'installation initiale de GLPI, plusieurs comptes sont créés automatiquement avec des niveaux d'habilitation différents. Voici les identifiants à utiliser (Login / Mot de passe) :</p>
+<ul>
+<li><strong>Super-Administrateur :</strong> <code>glpi</code> / <code>glpi</code></li>
+<li><strong>Technicien :</strong> <code>tech</code> / <code>tech</code></li>
+<li><strong>Utilisateur normal :</strong> <code>normal</code> / <code>normal</code></li>
+<li><strong>Utilisateur "Post-only" (Création de tickets uniquement) :</strong> <code>post-only</code> / <code>postonly</code></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Rappel de sécurité</p>
+<p>Dès votre première connexion avec le compte <code>glpi</code>, il est impératif de modifier ces mots de passe ou de désactiver/supprimer les comptes dont vous n'aurez pas l'utilité. Tant que ces identifiants par défaut sont actifs sur le serveur, GLPI affichera un avertissement de sécurité orange persistant sur le tableau de bord !</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  <div class="md-copyright__highlight">
+    &copy; 2026-2027 - Documentation par Loris.R
+  </div>
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy", "navigation.tracking", "navigation.top", "toc.follow"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
