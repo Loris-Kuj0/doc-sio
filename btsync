@@ -1,0 +1,124 @@
+#!/bin/bash
+
+# ==============================================================================
+# BTSYNC v3.5 - Auto-Sudo & Chemin Fixe
+# ==============================================================================
+
+# --- AUTO-ELEVATION (La magie est ici) ---
+if [ "$EUID" -ne 0 ]; then
+  # Si on n'est pas root, on relance le script avec sudo
+  # "$0" = le nom du script, "$@" = les arguments
+  sudo "$0" "$@"
+  exit $?
+fi
+
+# --- 1. Détection Contrôleur ---
+echo "🔍 Détection du contrôleur Bluetooth..."
+LINUX_CONTROLLER_MAC=""
+
+if command -v bluetoothctl &> /dev/null; then
+    LINUX_CONTROLLER_MAC=$(bluetoothctl list | grep "Controller" | head -n 1 | awk '{print $2}')
+fi
+
+if [ -z "$LINUX_CONTROLLER_MAC" ] && command -v hcitool &> /dev/null; then
+    LINUX_CONTROLLER_MAC=$(hcitool dev | grep "hci" | head -n 1 | awk '{print $2}')
+fi
+
+if [ -z "$LINUX_CONTROLLER_MAC" ]; then
+    HCI_PATH=$(find /sys/class/bluetooth -maxdepth 1 -name "hci*" -print -quit)
+    if [ -n "$HCI_PATH" ] && [ -f "$HCI_PATH/address" ]; then
+        LINUX_CONTROLLER_MAC=$(cat "$HCI_PATH/address")
+    fi
+fi
+
+if [ -z "$LINUX_CONTROLLER_MAC" ]; then
+    echo "❌ Échec détection. Entrez l'adresse MAC manuellement :"
+    read -p "MAC > " LINUX_CONTROLLER_MAC
+else
+    echo "🤖 Contrôleur détecté : $LINUX_CONTROLLER_MAC"
+fi
+
+LINUX_CONTROLLER_MAC=$(echo "$LINUX_CONTROLLER_MAC" | tr '[:lower:]' '[:upper:]')
+WIN_CONTROLLER_KEY=$(echo "$LINUX_CONTROLLER_MAC" | tr -d ':' | tr '[:upper:]' '[:lower:]')
+
+# --- 2. Montage Windows ---
+MOUNT_POINT="/mnt/windows_temp_mount"
+SYSTEM_HIVE=""
+mkdir -p "$MOUNT_POINT"
+
+for part in $(lsblk -rno NAME,TYPE | awk '$2=="part" {print "/dev/"$1}'); do
+    mount -o ro "$part" "$MOUNT_POINT" 2>/dev/null
+    if [ -f "$MOUNT_POINT/Windows/System32/config/SYSTEM" ]; then
+        SYSTEM_HIVE="$MOUNT_POINT/Windows/System32/config/SYSTEM"
+        break
+    elif [ -f "$MOUNT_POINT/Windows/System32/config/system" ]; then
+        SYSTEM_HIVE="$MOUNT_POINT/Windows/System32/config/system"
+        break
+    fi
+    umount "$MOUNT_POINT" 2>/dev/null
+done
+
+if [ -z "$SYSTEM_HIVE" ]; then
+    echo "❌ Partition Windows introuvable."
+    rmdir "$MOUNT_POINT"
+    exit 1
+fi
+
+# --- 3. Scan et Extraction ---
+REG_PATH="ControlSet001\Services\BTHPORT\Parameters\Keys"
+OUTPUT_FILE="/var/mnt/693C-E42C/BTKEYS.txt"
+MACOS_TEMP="/tmp/btsync_macos_temp"
+
+echo "Rapport des Clés Bluetooth - $(date)" > "$OUTPUT_FILE"
+echo "Contrôleur : $LINUX_CONTROLLER_MAC" >> "$OUTPUT_FILE"
+echo "----------------------------------------" >> "$OUTPUT_FILE"
+echo "" > "$MACOS_TEMP"
+
+RAW_LIST=$(printf "cd $REG_PATH\ncd $WIN_CONTROLLER_KEY\nls\nq\n" | chntpw -e "$SYSTEM_HIVE" 2>/dev/null | grep -oE "<[0-9a-fA-F]{12}>" | tr -d '<>')
+
+if [ -z "$RAW_LIST" ]; then
+    echo "⚠️  Aucun appareil trouvé."
+else
+    echo "📂 Analyse des appareils..."
+fi
+
+for WIN_DEVICE_KEY in $RAW_LIST; do
+    LINUX_DEVICE_MAC=$(echo "$WIN_DEVICE_KEY" | sed 's/.\{2\}/&:/g;s/:$//' | tr '[:lower:]' '[:upper:]')
+    
+    KEY_OUTPUT=$(printf "cd $REG_PATH\ncd $WIN_CONTROLLER_KEY\nhex $WIN_DEVICE_KEY\nq\n" | chntpw -e "$SYSTEM_HIVE" 2>/dev/null)
+    FOUND_KEY=$(echo "$KEY_OUTPUT" | grep -oE "([0-9A-Fa-f]{2} ?){16}" | tr -d ' ' | tr '[:lower:]' '[:upper:]' | tail -n 1)
+
+    if [ -n "$FOUND_KEY" ]; then
+        LINUX_INFO_FILE="/var/lib/bluetooth/$LINUX_CONTROLLER_MAC/$LINUX_DEVICE_MAC/info"
+        DEVICE_NAME="Inconnu ($LINUX_DEVICE_MAC)"
+        
+        if [ -f "$LINUX_INFO_FILE" ]; then
+            NAME_IN_FILE=$(grep "^Name=" "$LINUX_INFO_FILE" | cut -d '=' -f 2)
+            [ -n "$NAME_IN_FILE" ] && DEVICE_NAME="$NAME_IN_FILE"
+
+            echo "🔄 Sync Linux : $DEVICE_NAME"
+            cp "$LINUX_INFO_FILE" "${LINUX_INFO_FILE}.bak"
+            sed -i "s/^Key=.*/Key=$FOUND_KEY/" "$LINUX_INFO_FILE"
+        fi
+
+        echo "$DEVICE_NAME: $FOUND_KEY" >> "$OUTPUT_FILE"
+
+        SWAPPED_KEY=$(echo "$FOUND_KEY" | fold -w2 | tac | tr -d '\n')
+        FORMATTED_SWAPPED_KEY=$(echo "$SWAPPED_KEY" | sed 's/.\{2\}/&-/g;s/-$//')
+        
+        echo "$DEVICE_NAME: $FORMATTED_SWAPPED_KEY" >> "$MACOS_TEMP"
+    fi
+done
+
+echo "" >> "$OUTPUT_FILE"
+echo "### MacOS (INVERSÉ) ###" >> "$OUTPUT_FILE"
+cat "$MACOS_TEMP" >> "$OUTPUT_FILE"
+rm "$MACOS_TEMP"
+
+umount "$MOUNT_POINT"
+rmdir "$MOUNT_POINT"
+
+echo "✅ Terminé !"
+systemctl restart bluetooth
+echo "📄 Rapport sauvegardé : $OUTPUT_FILE"
+cat "$OUTPUT_FILE"

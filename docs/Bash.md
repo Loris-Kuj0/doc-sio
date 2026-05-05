@@ -179,7 +179,7 @@ echo "Nombre total d'arguments : $#"
 ```
 
 ### La commande `shift`
-La commande `shift` est une astuce souvent utilisée dans les scripts complexes. Elle permet de "décaler" les arguments vers la gauche : `$2` devient `$1`, `$3` devient `$2`, etc. C'est très utile pour traiter le premier argument puis boucler sur le reste.
+La commande `shift` est une astuce souvent utilisée dans les scripts complexes. Elle permet de "décaler" les arguments vers la gauche : `$2` devient `$1`, `$3` devient `$2`, etc. C'est très utile pour traiter le premier argument puis boucler sur le reste. 
 
 ```bash
 #!/bin/bash
