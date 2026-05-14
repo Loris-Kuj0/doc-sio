@@ -39,9 +39,3 @@
 
 ---
 
-## Sauvergardes
-
--site de l'état sur les durées de conservation
--différence entre sauvegarde et archivage 
--les différent type de sauvegrde: complète, incrémentale, diférentiel |avanage et inconvénients
--installation cobian reflector,
