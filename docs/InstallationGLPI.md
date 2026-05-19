@@ -359,7 +359,7 @@ apt install -y php8.3 php8.3-core php8.3-mysql php8.3-xml php8.3-cli php8.3-cas 
 
 ### 3. Configuration de MariaDB
 
-Il est nécessaire de provisionner un espace de stockage pour GLPI.
+Il est nécessaire de provisionner un espace de stockage pour GLPI. 
 
 Dans le terminal Debian, lancez l'invite de commande SQL via `mysql -u root` et exécutez les requêtes suivantes :
 
