@@ -73,9 +73,12 @@ Ce mécanisme copie uniquement les données modifiées depuis la **dernière sau
 ## TP : Programmation d'une Sauvegarde dans le Cloud
 
 -Environement (linux/spec du pc/distro)
+
 -Logiciel(s) choisi
 
--procedure
+-procedure (ce que tu as deja fait)
 
 -a la toute fin explique moi comment mettre une video 
+
+adapte ce que tuas deja fait si besion 
 
