@@ -74,19 +74,19 @@ Ce mecanisme copie uniquement les donnees modifiees depuis la **derniere sauvega
 ### A. Specifications de l'Environnement de Travail
 La realisation technique de ce cas pratique s'effectue sur un poste client disposant de l'environnement materiel et logiciel suivant :
 
-* **Systeme d'exploitation :** Bazzite OS (generation 43 / Base Fedora Silverblue)
+* **Systeme d'exploitation :** Bazzite (version 43 / Base Fedora Silverblue)
 * **Interface graphique :** KDE Plasma
-* **Contrainte d'architecture :** Systeme de fichiers immuable (systeme racine monte en lecture seule).
+* **Contrainte d'architecture :** Systeme de fichiers immuable (fichiers du systeme monte en lecture seule).
 
 ### B. Logiciel Choisi
-Le choix s'est porte sur **Rclone**, un utilitaire open-source en ligne de commande hautement performant specialise dans la gestion, la synchronisation et le transfert de donnees vers des infrastructures de stockage Cloud (IaaS). En raison de l'immuabilite de l'OS hote, le binaire a ete deploye manuellement de maniere isolee dans le repertoire personnel de l'utilisateur (`~/.local/bin`) afin d'assurer sa persistance.
+Le choix s'est porte sur **Rclone**, un utilitaire open-source en ligne de commande hautement performant specialise dans la gestion, la synchronisation et le transfert de donnees vers des infrastructures de stockage Cloud (IaaS). En raison de l'immuabilite de l'OS hote, le binaire a ete deploye manuellement de maniere isolee dans le repertoire personnel de l'utilisateur (`~/.local/bin`) afin d'assurer sa persistance. (Bazzite écrase ses propre répertoire apres chaque mises à jour)
 
 ---
 
 ### C. Procedure Technique et Implementation
 
 #### 1. Deploiement et initialisation du binaire Rclone
-N'ayant pas la possibilite d'utiliser un gestionnaire de paquets global sans alterer l'image du systeme, le binaire autonome est recupere directement depuis les depots officiels du projet :
+N'ayant pas la possibilite d'utiliser un gestionnaire de paquets global sans alterer l'image du systeme, le paquet est recupere directement depuis les depots officiels du projet :
 
 ```bash
 # Telechargement et decompression du package dans l'espace temporaire
@@ -95,20 +95,17 @@ cd /tmp && wget [https://downloads.rclone.org/rclone-current-linux-amd64.zip](ht
 # Isolation du fichier executable dans l'environnement de l'utilisateur lk
 mkdir -p ~/.local/bin && cp /tmp/rclone-*-linux-amd64/rclone ~/.local/bin/ && chmod +x ~/.local/bin/rclone
 
-# Enregistrement temporaire du dossier cible dans la variable PATH du terminal
-export PATH="$HOME/.local/bin:$PATH"
-
 ```
 
 ```bash
-# Verification de l'integrite operationnelle du programme
+# Verification du programme
 rclone version
 
 ```
 
 *Effet :* La version `v1.74.1` repond correctement aux appels du terminal.
 
-![Validation de la version locale rclone](../images/Screenshot_2026-05-20_18-56-47.png)
+![Validation de la version locale rclone](../images/Screenshot 2026-05-20 18-47-52.png)
 
 #### 2. Configuration du point d'acces distant (Remote Google Drive)
 
