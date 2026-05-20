@@ -7,7 +7,7 @@
 
 La conservation des données ne relève pas uniquement d'un choix technique, mais d'un cadre réglementaire strict imposé par l'État français (RGPD, Code de commerce, Code du travail). Les organisations ont l'obligation de conserver certains documents pour des durées minimales.
 
-* **Documents civils et commerciaux :** Les contrats conclus dans le cadre d'une relation commerciale ou les factures clients/fournisseurs doivent être conservés pendant **10 ans** (Code de commerce).
+* **Documents civils et commerciaux :** Les contrats conclus dans le cadre d'une relation commerciale ou les factures clients/fournisseurs doivent être conservés pendant **10 ans**.
 * **Données RH et administratives :** Les bulletins de paie ou les contrats de travail doivent être conservés pendant **5 ans**.
 * **Données de santé ou bancaires :** Soumises à des réglementations encore plus strictes, exigeant parfois des durées allant jusqu'à 20 ans ou plus, gérées par des hébergeurs certifiés.
 
