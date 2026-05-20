@@ -108,6 +108,8 @@ rclone version
 
 *Effet :* La version `v1.74.1` repond correctement aux appels du terminal.
 
+![Validation de la version locale rclone](../images/Screenshot_2026-05-20_18-56-47.jpg)
+
 #### 2. Configuration du point d'acces distant (Remote Google Drive)
 
 L'interfacage avec l'espace Cloud s'effectue via l'assistant de configuration interactif :
@@ -219,7 +221,7 @@ Voici les lignes de code brutes de tes images. Tu peux copier chaque ligne et re
 
 * **Pour `` :**
 ```markdown
-![Validation de la version locale rclone](../images/Screenshot_2026-05-20_18-56-47.jpg)
+
 
 ```
 
