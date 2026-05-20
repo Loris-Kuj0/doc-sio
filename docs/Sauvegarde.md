@@ -19,7 +19,7 @@ La conservation des données ne relève pas uniquement d'un choix technique, mai
 
 ## 2. Distinction Fondamentale : Sauvegarde vs Archivage
 
-Une erreur fréquente en administration système consiste à confondre la sauvegarde et l'archivage. Bien que ces deux processus manipulent les mêmes données, leurs finalités et leurs mécanismes techniques sont radicalement différents.
+Une erreur fréquente en administration système consiste à confondre la sauvegarde et l'archivage. Bien que ces deux processus manipulent les mêmes données, leurs finalités sont différentes.
 
 | Caractéristique | Sauvegarde (Backup) | Archivage |
 | :--- | :--- | :--- |
