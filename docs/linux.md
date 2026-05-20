@@ -156,8 +156,8 @@ L'enregistrement final montre la bonne creation du profil `tpsio` :
 
 Un script d'ordonnancement est redige a l'aide de l'editeur de texte **Kate** pour automatiser le traitement iteratif des repertoires du module.
 
-!!! warning "Sensibilite a la Casse (Case Sensitivity)"
-Le chemin absolu d'acces de l'infrastructure de dossiers de TP doit imperativement respecter la casse reelle de l'architecture Linux, a savoir : `/home/LK/SIO-TP`. Toute divergence typographique (ex: minuscules) provoque la levee d'une exception d'inexistence des sources.
+!!! warning "Sensibilite a la Casse"
+Le chemin absolu d'acces de l'infrastructure de dossiers de TP doit imperativement respecter la casse reelle de l'architecture Linux, a savoir : `/home/LK/SIO-TP`.
 
 ```bash
 #!/bin/bash
