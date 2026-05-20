@@ -5,7 +5,7 @@
 
 ## 1. Obligations Légales et Durées de Conservation
 
-La conservation des données ne relève pas uniquement d'un choix technique, mais d'un cadre réglementaire strict imposé par l'État français (RGPD, Code de commerce, Code du travail). Les organisations ont l'obligation de conserver certains documents pour des durées minimales, tout en respectant le droit à l'oubli des données personnelles.
+La conservation des données ne relève pas uniquement d'un choix technique, mais d'un cadre réglementaire strict imposé par l'État français (RGPD, Code de commerce, Code du travail). Les organisations ont l'obligation de conserver certains documents pour des durées minimales.
 
 * **Documents civils et commerciaux :** Les contrats conclus dans le cadre d'une relation commerciale ou les factures clients/fournisseurs doivent être conservés pendant **10 ans** (Code de commerce).
 * **Données RH et administratives :** Les bulletins de paie ou les contrats de travail doivent être conservés pendant **5 ans**.
@@ -14,7 +14,6 @@ La conservation des données ne relève pas uniquement d'un choix technique, mai
 !!! warning "Risque Juridique"
     Le non-respect de ces durées de conservation ou l'incapacité à restituer ces données lors d'un contrôle ou d'un litige expose l'organisation à de Lourdes sanctions financières et pénales.
     
-    *Effet :* La stratégie de sauvegarde doit intégrer des règles de rétention automatisées pour s'aligner précisément sur la législation en vigueur.
 
 ---
 
@@ -29,7 +28,7 @@ Une erreur fréquente en administration système consiste à confondre la sauveg
 | **Accessibilité** | Accès immédiat et transparent pour les administrateurs/utilisateurs. | Accès ponctuel, souvent indexé pour des recherches spécifiques. |
 | **Cycle de vie** | Rétention courte à moyenne (les anciennes versions écrasent les nouvelles). | Rétention définitive ou à très long terme (plusieurs années/décennies). |
 
-!!! tip "La règle d'or"
+!!! tip "Pour faire tres simple."
     * **Sauvegarde :** "J'ai perdu mon fichier ce matin, je dois le récupérer dans son état d'hier."
     * **Archivage :** "Le fisc me demande les factures de l'année 2018, je dois les extraire du coffre-fort numérique."
 
@@ -71,5 +70,12 @@ Ce mécanisme copie uniquement les données modifiées depuis la **dernière sau
 
 ---
 
-## 4. Travaux Pratiques : Mise en Situation
+## 4. TP : Programmation d'une Sauvegarde dans le Cloud
+
+-Environement (linux/spec du pc/distro)
+-Logiciel(s) choisi
+
+-procedure
+
+-a la toute fin explique moi comment mettre une video 
 
