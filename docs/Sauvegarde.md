@@ -227,3 +227,7 @@ Une vue detaillee confirme la presence et l'heure exacte de synchronisation de l
 #### 6. Video de démonstration
 
 Video Montrant Rclone en action sur l'infra installé précédemment:
+
+<video width="100%" controls>
+  <source src="../images/2026-05-20 21-56-24.mkv" type="video/mkv">
+</video>
