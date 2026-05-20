@@ -94,18 +94,16 @@ cd /tmp && wget [https://downloads.rclone.org/rclone-current-linux-amd64.zip](ht
 
 # Isolation du fichier executable dans l'environnement de l'utilisateur lk
 mkdir -p ~/.local/bin && cp /tmp/rclone-*-linux-amd64/rclone ~/.local/bin/ && chmod +x ~/.local/bin/rclone
-
 ```
 
 ```bash
 # Verification du programme
 rclone version
-
 ```
 
 *Effet :* La version `v1.74.1` repond correctement aux appels du terminal.
 
-![Validation de la version locale rclone](../images/Screenshot 2026-05-20 18-47-52.png)
+![Vérification de la version Rclone](../images/Screenshot_2026-05-20_18-56-47.png)
 
 #### 2. Configuration du point d'acces distant (Remote Google Drive)
 
@@ -113,11 +111,13 @@ L'interfacage avec l'espace Cloud s'effectue via l'assistant de configuration in
 
 ```bash
 rclone config
-
 ```
 
 * **Creation du profil :** Selection de l'option `n` (*New remote*) nommee logiquement `tpsio`.
 * **Choix du stockage :** Selection de l'option correspondant a Google Drive.
+
+![Sélection du stockage Google Drive dans Rclone](../images/Screenshot_2026-05-20_19-01-11.png)
+
 * **Gestion des permissions (`scope`) :** Attribution du profil `1` (*Full access all files*) pour autoriser l'edition complete sur le Drive cible.
 * **Authentification unifiee (OAuth2) :** Utilisation de l'authentification automatique (`Use auto config? -> y`).
 
@@ -132,16 +132,25 @@ Choose a number from below, or type in your own value.
  1 / Full access all files, excluding Application Data Folder.
    \ (drive)
 scope> 1
-
 ```
+
+![Configuration du scope d'accès Rclone](../images/Screenshot_2026-05-20_19-04-31.png)
 
 Le programme initie un serveur d'ecoute local et bascule la validation sur le navigateur web de la session pour approuver l'acces au compte Google.
 
+![Serveur d'écoute local et redirection navigateur](../images/Screenshot_2026-05-20_19-04-50.png)
+
 L'accord d'acces est alors confirme par le serveur d'authentification :
+
+![Confirmation de l'accord d'accès OAuth2](../images/Screenshot_2026-05-20_19-05-35.png)
 
 Une fois l'autorisation validee par l'API Google, le terminal recoit le jeton de securite (`Got code`), refuse la creation d'un disque d'equipe partage (`Shared Drive -> n`), affiche le recapitulatif chiffre du profil et ferme l'utilitaire via la commande `q` (*Quit*).
 
+![Réception du jeton Got code et récapitulatif du profil](../images/Screenshot_2026-05-20_19-06-42.png)
+
 L'enregistrement final montre la bonne creation du profil `tpsio` :
+
+![Enregistrement final du profil tpsio](../images/Screenshot_2026-05-20_19-08-25.png)
 
 #### 3. Ecriture du Script d'Automatisation Bash
 
@@ -179,10 +188,11 @@ done
 echo "===================================================="
 echo "        SAUVEGARDE TERMINÉE AVEC SUCCÈS !"
 echo "===================================================="
-
 ```
 
 L'edition s'effectue dans l'environnement de developpement :
+
+![Édition du script dans l'éditeur Kate](../images/Screenshot_2026-05-20_20-24-05.png)
 
 #### 4. Attribution des droits et execution de la routine
 
@@ -190,104 +200,26 @@ Avant de pouvoir executer le script, il est imperatif de modifier ses permission
 
 ```bash
 chmod +x backup.sh
-
 ```
+
+![Attribution des droits d'exécution au script](../images/Screenshot_2026-05-20_20-26-20.png)
 
 Le lancement du script execute la routine en arriere-plan. Rclone analyse l'arborescence locale, identifie les fichiers et televerse de maniere ciblee le contenu vers l'espace IaaS.
 
 ```bash
 ./backup.sh
-
 ```
 
 Le script confirme le bon traitement de chaque sous-dossier cible :
+
+![Confirmation du traitement de chaque sous-dossier](../images/Screenshot_2026-05-20_20-36-32.png)
 
 #### 5. Controle de conformite de l'infrastructure Cloud
 
 La verification s'opere en accedant a l'interface d'administration Web de Google Drive. Les repertoires distants ont ete crees et le fichier de verification `test.txt` est correctement synchronise dans l'arborescence cible.
 
+![Arborescence distante créée dans Google Drive](../images/Screenshot_2026-05-20_20-36-50.png)
+
 Une vue detaillee confirme la presence et l'heure exacte de synchronisation de l'element :
 
-```
-
-***
-
-### 2. Liste des balises d'images (à copier séparément)
-
-Voici les lignes de code brutes de tes images. Tu peux copier chaque ligne et remplacer la balise correspondante `` directement dans ton fichier Markdown :
-
-* **Pour `` :**
-```markdown
-
-
-```
-
-* **Pour `` :**
-
-```markdown
-![Parametres du type de stockage cloud](../images/Screenshot_2026-05-20_19-04-31.jpg)
-
-```
-
-* **Pour `` :**
-
-```markdown
-![Ouverture de la mire de selection Google](../images/Screenshot_2026-05-20_19-04-50.jpg)
-
-```
-
-* **Pour `` :**
-
-```markdown
-![Succes de l authentification web](../images/Screenshot_2026-05-20_19-05-35.png)
-
-```
-
-* **Pour `` :**
-
-```markdown
-![Recuperation du code oAuth](../images/Screenshot_2026-05-20_19-06-42.jpg)
-
-```
-
-* **Pour `` :**
-
-```markdown
-![Validation finale du remote tpsio](../images/Screenshot_2026-05-20_19-08-25.jpg)
-
-```
-
-* **Pour `` :**
-
-```markdown
-![Edition du script Bash dans Kate](../images/Screenshot_2026-05-20_20-24-05.jpg)
-
-```
-
-* **Pour `` :**
-
-```markdown
-![Application du chmod sur le terminal](../images/Screenshot_2026-05-20_20-26-20.jpg)
-
-```
-
-* **Pour `` :**
-
-```markdown
-![Execution reussie du transfert synchrone](../images/Screenshot_2026-05-20_20-36-32.jpg)
-
-```
-
-* **Pour `` :**
-
-```markdown
-![Verification du fichier envoye sur Google Drive](../images/Screenshot_2026-05-20_20-36-50.jpg)
-
-```
-
-* **Pour `` :**
-
-```markdown
-![Metadonnees de synchronisation du fichier test](../images/Screenshot_2026-05-20_20-36-50.tmp.png)
-
-```
+![Vue détaillée de la synchronisation dans Google Drive](../images/Screenshot_2026-05-20_20-36-50.tmp.png)
