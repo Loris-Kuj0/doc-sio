@@ -3,7 +3,7 @@
 !!! abstract "Introduction : Objectifs"
     La sauvegarde informatique est le pilier central de la sécurité des données.
 
-## 1. Obligations Légales et Durées de Conservation
+## Obligations Légales et Durées de Conservation
 
 La conservation des données ne relève pas uniquement d'un choix technique, mais d'un cadre réglementaire strict imposé par l'État français (RGPD, Code de commerce, Code du travail). Les organisations ont l'obligation de conserver certains documents pour des durées minimales.
 
@@ -17,7 +17,7 @@ La conservation des données ne relève pas uniquement d'un choix technique, mai
 
 ---
 
-## 2. Distinction Fondamentale : Sauvegarde vs Archivage
+## Distinction Fondamentale : Sauvegarde vs Archivage
 
 Une erreur fréquente en administration système consiste à confondre la sauvegarde et l'archivage. Bien que ces deux processus manipulent les mêmes données, leurs finalités sont différentes.
 
@@ -34,11 +34,11 @@ Une erreur fréquente en administration système consiste à confondre la sauveg
 
 ---
 
-## 3. Typologies de Sauvegardes : Mécanismes, Avantages et Inconvénients
+## Typologies de Sauvegardes : Mécanismes, Avantages et Inconvénients
 
 Le choix d'une méthode de sauvegarde dépend de l'équilibre à trouver entre la fenêtre de sauvegarde disponible (le temps alloué pour copier les données) et le volume de stockage disponible sur les serveurs cibles.
 
-### A. La Sauvegarde Complète
+### La Sauvegarde Complète
 Ce mécanisme consiste à copier l'intégralité des données sélectionnées à chaque cycle, indépendamment de toute modification antérieure.
 
 * **Avantages :** * Restauration ultra-rapide et simplifiée (un seul jeu de données est nécessaire).
@@ -48,7 +48,7 @@ Ce mécanisme consiste à copier l'intégralité des données sélectionnées à
     * Temps d'exécution très long (fenêtre de sauvegarde élevée).
 * *Effet :* Idéale comme point de départ (généralement planifiée une fois par semaine, le week-end).
 
-### B. La Sauvegarde Incrémentale
+### La Sauvegarde Incrémentale
 Ce processus ne sauvegarde que les données créées ou modifiées depuis la **dernière sauvegarde**, qu'elle soit complète ou incrémentale.
 
 * **Avantages :**
@@ -58,7 +58,7 @@ Ce processus ne sauvegarde que les données créées ou modifiées depuis la **d
     * Restauration lente et complexe. En cas de sinistre, il est nécessaire de restaurer la dernière sauvegarde complète, puis **chaque incrément successif** dans l'ordre chronologique sans aucune rupture de la chaîne.
 * *Effet :* Réduit drastiquement la charge réseau au quotidien (planifiée chaque nuit).
 
-### C. La Sauvegarde Différentielle
+### La Sauvegarde Différentielle
 Ce mécanisme copie uniquement les données modifiées depuis la **dernière sauvegarde complète**.
 
 * **Avantages :**
@@ -70,7 +70,7 @@ Ce mécanisme copie uniquement les données modifiées depuis la **dernière sau
 
 ---
 
-## 4. TP : Programmation d'une Sauvegarde dans le Cloud
+## TP : Programmation d'une Sauvegarde dans le Cloud
 
 -Environement (linux/spec du pc/distro)
 -Logiciel(s) choisi
