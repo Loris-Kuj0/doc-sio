@@ -103,7 +103,7 @@ rclone version
 
 *Effet :* La version `v1.74.1` repond correctement aux appels du terminal.
 
-![Vérification de la version Rclone](../images/Screenshot_2026-05-20_18-56-47.png)
+![Vérification de la version Rclone](../images/Screenshot%202026-05-20%2018-56-47.png)
 
 #### 2. Configuration du point d'acces distant (Remote Google Drive)
 
@@ -116,7 +116,7 @@ rclone config
 * **Creation du profil :** Selection de l'option `n` (*New remote*) nommee logiquement `tpsio`.
 * **Choix du stockage :** Selection de l'option correspondant a Google Drive.
 
-![Sélection du stockage Google Drive dans Rclone](../images/Screenshot_2026-05-20_19-01-11.png)
+![Sélection du stockage Google Drive dans Rclone](../images/Screenshot%202026-05-20%2019-01-11.png)
 
 * **Gestion des permissions (`scope`) :** Attribution du profil `1` (*Full access all files*) pour autoriser l'edition complete sur le Drive cible.
 * **Authentification unifiee (OAuth2) :** Utilisation de l'authentification automatique (`Use auto config? -> y`).
@@ -134,23 +134,23 @@ Choose a number from below, or type in your own value.
 scope> 1
 ```
 
-![Configuration du scope d'accès Rclone](../images/Screenshot_2026-05-20_19-04-31.png)
+![Configuration du scope d'accès Rclone](../images/Screenshot%202026-05-20%2019-04-31.png)
 
 Le programme initie un serveur d'ecoute local et bascule la validation sur le navigateur web de la session pour approuver l'acces au compte Google.
 
-![Serveur d'écoute local et redirection navigateur](../images/Screenshot_2026-05-20_19-04-50.png)
+![Serveur d'écoute local et redirection navigateur](../images/Screenshot%202026-05-20%2019-04-50.png)
 
 L'accord d'acces est alors confirme par le serveur d'authentification :
 
-![Confirmation de l'accord d'accès OAuth2](../images/Screenshot_2026-05-20_19-05-35.png)
+![Confirmation de l'accord d'accès OAuth2](../images/Screenshot%202026-05-20%2019-05-35.png)
 
 Une fois l'autorisation validee par l'API Google, le terminal recoit le jeton de securite (`Got code`), refuse la creation d'un disque d'equipe partage (`Shared Drive -> n`), affiche le recapitulatif chiffre du profil et ferme l'utilitaire via la commande `q` (*Quit*).
 
-![Réception du jeton Got code et récapitulatif du profil](../images/Screenshot_2026-05-20_19-06-42.png)
+![Réception du jeton Got code et récapitulatif du profil](../images/Screenshot%202026-05-20%2019-06-42.png)
 
 L'enregistrement final montre la bonne creation du profil `tpsio` :
 
-![Enregistrement final du profil tpsio](../images/Screenshot_2026-05-20_19-08-25.png)
+![Enregistrement final du profil tpsio](../images/Screenshot%202026-05-20%2019-08-25.png)
 
 #### 3. Ecriture du Script d'Automatisation Bash
 
@@ -192,7 +192,7 @@ echo "===================================================="
 
 L'edition s'effectue dans l'environnement de developpement :
 
-![Édition du script dans l'éditeur Kate](../images/Screenshot_2026-05-20_20-24-05.png)
+![Édition du script dans l'éditeur Kate](../images/Screenshot%202026-05-20%2020-24-05.png)
 
 #### 4. Attribution des droits et execution de la routine
 
@@ -202,7 +202,7 @@ Avant de pouvoir executer le script, il est imperatif de modifier ses permission
 chmod +x backup.sh
 ```
 
-![Attribution des droits d'exécution au script](../images/Screenshot_2026-05-20_20-26-20.png)
+![Attribution des droits d'exécution au script](../images/Screenshot%202026-05-20%2020-26-20.png)
 
 Le lancement du script execute la routine en arriere-plan. Rclone analyse l'arborescence locale, identifie les fichiers et televerse de maniere ciblee le contenu vers l'espace IaaS.
 
@@ -212,14 +212,14 @@ Le lancement du script execute la routine en arriere-plan. Rclone analyse l'arbo
 
 Le script confirme le bon traitement de chaque sous-dossier cible :
 
-![Confirmation du traitement de chaque sous-dossier](../images/Screenshot_2026-05-20_20-36-32.png)
+![Confirmation du traitement de chaque sous-dossier](../images/Screenshot%202026-05-20%2020-36-32.png)
 
 #### 5. Controle de conformite de l'infrastructure Cloud
 
 La verification s'opere en accedant a l'interface d'administration Web de Google Drive. Les repertoires distants ont ete crees et le fichier de verification `test.txt` est correctement synchronise dans l'arborescence cible.
 
-![Arborescence distante créée dans Google Drive](../images/Screenshot_2026-05-20_20-36-50.png)
+![Arborescence distante créée dans Google Drive](../images/Screenshot%202026-05-20%2020-36-50.png)
 
 Une vue detaillee confirme la presence et l'heure exacte de synchronisation de l'element :
 
-![Vue détaillée de la synchronisation dans Google Drive](../images/Screenshot_2026-05-20_20-36-50.tmp.png)
+![Vue détaillée de la synchronisation dans Google Drive](../images/Screenshot%202026-05-20%2020-36-50.tmp.png)
