@@ -1,7 +1,7 @@
 # Gestion des Sauvegardes et de la Continuité d'Activité
 
-!!! abstract "Objectifs du module"
-    La sauvegarde informatique est le pilier central de la sécurité des données et de la résilience d'une infrastructure. Ce chapitre pose les bases théoriques indispensables avant d'aborder la mise en œuvre pratique. L'objectif est de comprendre les obligations légales, de distinguer les concepts clés et de choisir la stratégie de sauvegarde optimale selon les contraintes de production.
+!!! abstract "Introduction : Objectifs"
+    La sauvegarde informatique est le pilier central de la sécurité des données.
 
 ## 1. Obligations Légales et Durées de Conservation
 
