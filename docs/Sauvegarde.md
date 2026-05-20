@@ -227,10 +227,10 @@ Une vue detaillee confirme la presence et l'heure exacte de synchronisation de l
 
 ![Vue détaillée de la synchronisation dans Google Drive](../images/Screenshot%202026-05-20%2020-36-50.tmp.png)
 
-#### 6. Video de démonstration
+#### 6. Video de  change pas l'encodage interne. Il faut obligatoirement la convertir proprement (via FFmpeg, Handbrake, etc.) pour que ça devienne un vrai MP4 lisible par le web.
 
 Video Montrant Rclone en action sur l'infra installé précédemment:
 
 <video width="100%" controls>
-  <source src="../images/2026-05-20-21-56-24.mp4" type="video/mkv">
+  <source src="../images/demo-rclone.mp4" type="video/mp4">
 </video>
