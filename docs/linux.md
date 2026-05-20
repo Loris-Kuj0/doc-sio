@@ -190,7 +190,7 @@ echo "        SAUVEGARDE TERMINÉE AVEC SUCCÈS !"
 echo "===================================================="
 ```
 
-L'edition s'effectue dans l'environnement de developpement :
+L'edition s'effectue dans l'editeur:
 
 ![Édition du script dans l'éditeur Kate](../images/Screenshot%202026-05-20%2020-24-05.png)
 
