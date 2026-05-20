@@ -34,7 +34,7 @@ Une erreur fréquente en administration système consiste à confondre la sauveg
 
 ---
 
-## Typologies de Sauvegardes : Mécanismes, Avantages et Inconvénients
+## Typologies de Sauvegardes
 
 Le choix d'une méthode de sauvegarde dépend de l'équilibre à trouver entre la fenêtre de sauvegarde disponible (le temps alloué pour copier les données) et le volume de stockage disponible sur les serveurs cibles.
 
