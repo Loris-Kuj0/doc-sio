@@ -27,7 +27,7 @@ nav:
   - B2 (SISR):
       - Documentation d'installation GLPI: InstallationGLPI.md
       - Documentation Utilisation GLPI: UtilisationGLPI.md
-      - Documentation Sauvegardes: Sauvegardes.md
+      - Documentation Sauvegardes: Sauvegarde.md
 
   - B1 (Dev):
       - À venir: InstallationMYT.md
