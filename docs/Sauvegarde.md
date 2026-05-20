@@ -1,7 +1,7 @@
 # Documentation : Gestion des Sauvegardes et de la Continuite d'Activite
 
 !!! abstract "Notes"
-    J'ai eu quelque soucis d'enregistrements/captures d'écran, j'ai tenté de corriger ça en vain, Je trouverais une solution d'ici les prochaines documentations, désolé d'avance.
+    J'ai eu quelque soucis d'enregistrements/captures d'écran, j'ai tenté de corriger ça, en vain, Je trouverais une solution pour les prochaines documentations, désolé d'avance.
 
 !!! abstract "Introduction : Objectifs"
     La sauvegarde informatique est le pilier central de la securite des donnees.
