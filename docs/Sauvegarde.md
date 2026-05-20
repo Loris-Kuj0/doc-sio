@@ -38,7 +38,7 @@ Une erreur fréquente en administration système consiste à confondre la sauveg
 
 Le choix d'une méthode de sauvegarde dépend de l'équilibre à trouver entre la fenêtre de sauvegarde disponible (le temps alloué pour copier les données) et le volume de stockage disponible sur les serveurs cibles.
 
-### A. La Sauvegarde Complète (Full Backup)
+### A. La Sauvegarde Complète
 Ce mécanisme consiste à copier l'intégralité des données sélectionnées à chaque cycle, indépendamment de toute modification antérieure.
 
 * **Avantages :** * Restauration ultra-rapide et simplifiée (un seul jeu de données est nécessaire).
@@ -48,7 +48,7 @@ Ce mécanisme consiste à copier l'intégralité des données sélectionnées à
     * Temps d'exécution très long (fenêtre de sauvegarde élevée).
 * *Effet :* Idéale comme point de départ (généralement planifiée une fois par semaine, le week-end).
 
-### B. La Sauvegarde Incrémentale (Incremental Backup)
+### B. La Sauvegarde Incrémentale
 Ce processus ne sauvegarde que les données créées ou modifiées depuis la **dernière sauvegarde**, qu'elle soit complète ou incrémentale.
 
 * **Avantages :**
@@ -58,7 +58,7 @@ Ce processus ne sauvegarde que les données créées ou modifiées depuis la **d
     * Restauration lente et complexe. En cas de sinistre, il est nécessaire de restaurer la dernière sauvegarde complète, puis **chaque incrément successif** dans l'ordre chronologique sans aucune rupture de la chaîne.
 * *Effet :* Réduit drastiquement la charge réseau au quotidien (planifiée chaque nuit).
 
-### C. La Sauvegarde Différentielle (Differential Backup)
+### C. La Sauvegarde Différentielle
 Ce mécanisme copie uniquement les données modifiées depuis la **dernière sauvegarde complète**.
 
 * **Avantages :**
