@@ -1,4 +1,4 @@
-# Gestion des Sauvegardes et de la Continuité d'Activité
+# Documentation: Gestion des Sauvegardes et de la Continuité d'Activité
 
 !!! abstract "Introduction : Objectifs"
     La sauvegarde informatique est le pilier central de la sécurité des données.
