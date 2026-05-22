@@ -1,4 +1,4 @@
-# Documentation : Gestion des Sauvegardes et de la Continuite d'Activite
+# Documentation : Gestion des Sauvegardes
 
 **Auteur :** Loris.R   
 **Module :** B2  
