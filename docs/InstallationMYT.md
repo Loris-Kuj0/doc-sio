@@ -34,6 +34,8 @@ Le schéma ci-dessous illustre l'architecture réseau mise en place entre les di
     style Client fill:#2d333b,color:#ffffff,stroke:#29b6f6,stroke-width:2px
     style Server fill:#2d333b,color:#ffffff,stroke:#ef5350,stroke-width:2px
 ```
+
+
 ---
 
 ### Installation de la pile LAMP (Linux,Apache,MariaDB,PHP)
