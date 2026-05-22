@@ -1,6 +1,15 @@
-### 2. Installation de la pile LAMP (Linux,Apache,MariaDB,PHP)
+# Documentation : Installation My Tiny Todo
 
-L'étape suivante consiste à installer le serveur web, le moteur de base de données, et l'interpréteur PHP accompagné des modules requis par l'application.
+**Auteur :** Loris.R   
+**Module :** B1  
+**Sujet :** Installation My Tiny Todo
+
+---
+### Topologie Réseau
+
+### Installation de la pile LAMP (Linux,Apache,MariaDB,PHP)
+
+La première étape consiste à installer le serveur web, le moteur de base de données, et l'interpréteur PHP accompagné des modules requis par l'application.
 
 ```bash
 # Installation des moteurs Web et SQL

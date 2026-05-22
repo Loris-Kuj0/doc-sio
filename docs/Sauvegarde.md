@@ -1,5 +1,10 @@
 # Documentation : Gestion des Sauvegardes et de la Continuite d'Activite
 
+**Auteur :** Loris.R   
+**Module :** B2  
+**Sujet :** Sauvegardes
+
+---
 !!! abstract "Notes"
     J'ai eu quelque soucis d'enregistrements/captures d'écran, j'ai tenté de corriger ça, en vain, Je trouverais une solution pour les prochaines documentations, désolé d'avance.
 
