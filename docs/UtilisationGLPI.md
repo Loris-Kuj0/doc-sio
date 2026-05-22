@@ -55,7 +55,7 @@ M. Pignon se déplace physiquement et effectue des tests croisés : remplacement
 
 ![GLPIT7](../images/GLPIT7.png)
 
-La carte réseau de l'ordinateur est diagnostiquée comme défectueuse. [cite_start]Un adaptateur réseau USB est alors installé et configuré avec succès par le technicien.
+La carte réseau de l'ordinateur est diagnostiquée comme défectueuse. Un adaptateur réseau USB est alors installé et configuré avec succès par le technicien.
 
 ![GLPIT8](../images/GLPIT8.png)
 
