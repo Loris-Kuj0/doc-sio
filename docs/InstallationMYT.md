@@ -114,11 +114,3 @@ Lors de l'accès à la page `setup.php`, le système demandera les informations 
 
 ---
 
-## Identifiants et Sécurité par défaut
-
-Contrairement à des systèmes complexes avec plusieurs niveaux d'utilisateurs (Techniciens, Admins), myTinyTodo est pensé comme un gestionnaire de tâches personnel ou de petite équipe.
-
-Par défaut, l'application est **ouverte à tous ceux qui possèdent l'URL**, sans aucun compte requis.
-
-
-```
