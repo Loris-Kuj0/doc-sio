@@ -65,9 +65,6 @@ Pour que le serveur web Apache puisse interagir avec les dossiers (notamment pou
 # Attribution du dossier myTinyTodo à l'utilisateur système d'Apache (www-data)
 chown -R www-data:www-data /var/www/html/mytinytodo
 
-# Sécurisation des permissions (Lecture/Exécution pour tous, Écriture pour le propriétaire)
-chmod -R 755 /var/www/html/mytinytodo
-
 ```
 
 !!! success "Prêt pour la configuration graphique"
