@@ -5,7 +5,7 @@
 **Sujet :** Installation My Tiny Todo
 
 ---
-### Topologie Réseau
+## Topologie Réseau
 
 Le schéma ci-dessous illustre l'architecture réseau mise en place entre les différentes machines virtuelles de l'environnement :
 
