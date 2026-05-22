@@ -1,6 +1,3 @@
-Voici la rédaction complète de ta documentation, parfaitement intégrée à ta structure et formatée selon les règles et le ton (neutre, direct, technique) définis dans ton guide de reprise de projet. Les scénarios issus de tes documents y sont intégrés pas à pas, avec tes balises d'images intercalées de manière logique.
-
-```markdown
 # Documentation : Utilisation-GLPI
 
 **Auteur :** Loris.R   
@@ -103,5 +100,3 @@ Le technicien sensibilise M. Blier aux risques liés au phishing et aux bonnes p
 
 Le ticket est alors clôturé et un rapport complet d'incident est renseigné dans GLPI, détaillant le diagnostic de l'intrusion et les actions correctives appliquées (suppression du malware, ajout du 2FA).
 ![GLPIT27](../images/GLPIT27.png)
-
-```
