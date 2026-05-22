@@ -178,7 +178,7 @@ REMOTE_TARGET="tpsio:Sauvegardes_SIO"
 REPERTOIRES=("AP" "B1" "B2" "B3")
 
 echo "===================================================="
-echo " DEBUT DE LA SAUVEGARDE SYNCHRONE VERS GOOGLE DRIVE"
+echo " DEBUT DE LA SAUVEGARDE VERS GOOGLE DRIVE"
 echo "===================================================="
 
 for dossier in "${REPERTOIRES[@]}"
