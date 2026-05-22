@@ -36,7 +36,6 @@ Le schéma ci-dessous illustre l'architecture réseau mise en place entre les di
 ```
 
 
----
 
 ### Installation de la pile LAMP (Linux,Apache,MariaDB,PHP)
 
