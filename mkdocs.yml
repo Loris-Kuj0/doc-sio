@@ -25,12 +25,12 @@ theme:
 nav:
   - Accueil: index.md
   - B2 (SISR):
-      - Documentation Installation GLPI: InstallationGLPI.md
-      - Documentation Utilisation GLPI: UtilisationGLPI.md
-      - Documentation Sauvegardes: Sauvegarde.md
+      - Installation GLPI: InstallationGLPI.md
+      - Utilisation GLPI: UtilisationGLPI.md
+      - Sauvegardes: Sauvegarde.md
 
   - B1 (Dev):
-      - Documentation Installation My Tiny Todo: InstallationMYT.md
+      - Installation My Tiny Todo: InstallationMYT.md
   - B3 (Cybersécurité):
       - À venir: b3-cyber.md
   - Stages:
