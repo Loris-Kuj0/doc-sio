@@ -11,3 +11,7 @@
 ## Prises d'appels et Gestion de Tickets
 
 ## Insallation de Switchs (peut être)
+
+# Observations Journalière
+
+## Jour 1
