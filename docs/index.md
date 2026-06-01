@@ -42,7 +42,7 @@ Documentation BTS SIO de Loris-R. Choisissez une catégorie ci-dessous pour comm
 
     Rapports et documentations liées aux périodes de stage en entreprise.
 
-    [➔ Accéder aux rapports](stage.md)
+    [➔ Accéder aux rapports](stage1.md)
 
 -   :material-linux: __Linux__
 
