@@ -1,8 +1,10 @@
 # Documentation : Scripting en Bash
 
----
+**Auteur :** Loris.R   
+**Module :** Linux  
+**Sujet :** Scripting en Bash
 
-# 0.
+---
 
 Ce guide présente les bases fondamentales pour créer des scripts d'automatisation sous Linux.
 
