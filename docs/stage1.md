@@ -27,7 +27,11 @@
 
 #### System>Firmware & Registration>Upgrade
 
-![Mise à jour du Switch](../images/FortiMAJ.png)
+![Mise à jour du Switch](../images/FortiM.png)
+
+### Configuration d'un VLAN
+
+![Interface de  configuration d'un VLAN](../images/FortiV.png)
 
 
 ---
