@@ -62,5 +62,11 @@ Création d'un VLAN "Natif"
 ### Ports d'administration et Idle Timeout 
 
 ![Interface de configuration des comptes admin](../images/FortiPA.png)
+
+### Visibilité des fonctionnalités (Feature Visibility)
+
+![Interface de configuration](../images/FortiFV.png)
+
+
 ---
 
