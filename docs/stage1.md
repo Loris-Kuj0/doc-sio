@@ -5,6 +5,15 @@
 **Sujet :** Stage de Première Année
 
 ---
+# Outils Vus/utilisés 
+
+## Datto: Logicielle RMM
+
+Datto Remote Monitoring and Management (RMM) est une plateforme RMM sécurisée basée sur le cloud. Vous pouvez sécuriser, surveiller et gérer à distance les terminaux avec Datto RMM afin de réduire les coûts et d’améliorer l’efficacité du réseau.
+
+## Passbolt: Gestionnaire de Mots de Passe
+
+Passbolt est un gestionnaire de mots de passe collaboratif : chaque utilisateur dispose de son coffre-fort personnel, mais il est tout à fait possible de partager des identifiants entre plusieurs utilisateurs. Pour partager les mots de passe des clients par exemple.
 
 # Taches
 
