@@ -15,6 +15,8 @@ Datto Remote Monitoring and Management (RMM) est une plateforme RMM sécurisée 
 
 Passbolt est un gestionnaire de mots de passe collaboratif : chaque utilisateur dispose de son coffre-fort personnel, mais il est tout à fait possible de partager des identifiants entre plusieurs utilisateurs. Pour partager les mots de passe des clients par exemple.
 
+---
+
 # Taches
 
 ## Prises d'appels et Gestion de Tickets
