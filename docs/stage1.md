@@ -70,7 +70,8 @@ Création d'un VLAN "Natif"
 ### Visibilité des fonctionnalités (Feature Visibility)
 
 ![](../images/FortiFV.png)
-![DHCP Monitor](../images/FortiDM.png)
+![DHCP Monitor](../images/FortiDM.png)  
+
 
 
 ---
