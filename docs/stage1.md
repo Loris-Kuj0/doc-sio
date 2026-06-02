@@ -45,9 +45,20 @@ Passbolt est un gestionnaire de mots de passe collaboratif : chaque utilisateur 
 
 Création d'un VLAN "Natif"
 
-![Interface de  configuration d'un VLAN](../images/FortiV.png)
+![Interface de configuration d'un VLAN](../images/FortiV.png)
 
+### Comptes administrateurs
 
+![Interface de configuration des comptes admin](../images/FortiA.png)
 
+### Nom d'hôte et Fuseau Horraire
+
+### Restriction des accès (Trusted Hosts)
+
+![Interface de configuration des comptes admin](../images/FortiH.png)
+
+### Ports d'administration
+
+![Interface de configuration des comptes admin](../images/FortiPA.png)
 ---
 
