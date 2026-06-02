@@ -10,12 +10,17 @@
 
 ## Prises d'appels et Gestion de Tickets
 
-## Insallation de Switchs 
-
 ## Configuration d'un switch FortiGate 40F
 
 ### Accès à l'interface
 
 ![Interface de configuration du switch](../images/Forti1.png)
+
+### Activation du mode HTTPS/HTTP
+
+#### Interface>Interface Pysique>WAN
+
+![Interface de configuration du switch](../images/Forti2.png)
+
 ---
 
