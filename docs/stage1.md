@@ -57,7 +57,7 @@ Création d'un VLAN "Natif"
 
 ![Interface de configuration des comptes admin](../images/FortiH.png)
 
-### Ports d'administration
+### Ports d'administration et Idle Timeout 
 
 ![Interface de configuration des comptes admin](../images/FortiPA.png)
 ---
