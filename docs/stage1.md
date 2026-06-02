@@ -10,10 +10,12 @@
 
 ## Prises d'appels et Gestion de Tickets
 
-## Insallation de Switchs (peut être)
+## Insallation de Switchs 
 
+## Configuration d'un switch FortiGate 40F
+
+### Accès à l'interface
+
+![Interface de configuration du switch](../images/forti1.png)
 ---
 
-# Observations Journalière
-
-## Jour 1
