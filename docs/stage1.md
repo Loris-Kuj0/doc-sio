@@ -22,6 +22,8 @@ Passbolt est un gestionnaire de mots de passe collaboratif : chaque utilisateur 
 ## Configuration d'un switch FortiGate 40F
 
 ![Image du switch](../images/Forti0.webp)
+<img src="Forti0.webp" width="250">
+
 
 ### Accès à l'interface
 
