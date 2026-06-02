@@ -53,6 +53,8 @@ Création d'un VLAN "Natif"
 
 ### Nom d'hôte et Fuseau Horraire
 
+![Interface de configuration des comptes admin](../images/FortiF.png)
+
 ### Restriction des accès (Trusted Hosts)
 
 ![Interface de configuration des comptes admin](../images/FortiH.png)
