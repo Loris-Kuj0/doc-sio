@@ -20,7 +20,9 @@
 
 #### Interface>Interface Pysique>WAN
 
-![Interface de configuration du switch](../images/Forti2.png)
+![Interface de configuration des ports du switch](../images/Forti2.png)
+![Interface de configuration des ports du switch](../images/Forti3.png)
+
 
 ---
 
