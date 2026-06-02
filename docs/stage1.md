@@ -16,6 +16,6 @@
 
 ### Accès à l'interface
 
-![Interface de configuration du switch](../images/forti1.png)
+![Interface de configuration du switch](../images/Forti1.png)
 ---
 
