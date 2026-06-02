@@ -12,6 +12,8 @@
 
 ## Configuration d'un switch FortiGate 40F
 
+![Image du switch](../images/Forti0.webp)
+
 ### Accès à l'interface
 
 ![Interface de configuration du switch](../images/Forti1.png)
@@ -31,7 +33,10 @@
 
 ### Configuration d'un VLAN
 
+Création d'un VLAN "Natif"
+
 ![Interface de  configuration d'un VLAN](../images/FortiV.png)
+
 
 
 ---
