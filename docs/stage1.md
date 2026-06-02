@@ -23,6 +23,12 @@
 ![Interface de configuration des ports du switch](../images/Forti2.png)
 ![Interface de configuration des ports du switch](../images/Forti3.png)
 
+### Mise à jour du Switch
+
+#### System>Firmware & Registration>Upgrade
+
+![Mise à jour du Switch](../images/FortiMAJ.png)
+
 
 ---
 
