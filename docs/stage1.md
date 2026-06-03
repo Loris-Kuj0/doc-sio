@@ -15,6 +15,10 @@ Datto Remote Monitoring and Management (RMM) est une plateforme RMM sécurisée 
 
 Passbolt est un gestionnaire de mots de passe collaboratif : chaque utilisateur dispose de son coffre-fort personnel, mais il est tout à fait possible de partager des identifiants entre plusieurs utilisateurs. Pour partager les mots de passe des clients par exemple.
 
+## Unifi 
+
+La plateforme UniFi centralise la gestion des réseaux Wi-Fi, des commutateurs, des routeurs, et des caméras de surveillance, permettant aux administrateurs réseau d'avoir une vue d'ensemble et de contrôler les différents éléments via une seule interface.
+
 ---
 
 # Taches
