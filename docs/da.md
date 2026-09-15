@@ -156,7 +156,7 @@ Contrairement à la lourdeur de déploiement de TeamViewer, RustDesk a été dé
 #### Interface sur la Cible (PC2) :
 ![Interface RustDesk sur PC2](../images/da4.png)
 
-Il suffit ensuite de saisir l'identifiant du PC2 dans le champ "Autoroute" du PC1, puis de renseigner le mot de passe de session généré par RustDesk pour établir la connexion chiffrée.
+Il suffit ensuite de saisir l'identifiant du PC2 dans le champ "Autoroute" du PC1, puis de renseigner le mot de passe de session généré par RustDesk pour établir la connexion.
 
 ---
 
