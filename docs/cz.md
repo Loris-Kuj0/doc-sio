@@ -1,4 +1,4 @@
-# Documentation Technique : Samba, NFS et Clonezilla
+# Documentation : Samba, NFS et Clonezilla
 
 **Auteur :** Loris.R  
 **Module :** B2  
