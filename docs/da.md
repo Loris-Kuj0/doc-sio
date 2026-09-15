@@ -13,7 +13,7 @@
 
 ## Topologie Réseau
 
-Pour l'ensemble des démonstrations présentées dans cette documentation, deux machines virtuelles/physiques sont déployées au sein d'un même sous-réseau local (`192.168.1.0/24`). Dans chaque scénario, le **PC1** agit comme la station de contrôle (client) et le **PC2** comme le poste administré à distance (serveur/cible).
+Pour l'ensemble des démonstrations présentées dans cette documentation, deux machines physiques sont déployées au sein d'un même sous-réseau local (`192.168.1.0/24`). Dans chaque scénario, le **PC1** agit comme la station de contrôle (client) et le **PC2** comme le poste administré à distance (serveur/cible).
 
 ```mermaid
 graph TD
