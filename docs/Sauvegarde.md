@@ -210,6 +210,7 @@ Avant de pouvoir executer le script, il est imperatif de modifier ses permission
 chmod +x backup.sh
 ```
 
+
 ![Attribution des droits d'exécution au script](../images/Screenshot%202026-05-20%2020-26-20.png)
 
 Le lancement du script execute la routine en arriere-plan. Rclone analyse l'arborescence locale, identifie les fichiers et televerse de maniere ciblee le contenu vers Google Drive.

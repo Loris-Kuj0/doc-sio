@@ -28,6 +28,7 @@ nav:
       - Installation GLPI: InstallationGLPI.md
       - Utilisation GLPI: UtilisationGLPI.md
       - Sauvegardes: Sauvegarde.md
+      - Accès à distance: da.md
 
   - B1 (Dev):
       - Installation My Tiny Todo: InstallationMYT.md
