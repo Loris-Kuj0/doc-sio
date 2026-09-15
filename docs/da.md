@@ -19,7 +19,7 @@ Pour l'ensemble des démonstrations présentées dans cette documentation, deux 
 graph TD
     R[Routeur<br/>192.168.1.254]
     PC1[PC1 - Fedora GNOME / Bazzite<br/>192.168.1.91<br/><i>Station Client</i>]
-    PC2[PC2 - Fedora KDE<br/>192.168.1.31<br/><i>Poste Cible</i>]
+    PC2[PC2 - Fedora KDE / Bazzite<br/>192.168.1.31<br/><i>Poste Cible</i>]
 
     R <-->|Réseau local| PC1
     R <-->|Réseau local| PC2
