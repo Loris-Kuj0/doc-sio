@@ -31,7 +31,7 @@ Une erreur frequente en administration systeme consiste a confondre la sauvegard
 | Caracteristique | Sauvegarde (Backup) | Archivage |
 | :--- | :--- | :--- |
 | **Objectif Principal** | Restauration rapide apres un incident (panne, cyberattaque, erreur humaine). | Conservation a long terme pour des raisons legales ou historiques. |
-| **Etat de la Donnee** | Donnees vivantes, dynamiques, qui changent frequemment. | Donnees figees, immuables, qui ne seront plus modifiees. |
+| **Etat de la Donnée** | Donnees vivantes, dynamiques, qui changent frequemment. | Donnees figees, immuables, qui ne seront plus modifiees. |
 | **Accessibilite** | Acces immediat et transparent pour les administrateurs/utilisateurs. | Acces ponctuel, souvent indexe pour des recherches specifiques. |
 | **Cycle de vie** | Retention courte a moyenne (les anciennes versions ecrasent les nouvelles). | Retention definitive ou a tres long terme (plusieurs annees/decennies). |
 
