@@ -204,7 +204,7 @@ Il suffit ensuite de saisir l'identifiant du PC3 dans le champ du PC1, puis de r
 ## 3. Sunshine & Moonlight (Accès haute performance / faible latence)
 
 !!! warning "Avertissement et contexte d'utilisation"
-    Contrairement aux deux autres solutions présentées, le tandem Sunshine / Moonlight n'est utilisable à la base qu'au sein d'un réseau local (LAN), bien qu'il reste possible d'y accéder à distance en passant par un VPN. J'ai souhaité mettre en place cette solution un peu exotique, que j'ai déjà eu l'occasion d'utiliser à titre personnel, car je pense qu'elle conserve un réel intérêt en administration réseau grâce à ses performances exceptionnelles.
+    Contrairement aux deux autres solutions présentées, le tandem Sunshine / Moonlight n'est utilisable à la base qu'au sein d'un réseau local (LAN), bien qu'il reste possible d'y accéder à distance en passant par un VPN. J'ai souhaité mettre en place cette solution un peu exotique, que j'ai déjà eu l'occasion d'utiliser à titre personnel, car je pense qu'elle conserve un réel intérêt en administration réseau grâce à ses performances.
 
 !!! info "Cas d'usage : TP actuel vs Utilisation globale (LAN / WAN)"
     * **Dans le cadre de ce TP :** Prise en main à très faible latence du **PC2** (`192.168.1.31`) depuis le **PC1** (`192.168.1.91`) sur le réseau local LAN1.
