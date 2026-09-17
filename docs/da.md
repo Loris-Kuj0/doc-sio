@@ -267,12 +267,20 @@ L'architecture d'affichage d'un système Linux conditionne directement le bon fo
 
 ### B. Caractéristiques spécifiques et différences d'architecture
 
-```
-Modèle X11 :
-[Application / Client X] <---> [Serveur Xorg] <---> [Gestionnaire de fenêtres] <---> [Matériel / GPU]
+```mermaid
+graph LR
+    subgraph X11 ["Modèle X11 (Architecture centralisée)"]
+        direction LR
+        AppX["Application / Client X"] <--> Xorg["Serveur Xorg"]
+        Xorg <--> WM["Gestionnaire de fenêtres"]
+        WM <--> GPU1["Matériel / GPU"]
+    end
 
-Modèle Wayland :
-[Application] <---> [Compositeur Wayland (Mutter / KWin)] <---> [Matériel / GPU (via KMS/evdev)]
+    subgraph Wayland ["Modèle Wayland (Pipeline direct)"]
+        direction LR
+        AppW["Application"] <--> Comp["Compositeur<br/>(Mutter / KWin)"]
+        Comp <--> GPU2["Matériel / GPU<br/>(via KMS / evdev)"]
+    end
 ```
 
 * **Gestion globale vs Isolation stricte :**
@@ -300,31 +308,3 @@ L'isolation stricte garantie par Wayland casse le modèle de fonctionnement hist
 
 #### Choix technique dans ce TP :
 C'est pour cette raison précise que la machine virtuelle **PC3 (Debian 13)** a été configurée sur une session **X11**. L'AppImage RustDesk sur le client PC1 sous Wayland a pu capturer et injecter les commandes à travers le réseau sans se heurter au cloisonnement mémoire de la machine cible, garantissant une stabilité et un contrôle parfaits pendant le TP.
-
-
-TEST
-
-
-## 5. Comparatif technique : X11 vs Wayland
-
-L'architecture d'affichage d'un système Linux conditionne directement le bon fonctionnement des logiciels de prise en main à distance. Comprendre les différences fondamentales entre **X11** et **Wayland** permet d'expliquer les contraintes techniques rencontrées lors de ce TP.
-
-### A. Origines et philosophie
-
-Développé au MIT en 1984, **X11** repose sur un modèle client-serveur classique hérité de l'époque des terminaux lourds. Dans cette architecture, le serveur d'affichage (`Xorg`) s'interpose comme intermédiaire central entre les applications clientes et le matériel. Chaque fenêtre communique avec le serveur via un protocole réseau, indépendamment du fait que l'application s'exécute en local ou à distance.
-
-À l'inverse, **Wayland** a été conçu à partir de 2008 pour remplacer le code vieillissant de Xorg en simplifiant le pipeline graphique. Il ne s'agit pas d'un serveur d'affichage en soi, mais d'un **protocole**. Sous Wayland, le rôle du serveur d'affichage et du gestionnaire de fenêtres est fusionné au sein d'un composant unique : le **compositeur** (comme Mutter sous GNOME ou KWin sous KDE). Les applications communiquent ainsi directement avec le compositeur, qui transmet ensuite les données au processeur graphique.
-
-### B. Caractéristiques d'architecture, sécurité et performances
-
-La différence majeure entre les deux architectures réside dans le niveau d'isolation des applications. 
-
-Sous **X11**, l'architecture offre une visibilité globale non cloisonnée : le serveur Xorg accorde à chaque application un accès direct à l'ensemble du tampon d'affichage et aux flux d'entrées. Par conséquent, une application peut librement lire la mémoire vidéo globale, intercepter les frappes clavier d'une fenêtre voisine ou simuler des clics de souris. Si ce fonctionnement simplifiait historiquement le développement d'outils de prise en main, il pose aujourd'hui de lourds problèmes de sécurité (vulnérabilité native au *keylogging* et à la capture d'écran non autorisée) et génère du *tearing* (déchirure d'image) en raison des surcoûts de communication inter-processus.
-
-**Wayland** résout ces faiblesses en imposant un cloisonnement hermétique. Chaque application n'a accès qu'à sa propre surface de rendu, sans aucune visibilité sur les fenêtres adjacentes ni sur les périphériques d'entrée globaux. Le compositeur prend en charge la composition finale directement au niveau du matériel (via KMS/evdev), garantissant un affichage sans déchirure, une gestion native du multi-écran à fréquences de rafraîchissement mixtes et un niveau de sécurité renforcé par défaut.
-
-### C. Impact sur les outils d'accès à distance et choix technique
-
-Ce modèle d'isolation propre à Wayland remet en cause le fonctionnement traditionnel des logiciels de contrôle distant. Sans accès global à la mémoire d'affichage, un logiciel ne peut plus capturer l'écran directement. Il doit obligatoirement passer par les sous-systèmes **XDG-Desktop-Portal** et **PipeWire**, ce qui impose une demande d'autorisation explicite à l'utilisateur via une invite système. De même, l'injection d'entrées clavier et souris nécessite l'utilisation du module noyau **`uinput`** ou d'extensions spécifiques au compositeur (`virtual-keyboard`), dont le support varie selon les distributions et les formats de paquets (notamment les AppImage sous Bazzite).
-
-Pour garantir la stabilité du TP, la machine cible **PC3 (VM Debian 13)** a été délibérément configurée avec une session **X11**. Ce choix technique a permis à l'AppImage RustDesk exécutée sur le client d'interagir avec la cible sans restriction mémoire ni blocage au niveau du compositeur.
