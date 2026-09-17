@@ -19,7 +19,7 @@ Pour l'ensemble des démonstrations présentées dans cette documentation, l'inf
     * **PC1 (`192.168.1.91`) :** Fedora GNOME / Bazzite — agit comme la station de contrôle centrale (client).
     * **PC2 (`192.168.1.31`) :** Fedora KDE / Bazzite — poste cible situé dans le même segment réseau que le client.
 * **Sous-réseau virtuel Proxmox (`192.168.209.0/24`) :**
-    * **PC3 (`192.168.209.151`) :** Machine virtuelle sous Debian 13 (KDE Plasma) hébergée sur Proxmox, Il s'agit d'un poste cible distant routé hors du réseau local de départ.
+    * **PC3 (`192.168.209.151`) :** Machine virtuelle sous Debian 13 (KDE Plasma) hébergée sur Proxmox. Il s'agit d'un poste cible distant routé hors du réseau local de départ.
 
 ```mermaid
 graph TD
@@ -46,6 +46,10 @@ graph TD
 ---
 
 ## 1. TeamViewer & QuickSupport
+
+!!! note "Périmètre d'accès"
+    * **Machine cliente (contrôle) :** PC1 (`192.168.1.91` — Bazzite)
+    * **Machine cible (administrée) :** PC2 (`192.168.1.31` — Bazzite KDE)
 
 !!! info "Différence entre TeamViewer complet et QuickSupport"
     * **TeamViewer (Client complet) :** logiciel lourd incluant le démon système (`teamviewerd`), la gestion de comptes centralisée, la prise en main entrante et sortante, ainsi que la gestion de carnet d'adresses.
@@ -156,6 +160,10 @@ systemctl reboot
 
 ## 2. RustDesk (Solution open source portable)
 
+!!! note "Périmètre d'accès"
+    * **Machine cliente (contrôle) :** PC1 (`192.168.1.91` — Bazzite)
+    * **Machine cible (administrée) :** PC3 (`192.168.209.151` — VM Debian 13 KDE sur Proxmox)
+
 ### Mettre en œuvre RustDesk
 
 Contrairement à la lourdeur de déploiement de TeamViewer, RustDesk est disponible sous forme d'**AppImage** (un format d'application que j'affectionne tout particulièrement) sur les deux postes en quelques clics :
@@ -164,16 +172,16 @@ Contrairement à la lourdeur de déploiement de TeamViewer, RustDesk est disponi
 2. Octroi des droits d'exécution : `chmod +x rustdesk-*.AppImage`.
 3. Lancement direct par double-clic ou via le terminal.
 
-!!! tip "L'intérêt du format AppImage sur un OS immuable"
-    L'**AppImage** est un format d'encapsulation universel pour Linux. Il regroupe l'application et l'ensemble de ses dépendances dans un seul fichier binaire exécutable. Il ne nécessite **aucune installation**, aucun privilège d'administrateur (`root`), et n'altère en rien l'image système. C'est le format idéal pour une distribution atomique comme Bazzite.
+!!! tip "L'intérêt du format AppImage sur un OS immuable ou une VM"
+    L'**AppImage** est un format d'encapsulation universel pour Linux. Il regroupe l'application et l'ensemble de ses dépendances dans un seul fichier binaire exécutable. Il ne nécessite **aucune installation**, aucun privilège d'administrateur (`root`), et n'altère en rien l'image système. C'est le format idéal aussi bien pour une distribution atomique comme Bazzite que pour un déploiement rapide sur une VM Debian 13.
 
 #### Interface sur le client (PC1) :
 ![Interface RustDesk sur PC1](../images/da3.png)
 
-#### Interface sur la cible (PC2) :
-![Interface RustDesk sur PC2](../images/da4.png)
+#### Interface sur la cible (PC3) :
+![Interface RustDesk sur PC3](../images/da5.png)
 
-Il suffit ensuite de saisir l'identifiant du PC2 dans le champ du PC1, puis de renseigner le mot de passe de session généré par RustDesk pour établir la connexion.
+Il suffit ensuite de saisir l'identifiant du PC3 dans le champ du PC1, puis de renseigner le mot de passe de session généré par RustDesk pour établir la connexion à travers les réseaux routés.
 
 ---
 
@@ -186,6 +194,10 @@ Il suffit ensuite de saisir l'identifiant du PC2 dans le champ du PC1, puis de r
 ---
 
 ## 3. Sunshine & Moonlight (Accès haute performance / faible latence)
+
+!!! note "Périmètre d'accès"
+    * **Machine cliente (contrôle) :** PC1 (`192.168.1.91` — Bazzite)
+    * **Machine cible (administrée) :** PC2 (`192.168.1.31` — Bazzite KDE)
 
 !!! info "Présentation et détournement de cas d'usage"
     * **Sunshine :** serveur hôte open source de flux vidéo/audio auto-hébergé (remplaçant l'ancien NVIDIA GameStream). Il s'installe sur la machine distante à contrôler (PC2).
