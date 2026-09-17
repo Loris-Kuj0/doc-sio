@@ -7,23 +7,41 @@
 ---
 
 !!! abstract "Notes"
-    Ce guide présente l'installation, la configuration et le cas d'usage pratique de trois méthodes d'accès à distance aux philosophies distinctes : une solution propriétaire commerciale (**TeamViewer / QuickSupport**), une alternative open source légère (**RustDesk** au format AppImage) et un tandem haute performance initialement dédié au streaming et au cloud gaming(**Sunshine / Moonlight**).
+    Ce guide présente l'installation, la configuration et le cas d'usage pratique de trois méthodes d'accès à distance aux philosophies distinctes : une solution propriétaire commerciale (**TeamViewer / QuickSupport**), une alternative open source légère (**RustDesk** au format AppImage) et un tandem haute performance initialement dédié au streaming et au cloud gaming (**Sunshine / Moonlight**).
 
 ---
 
 ## Topologie réseau
 
-Pour l'ensemble des démonstrations présentées dans cette documentation, deux machines physiques sont déployées au sein d'un même sous-réseau local (`192.168.1.0/24`). Dans chaque scénario, le **PC1** agit comme la station de contrôle (client) et le **PC2** comme le poste administré à distance (serveur/cible).
+Pour l'ensemble des démonstrations présentées dans cette documentation, l'infrastructure s'articule autour de trois machines réparties sur deux sous-réseaux distincts :
+
+* **Sous-réseau local 1 (`192.168.1.0/24`) :**
+    * **PC1 (`192.168.1.91`) :** Fedora GNOME / Bazzite — agit comme la station de contrôle centrale (client).
+    * **PC2 (`192.168.1.31`) :** Fedora KDE / Bazzite — poste cible situé dans le même segment réseau que le client.
+* **Sous-réseau virtuel Proxmox (`192.168.209.0/24`) :**
+    * **PC3 (`192.168.209.151`) :** Machine virtuelle sous Debian 13 (KDE Plasma) hébergée sur un hyperviseur Proxmox et reliée via une passerelle virtuelle. Il s'agit d'un poste cible distant routé hors du réseau local de départ.
 
 ```mermaid
 graph TD
-    R[Routeur<br/>192.168.1.254]
-    PC1[PC1 - Fedora GNOME / Bazzite<br/>192.168.1.91<br/><i>Station Client</i>]
-    PC2[PC2 - Fedora KDE / Bazzite<br/>192.168.1.31<br/><i>Poste Cible</i>]
+    subgraph LAN1 ["Réseau Local (192.168.1.0/24)"]
+        R1[Routeur Local<br/>192.168.1.254]
+        PC1[PC1 - Fedora GNOME / Bazzite<br/>192.168.1.91<br/><i>Station Client</i>]
+        PC2[PC2 - Fedora KDE / Bazzite<br/>192.168.1.31<br/><i>Poste Cible Local</i>]
+        
+        R1 <--> PC1
+        R1 <--> PC2
+    end
 
-    R <-->|Réseau local| PC1
-    R <-->|Réseau local| PC2
-    PC1 -.->|Session d'accès distant| PC2
+    subgraph PROXMOX ["Infra Proxmox (192.168.209.0/24)"]
+        GW[Passerelle Virtuelle]
+        PC3[PC3 - VM Debian 13 KDE<br/>192.168.209.151<br/><i>Poste Cible Distant</i>]
+        
+        GW <--> PC3
+    end
+
+    R1 <==>|Inter-réseau / Routage| GW
+    PC1 -.->|Session locale| PC2
+    PC1 -.->|Session distante / Routée| PC3
 ```
 
 ---
