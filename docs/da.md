@@ -166,7 +166,7 @@ systemctl reboot
 
 !!! info "Cas d'usage : TP actuel vs Utilisation globale (LAN / WAN)"
     * **Dans le cadre de ce TP :** Prise en main à travers deux sous-réseaux distincts du **PC3** (`192.168.209.151`, VM Debian 13 sous Proxmox) depuis le **PC1** (`192.168.1.91`) via un routage virtuel.
-    * **En contexte professionnel / Utilisation globale :** RustDesk s'adapte aussi bien aux environnements **LAN** qu'**WAN**. Son principal atout en entreprise réside dans la possibilité d'auto-héberger son propre serveur de signalement et de relais (`hbbs`/`hbbr`), garantissant une souveraineté totale des données sans dépendre d'infrastructures tierces. C'est l'outil idéal pour administrer un parc hétérogène (Linux, Windows, macOS) ou des machines immuables grâce au format AppImage.
+    * **En contexte professionnel / Utilisation globale :** RustDesk s'adapte aussi bien aux environnements **LAN** qu'**WAN**. Son principal atout en entreprise réside dans la possibilité d'auto-héberger son propre serveur de relais, garantissant une souveraineté totale des données sans dépendre d'infrastructures tierces.
 
 !!! note "Périmètre d'accès"
     * **Machine cliente (contrôle) :** PC1 (`192.168.1.91` — Bazzite)
