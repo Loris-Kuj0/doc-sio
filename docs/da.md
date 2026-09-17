@@ -19,7 +19,7 @@ Pour l'ensemble des démonstrations présentées dans cette documentation, l'inf
     * **PC1 (`192.168.1.91`) :** Fedora GNOME / Bazzite — agit comme la station de contrôle centrale (client).
     * **PC2 (`192.168.1.31`) :** Fedora KDE / Bazzite — poste cible situé dans le même segment réseau que le client.
 * **Sous-réseau virtuel Proxmox (`192.168.209.0/24`) :**
-    * **PC3 (`192.168.209.151`) :** Machine virtuelle sous Debian 13 (KDE Plasma) hébergée sur un hyperviseur Proxmox et reliée via une passerelle virtuelle. Il s'agit d'un poste cible distant routé hors du réseau local de départ.
+    * **PC3 (`192.168.209.151`) :** Machine virtuelle sous Debian 13 (KDE Plasma) hébergée sur Proxmox, Il s'agit d'un poste cible distant routé hors du réseau local de départ.
 
 ```mermaid
 graph TD
@@ -39,7 +39,7 @@ graph TD
         GW <--> PC3
     end
 
-    R1 <==>|Inter-réseau / Routage| GW
+    #R1 <==>|Inter-réseau / Routage| GW
     PC1 -.->|Session locale| PC2
     PC1 -.->|Session distante / Routée| PC3
 ```
