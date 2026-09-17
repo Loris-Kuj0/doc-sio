@@ -217,7 +217,7 @@ Une fois l'appairage effectué, Moonlight permet d'afficher l'intégralité du b
 
 ## 4. Tableau comparatif des solutions
 
-Pour synthétiser les spécificités de chaque outil et guider le choix de la solution selon le besoin d'administration, voici un comparatif détaillé de leurs caractéristiques :
+Pour synthétiser les spécificités de chaque outil et guider le choix de la solution selon le besoin d'administration, voici un comparatif de leurs caractéristiques:
 
 | Critère | TeamViewer & QuickSupport | RustDesk | Sunshine & Moonlight |
 | :--- | :--- | :--- | :--- |
