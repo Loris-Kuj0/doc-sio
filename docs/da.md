@@ -40,7 +40,7 @@ graph TD
     end
 
     PC1 -.->|Session locale| PC2
-    PC1 -.->|Session distante / Routée| PC3
+    PC1 -.->|Session distante| PC3
 ```
 
 ---
