@@ -39,7 +39,6 @@ graph TD
         GW <--> PC3
     end
 
-    #R1 <==>|Inter-réseau / Routage| GW
     PC1 -.->|Session locale| PC2
     PC1 -.->|Session distante / Routée| PC3
 ```
