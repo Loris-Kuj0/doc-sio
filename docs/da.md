@@ -47,6 +47,10 @@ graph TD
 
 ## 1. TeamViewer & QuickSupport
 
+!!! info "Cas d'usage : TP actuel vs Utilisation globale (LAN / WAN)"
+    * **Dans le cadre de ce TP :** Prise en main du **PC2** (`192.168.1.31`) depuis le **PC1** (`192.168.1.91`) au sein du même réseau local (LAN1).
+    * **En contexte professionnel / Utilisation globale :** TeamViewer et QuickSupport sont principalement conçus pour des déploiements **WAN** (inter-sites, télétravail, support utilisateur externe). Grâce aux serveurs relais de TeamViewer, la connexion traverse de manière transparente les pare-feux et les routeurs NAT sans nécessiter de VPN ni de redirection de ports. QuickSupport est idéal pour le dépannage ponctuel auprès d'utilisateurs non techniciens, tandis que le client complet permet une administration permanente non supervisée.
+
 !!! note "Périmètre d'accès"
     * **Machine cliente (contrôle) :** PC1 (`192.168.1.91` — Bazzite)
     * **Machine cible (administrée) :** PC2 (`192.168.1.31` — Bazzite KDE)
@@ -160,6 +164,10 @@ systemctl reboot
 
 ## 2. RustDesk (Solution open source portable)
 
+!!! info "Cas d'usage : TP actuel vs Utilisation globale (LAN / WAN)"
+    * **Dans le cadre de ce TP :** Prise en main à travers deux sous-réseaux distincts du **PC3** (`192.168.209.151`, VM Debian 13 sous Proxmox) depuis le **PC1** (`192.168.1.91`) via un routage virtuel.
+    * **En contexte professionnel / Utilisation globale :** RustDesk s'adapte aussi bien aux environnements **LAN** qu'**WAN**. Son principal atout en entreprise réside dans la possibilité d'auto-héberger son propre serveur de signalement et de relais (`hbbs`/`hbbr`), garantissant une souveraineté totale des données sans dépendre d'infrastructures tierces. C'est l'outil idéal pour administrer un parc hétérogène (Linux, Windows, macOS) ou des machines immuables grâce au format AppImage.
+
 !!! note "Périmètre d'accès"
     * **Machine cliente (contrôle) :** PC1 (`192.168.1.91` — Bazzite)
     * **Machine cible (administrée) :** PC3 (`192.168.209.151` — VM Debian 13 KDE sur Proxmox)
@@ -195,35 +203,42 @@ Il suffit ensuite de saisir l'identifiant du PC3 dans le champ du PC1, puis de r
 
 ## 3. Sunshine & Moonlight (Accès haute performance / faible latence)
 
+!!! warning "Avertissement et contexte d'utilisation"
+    Contrairement aux deux autres solutions présentées, le tandem Sunshine / Moonlight n'est utilisable à la base qu'au sein d'un réseau local (LAN), bien qu'il reste possible d'y accéder à distance en passant par un VPN. J'ai souhaité mettre en place cette solution un peu exotique, que j'ai déjà eu l'occasion d'utiliser à titre personnel, car je pense qu'elle conserve un réel intérêt en administration réseau grâce à ses performances exceptionnelles.
+
+!!! info "Cas d'usage : TP actuel vs Utilisation globale (LAN / WAN)"
+    * **Dans le cadre de ce TP :** Prise en main à très faible latence du **PC2** (`192.168.1.31`) depuis le **PC1** (`192.168.1.91`) sur le réseau local LAN1.
+    * **En contexte professionnel / Utilisation globale :** Cette solution est conçue nativement pour un usage en **LAN** haut débit (WiFi 6 / Ethernet Gbps) en raison de sa forte consommation de bande passante et de ses exigences en matière de latence. Pour un usage en **WAN**, elle nécessite obligatoirement la mise en place préalable d'un tunnel sécurisé (VPN de type WireGuard ou Tailscale). Elle s'adresse principalement aux stations de travail nécessitant une accélération graphique distante (CAO 3D, montage vidéo, simulation, Cloud Gaming).
+
 !!! note "Périmètre d'accès"
     * **Machine cliente (contrôle) :** PC1 (`192.168.1.91` — Bazzite)
     * **Machine cible (administrée) :** PC2 (`192.168.1.31` — Bazzite KDE)
 
 !!! info "Présentation et détournement de cas d'usage"
-    * **Sunshine :** serveur hôte open source de flux vidéo/audio auto-hébergé (remplaçant l'ancien NVIDIA GameStream). Il s'installe sur la machine distante à contrôler (PC2).
+    * **Sunshine :** serveur hôte open source de flux vidéo/audio auto-hébergé. Il s'installe sur la machine distante à contrôler (PC2).
     * **Moonlight :** client de réception ultra-léger et optimisé pour le décodage matériel. Il s'installe sur la machine de contrôle (PC1).
 
 ### Pourquoi utiliser cette solution en administration système ?
 
-Bien que le couple Sunshine / Moonlight soit initialement conçu pour le streaming de jeux vidéo en réseau local, son architecture offre des avantages inédits pour l'administration à distance :
+Bien que le couple Sunshine / Moonlight soit initialement conçu pour le streaming de jeux vidéo en réseau local, son architecture offre des avantages qui peuvent présenter un intérêt dans des cas très spécifiques pour l'administration à distance :
 
-* **Latence quasi nulle :** enregistrement et encodage vidéo matériel direct (via GPU NVENC, VAAPI ou QuickSync) permettant un flux à 60 ou 120 FPS constant.
-* **Fluidité d'affichage exceptionnelle :** supérieure aux protocoles classiques comme le VNC ou le RDP lors du traitement de tâches graphiques lourdes.
+* **Latence quasi nulle :** enregistrement et encodage vidéo matériel direct (via GPU) permettant un flux à 60 ou 120 FPS constant.
+* **Fluidité d'affichage exceptionnelle :** supérieure aux protocoles classiques lors du traitement de tâches graphiques lourdes.
 * **Sécurité :** appairage chiffré via un code PIN à quatre chiffres lors de la première poignée de main entre le client Moonlight et le serveur Sunshine.
 
-Une fois l'appairage effectué, Moonlight permet d'afficher l'intégralité du bureau distant du PC2 avec une réactivité identique à celle d'un moniteur branché physiquement sur la machine.
+Une fois l'appairage effectué, Moonlight permet d'afficher l'intégralité du bureau distant du PC2 avec une réactivité presque identique à celle d'un moniteur branché physiquement sur la machine.
 
 ---
 
 ## 4. Tableau comparatif des solutions
 
-Pour synthétiser les spécificités de chaque outil et guider le choix de la solution selon le besoin d'administration, voici un comparatif de leurs caractéristiques:
+Pour synthétiser les spécificités de chaque outil et guider le choix de la solution selon le besoin d'administration, voici un comparatif de leurs caractéristiques :
 
 | Critère | TeamViewer & QuickSupport | RustDesk | Sunshine & Moonlight |
 | :--- | :--- | :--- | :--- |
 | **Licence & Philosophie** | Propriétaire / Commercial (Gratuit usage privé) | Open source (AGPLv3) & Auto-hébergeable | Open source (GPLv3) & 100 % Auto-hébergé |
-| **Environnement Réseau** | **LAN & WAN** (Traversée transparente des pare-feu via serveurs relais cloud propriétaires) | **LAN & WAN** (Serveurs de signalement publics ou serveur privé auto-hébergé) | **LAN prioritaire** (Accès WAN possible via VPN/Tailscale ou redirection de ports) |
+| **Environnement Réseau** | **LAN & WAN** (Traversée transparente des pare-feu via serveurs relais cloud propriétaires) | **LAN & WAN** (Serveurs de signalement publics ou serveur privé auto-hébergé) | **LAN prioritaire** (Accès WAN possible via VPN) |
 | **Type de Déploiement** | **Client lourd :** installation système (RPM/démon)<br>**QuickSupport :** binaire portable | **AppImage autonome** (Exécution directe sans installation ni privilèges) | **Serveur :** démon système de capture hôte<br>**Client :** application réceptrice légère |
 | **Performance & Latence** | Standard (Optimisé pour la bureautique et le transfert de fichiers) | Bonne à Très bonne (Ajustable selon le relais utilisé et le codec choisi) | **Ultra-haute performance** (Encodage matériel GPU, 60/120 FPS, latence imperceptible) |
 | **Prérequis Cible** | Interaction utilisateur requise (Transmission ID / Mot de passe temporaire) | Configuration flexible (Accès permanent ou temporaire via mot de passe) | Configuration préalable (Service actif et appairage PIN initial requis) |
-| **Cas d'usage idéal** | **Support utilisateur à chaud** et assistance ponctuelle grand public | **Support IT régulier**, administration système et machines immuables | **Station de travail graphique**, CAO/3D, montage vidéo à distance, Cloud Gaming |
+| **Cas d'usage idéal** | **Support utilisateur à chaud** et assistance ponctuelle grand public | **Support IT régulier** | **Station de travail graphique**, CAO/3D, montage vidéo à distance, Cloud Gaming |
