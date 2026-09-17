@@ -48,7 +48,7 @@ graph TD
 ## 1. TeamViewer & QuickSupport
 
 !!! info "Cas d'usage : TP actuel vs Utilisation globale (LAN / WAN)"
-    * **Dans le cadre de ce TP :** Prise en main du **PC2** (`192.168.1.31`) depuis le **PC1** (`192.168.1.91`) au sein du même réseau local (LAN1).
+    * **Dans le cadre de ce TP :** Prise en main du **PC2** depuis le **PC1** au sein du même réseau local (LAN1).
     * **En contexte professionnel / Utilisation globale :** TeamViewer et QuickSupport sont principalement conçus pour des déploiements **WAN** (inter-sites, télétravail, support utilisateur externe). Grâce aux serveurs relais de TeamViewer, la connexion traverse de manière transparente les pare-feux et les routeurs NAT sans nécessiter de VPN ni de redirection de ports. QuickSupport est idéal pour le dépannage ponctuel auprès d'utilisateurs non techniciens, tandis que le client complet permet une administration permanente non supervisée.
 
 !!! note "Périmètre d'accès"
@@ -165,7 +165,7 @@ systemctl reboot
 ## 2. RustDesk (Solution open source portable)
 
 !!! info "Cas d'usage : TP actuel vs Utilisation globale (LAN / WAN)"
-    * **Dans le cadre de ce TP :** Prise en main à travers deux sous-réseaux distincts du **PC3** (`192.168.209.151`, VM Debian 13 sous Proxmox) depuis le **PC1** (`192.168.1.91`) via un routage virtuel.
+    * **Dans le cadre de ce TP :** Prise en main à travers deux sous-réseaux distincts du **PC3** (VM Debian 13 sous Proxmox) depuis le **PC1**.
     * **En contexte professionnel / Utilisation globale :** RustDesk s'adapte aussi bien aux environnements **LAN** qu'**WAN**. Son principal atout en entreprise réside dans la possibilité d'auto-héberger son propre serveur de relais, garantissant une souveraineté totale des données sans dépendre d'infrastructures tierces.
 
 !!! note "Périmètre d'accès"
@@ -207,8 +207,8 @@ Il suffit ensuite de saisir l'identifiant du PC3 dans le champ du PC1, puis de r
     Contrairement aux deux autres solutions présentées, le tandem Sunshine / Moonlight n'est utilisable à la base qu'au sein d'un réseau local (LAN), bien qu'il reste possible d'y accéder à distance en passant par un VPN. J'ai souhaité mettre en place cette solution un peu exotique, que j'ai déjà eu l'occasion d'utiliser à titre personnel, car je pense qu'elle conserve un réel intérêt en administration réseau grâce à ses performances.
 
 !!! info "Cas d'usage : TP actuel vs Utilisation globale (LAN / WAN)"
-    * **Dans le cadre de ce TP :** Prise en main à très faible latence du **PC2** (`192.168.1.31`) depuis le **PC1** (`192.168.1.91`) sur le réseau local LAN1.
-    * **En contexte professionnel / Utilisation globale :** Cette solution est conçue nativement pour un usage en **LAN** haut débit (WiFi 6 / Ethernet Gbps) en raison de sa forte consommation de bande passante et de ses exigences en matière de latence. Pour un usage en **WAN**, elle nécessite obligatoirement la mise en place préalable d'un tunnel sécurisé (VPN de type WireGuard ou Tailscale). Elle s'adresse principalement aux stations de travail nécessitant une accélération graphique distante (CAO 3D, montage vidéo, simulation, Cloud Gaming).
+    * **Dans le cadre de ce TP :** Prise en main à très faible latence du **PC2**  depuis le **PC1** sur le réseau local LAN1.
+    * **En contexte professionnel / Utilisation globale :** Cette solution est conçue nativement pour un usage en **LAN** haut débit (WiFi 6 / Ethernet Gbps) en raison de sa forte consommation de bande passante et de ses exigences en matière de latence. Pour un usage en **WAN**, elle nécessite obligatoirement la mise en place préalable d'un tunnel sécurisé (VPN).
 
 !!! note "Périmètre d'accès"
     * **Machine cliente (contrôle) :** PC1 (`192.168.1.91` — Bazzite)
