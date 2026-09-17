@@ -212,3 +212,18 @@ Bien que le couple Sunshine / Moonlight soit initialement conçu pour le streami
 * **Sécurité :** appairage chiffré via un code PIN à quatre chiffres lors de la première poignée de main entre le client Moonlight et le serveur Sunshine.
 
 Une fois l'appairage effectué, Moonlight permet d'afficher l'intégralité du bureau distant du PC2 avec une réactivité identique à celle d'un moniteur branché physiquement sur la machine.
+
+---
+
+## 4. Tableau comparatif des solutions
+
+Pour synthétiser les spécificités de chaque outil et guider le choix de la solution selon le besoin d'administration, voici un comparatif détaillé de leurs caractéristiques :
+
+| Critère | TeamViewer & QuickSupport | RustDesk | Sunshine & Moonlight |
+| :--- | :--- | :--- | :--- |
+| **Licence & Philosophie** | Propriétaire / Commercial (Gratuit usage privé) | Open source (AGPLv3) & Auto-hébergeable | Open source (GPLv3) & 100 % Auto-hébergé |
+| **Environnement Réseau** | **LAN & WAN** (Traversée transparente des pare-feu via serveurs relais cloud propriétaires) | **LAN & WAN** (Serveurs de signalement publics ou serveur privé auto-hébergé) | **LAN prioritaire** (Accès WAN possible via VPN/Tailscale ou redirection de ports) |
+| **Type de Déploiement** | **Client lourd :** installation système (RPM/démon)<br>**QuickSupport :** binaire portable | **AppImage autonome** (Exécution directe sans installation ni privilèges) | **Serveur :** démon système de capture hôte<br>**Client :** application réceptrice légère |
+| **Performance & Latence** | Standard (Optimisé pour la bureautique et le transfert de fichiers) | Bonne à Très bonne (Ajustable selon le relais utilisé et le codec choisi) | **Ultra-haute performance** (Encodage matériel GPU, 60/120 FPS, latence imperceptible) |
+| **Prérequis Cible** | Interaction utilisateur requise (Transmission ID / Mot de passe temporaire) | Configuration flexible (Accès permanent ou temporaire via mot de passe) | Configuration préalable (Service actif et appairage PIN initial requis) |
+| **Cas d'usage idéal** | **Support utilisateur à chaud** et assistance ponctuelle grand public | **Support IT régulier**, administration système et machines immuables | **Station de travail graphique**, CAO/3D, montage vidéo à distance, Cloud Gaming |
