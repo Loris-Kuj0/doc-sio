@@ -251,7 +251,9 @@ Pour synthétiser les spécificités de chaque outil et guider le choix de la so
 
 ## 5. Comparatif technique : X11 vs Wayland
 
-L'architecture d'affichage d'un système Linux conditionne directement le bon fonctionnement des logiciels de prise en main à distance. Comprendre les différences fondamentales entre **X11** et **Wayland** permet d'expliquer les contraintes rencontrées lors de la mise en œuvre de ce TP.
+L'architecture d'affichage d'un système Linux conditionne directement le bon fonctionnement des logiciels de prise en main à distance. Comprendre les différences fondamentales entre **X11** et **Wayland** permet d'expliquer les contraintes techniques rencontrées lors de la mise en œuvre de ce TP.
+
+---
 
 ### A. Origines et Philosophie
 
@@ -261,35 +263,50 @@ L'architecture d'affichage d'un système Linux conditionne directement le bon fo
 
 * **Wayland :**
     * **Origines :** Projet initié en **2008** par Kristian Høgsberg (développeur chez Red Hat) afin de remplacer le code vieillissant, complexe et maintenu difficilement de X11.
-    * **Philosophie :** Simplification radicale du pipeline graphique (*« every frame is perfect »*). Wayland n'est pas un serveur, mais un **protocole**. La fonction de serveur d'affichage et de gestionnaire de fenêtres est fusionnée au sein d'un composant unique appelé le **compositeur** (Mutter sous GNOME, KWin sous KDE).
+    * **Philosophie :** Simplification radicale du pipeline graphique (*« every frame is perfect »*). Wayland n'est pas un serveur, mais un **protocole**. La fonction de serveur d'affichage, de gestionnaire de fenêtres et de compositeur est fusionnée au sein d'un composant unique appelé le **compositeur** (Mutter sous GNOME, KWin sous KDE).
 
 ---
 
-### B. Caractéristiques spécifiques et différences d'architecture
+### B. Caractéristiques d'architecture, rôle du compositeur et sécurité
+
+#### Où se trouve le compositeur dans chaque modèle ?
+
+* **Dans le modèle X11 :** Le compositeur est une couche externe séparée du serveur d'affichage `Xorg`. À l'origine, X11 n'avait **aucun compositeur**. Chaque application dessinait sa fenêtre, et `Xorg` les affichait directement. Plus tard, une extension (*Composite*) a été ajoutée pour permettre à un programme tiers (comme Picom ou le WM) de récupérer les images des fenêtres, d'y ajouter des effets (ombres, transparence, anti-déchirure), puis de renvoyer le résultat à `Xorg`. Comme `Xorg` reste le hub central au milieu, **toutes les applications partagent le même espace mémoire**, ce qui permettait aux logiciels de prise en main à distance de tout intercepter très facilement.
+
+* **Dans le modèle Wayland :** Il n'y a **plus de serveur central Xorg**. Le **compositeur est le cœur du système** : il accumule les rôles de serveur d'affichage, de gestionnaire de fenêtres et d'assembleur graphique. Les applications communiquent directement avec lui. C'est lui qui distribue l'affichage et qui **isole hermétiquement chaque application** : une application ne sait pas ce que font les autres fenêtres et ne peut pas lire la mémoire globale.
 
 ```mermaid
-graph LR
-    subgraph X11 ["Modèle X11 (Architecture centralisée)"]
-        direction LR
-        AppX["Application / Client X"] <--> Xorg["Serveur Xorg"]
-        Xorg <--> WM["Gestionnaire de fenêtres"]
-        WM <--> GPU1["Matériel / GPU"]
+graph TD
+    subgraph X11 ["Modèle X11 : Architecture centralisée (Sans isolation)"]
+        direction TB
+        AppX1["Application A"] <-->|Protocol X11| Xorg
+        AppX2["Application B<br/><i>(ex: RustDesk/TeamViewer)</i>"] <-->|Peut lire/injecter partout !| Xorg["<b>Serveur Xorg</b><br/><i>(Hub central : conserve toutes les fenêtres en mémoire)</i>"]
+        WMX["<b>Gestionnaire de fenêtres & Compositeur</b><br/><i>(Module externe : placement, effets)</i>"] <-->|Extension Composite| Xorg
+        Xorg <-->|Drivers| GPU1["Matériel / GPU & Écran"]
     end
 
-    subgraph Wayland ["Modèle Wayland (Pipeline direct)"]
-        direction LR
-        AppW["Application"] <--> Comp["Compositeur<br/>(Mutter / KWin)"]
-        Comp <--> GPU2["Matériel / GPU<br/>(via KMS / evdev)"]
+    subgraph Wayland ["Modèle Wayland : Pipeline direct (Isolation stricte)"]
+        direction TB
+        AppW1["Application A"] <-->|Protocole Wayland| Comp
+        AppW2["Application B<br/><i>(Isolée dans sa bulle)</i>"] <-->|Ne voit rien d'autre !| Comp["<b>Compositeur Wayland (Mutter / KWin)</b><br/><i>(Fusionne Serveur + WM + Compositeur)</i>"]
+        Comp <-->|KMS / evdev| GPU2["Matériel / GPU & Écran"]
     end
 ```
 
-* **Gestion globale vs Isolation stricte :**
-    * Sous **X11**, l'architecture offre une visibilité globale non cloisonnée. N'importe quelle application connectée au serveur X peut lire la mémoire vidéo globale, capturer les fenêtres d'autres applications ou simuler des clics de souris et des touches de clavier de manière arbitraire.
-    * Sous **Wayland**, le compositeur isole hermétiquement chaque application. Une application n'a conscience que de sa propre surface de rendu et ne peut pas accéder aux fenêtres voisines ni intercepter les entrées clavier/souris globales.
+---
 
-* **Performances et Sécurité :**
-    * **X11 :** Souffre de *tearing* (déchirure d'image) et de surcoûts d'IPC (communication inter-processus). Il est intrinsèquement vulnérable aux attaques de type *Keylogging* ou capture d'écran malveillante sans élévation de privilèges.
-    * **Wayland :** Offre une fluidité parfaite, la gestion native du multi-écran à fréquences/échelles d'affichage différentes, et une sécurité renforcée par défaut.
+#### Lexique & Définitions des termes techniques
+
+Pour bien comprendre le fonctionnement du système d'affichage Linux et les défis du contrôle à distance, voici la définition des composants clés :
+
+* **Serveur Xorg (`Xorg`) :** Le serveur d'affichage historique de X11. C'est l'intermédiaire central par lequel transitaient obligatoirement tous les évènements clavier/souris et toutes les fenêtres d'affichage.
+* **Gestionnaire de fenêtres (*Window Manager / WM*) :** Le programme chargé de positionner les fenêtres sur l'écran, de dessiner leurs bordures (boutons réduire/fermer) et de gérer le focus. *(Exemples : Openbox, i3, ou modules intégrés à KWin/Mutter)*.
+* **Compositeur (*Compositor*) :** Le composant qui prend les images individuelles dessinées par chaque application et les "compose" (assemble) en une seule image finale envoyée à l'écran. Il gère la fluidité, la transparence, les animations et élimine le *tearing* (déchirure d'image).
+* **PipeWire :** Un serveur multimédia moderne sous Linux spécialisé dans la capture et la redirection des flux audio/vidéo à très faible latence. Sous Wayland, c'est **PipeWire** qui est chargé d'extraire le flux d'écran pour le transmettre de manière sécurisée à une application cliente (comme Teams, Discord ou RustDesk).
+* **XDG-Desktop-Portal :** Un service intermédiaire de sécurité (une "boîte de dialogue système"). Sous Wayland, lorsqu'une application veut capturer l'écran, elle n'a pas le droit de le faire directement : elle demande au *Portal*, qui affiche une pop-up à l'utilisateur : *"Autorisez-vous cette application à partager votre écran ?"*. Une fois validé, le Portal transmet le flux via PipeWire.
+* **KMS (*Kernel Mode Setting*) :** Une fonctionnalité du noyau Linux qui permet au compositeur de communiquer directement avec la carte graphique pour régler la résolution, la fréquence de rafraîchissement et la mémoire vidéo sans passer par un serveur intermédiaire.
+* **evdev (*Event Device*) :** Le gestionnaire d'événements d'entrée du noyau Linux. Il centralise les signaux bruts envoyés par le matériel physique (pressions sur le clavier, mouvements de la souris, écrans tactiles).
+* **`uinput` :** Un module du noyau Linux qui permet à un logiciel (comme RustDesk ou Sunshine) de créer des périphériques d'entrée **virtuels**. Cela permet de simuler de vrais clics de souris ou des frappes de clavier au niveau du système sans avoir de matériel physique branché.
 
 ---
 
