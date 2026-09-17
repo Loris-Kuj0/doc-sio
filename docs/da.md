@@ -203,6 +203,10 @@ Il suffit ensuite de saisir l'identifiant du PC3 dans le champ du PC1, puis de r
 
 ## 3. Sunshine & Moonlight (Accès haute performance / faible latence)
 
+!!! info "Présentation et détournement de cas d'usage"
+    * **Sunshine :** serveur hôte open source de flux vidéo/audio auto-hébergé. Il s'installe sur la machine distante à contrôler (PC2).
+    * **Moonlight :** client de réception ultra-léger et optimisé pour le décodage matériel. Il s'installe sur la machine de contrôle (PC1).
+
 !!! warning "Avertissement et contexte d'utilisation"
     Contrairement aux deux autres solutions présentées, le tandem Sunshine / Moonlight n'est utilisable à la base qu'au sein d'un réseau local (LAN), bien qu'il reste possible d'y accéder à distance en passant par un VPN. J'ai souhaité mettre en place cette solution un peu exotique, que j'ai déjà eu l'occasion d'utiliser à titre personnel, car je pense qu'elle conserve un réel intérêt en administration réseau grâce à ses performances.
 
@@ -213,10 +217,6 @@ Il suffit ensuite de saisir l'identifiant du PC3 dans le champ du PC1, puis de r
 !!! note "Périmètre d'accès"
     * **Machine cliente (contrôle) :** PC1 (`192.168.1.91` — Bazzite)
     * **Machine cible (administrée) :** PC2 (`192.168.1.31` — Bazzite KDE)
-
-!!! info "Présentation et détournement de cas d'usage"
-    * **Sunshine :** serveur hôte open source de flux vidéo/audio auto-hébergé. Il s'installe sur la machine distante à contrôler (PC2).
-    * **Moonlight :** client de réception ultra-léger et optimisé pour le décodage matériel. Il s'installe sur la machine de contrôle (PC1).
 
 ### Pourquoi utiliser cette solution en administration système ?
 
