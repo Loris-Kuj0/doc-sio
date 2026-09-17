@@ -183,6 +183,9 @@ Contrairement à la lourdeur de déploiement de TeamViewer, RustDesk est disponi
 !!! tip "L'intérêt du format AppImage sur un OS immuable ou une VM"
     L'**AppImage** est un format d'encapsulation universel pour Linux. Il regroupe l'application et l'ensemble de ses dépendances dans un seul fichier binaire exécutable. Il ne nécessite **aucune installation**, aucun privilège d'administrateur (`root`), et n'altère en rien l'image système. C'est le format idéal aussi bien pour une distribution atomique comme Bazzite que pour un déploiement rapide sur une VM Debian 13.
 
+!!! warning "Gestion du serveur d'affichage : Wayland vs X11"
+    Les machines **PC1** et **PC2** fonctionnent nativement sous **Bazzite** avec le serveur d'affichage **Wayland**. La prise en main à distance sous Wayland s'appuie désormais sur les protocoles modernes **PipeWire** et **XDG-Desktop-Portal** pour l'injection des entrées et la capture d'écran. Cependant, le support de Wayland par RustDesk sous Bazzite présentant des instabilités et des limitations d'interaction, le poste cible **PC3 (VM Debian 13 KDE)** a été délibérément configuré avec une session **X11**. Ce choix technique garantit une compatibilité parfaite, un contrôle fluide des périphériques et un affichage sans dysfonctionnement lors de la prise en main à distance.
+
 #### Interface sur le client (PC1) :
 ![Interface RustDesk sur PC1](../images/da3.png)
 
@@ -238,6 +241,7 @@ Pour synthétiser les spécificités de chaque outil et guider le choix de la so
 | :--- | :--- | :--- | :--- |
 | **Licence & Philosophie** | Propriétaire / Commercial (Gratuit usage privé) | Open source (AGPLv3) & Auto-hébergeable | Open source (GPLv3) & 100 % Auto-hébergé |
 | **Environnement Réseau** | **LAN & WAN** (Traversée transparente des pare-feu via serveurs relais cloud propriétaires) | **LAN & WAN** (Serveurs de signalement publics ou serveur privé auto-hébergé) | **LAN prioritaire** (Accès WAN possible via VPN) |
+| **Compatibilité OS & Serveur d'affichage** | **Multiplateforme** (Linux X11 & Wayland via XWayland/PipeWire, Windows, macOS) | **Multiplateforme** (Linux X11 recommandé ; Wayland géré via PipeWire mais variable selon distributions), Windows, macOS | **Multiplateforme** (Linux X11 & Wayland avec KMS/PipeWire, Windows, macOS) |
 | **Type de Déploiement** | **Client lourd :** installation système (RPM/démon)<br>**QuickSupport :** binaire portable | **AppImage autonome** (Exécution directe sans installation ni privilèges) | **Serveur :** démon système de capture hôte<br>**Client :** application réceptrice légère |
 | **Performance & Latence** | Standard (Optimisé pour la bureautique et le transfert de fichiers) | Bonne à Très bonne (Ajustable selon le relais utilisé et le codec choisi) | **Ultra-haute performance** (Encodage matériel GPU, 60/120 FPS, latence imperceptible) |
 | **Prérequis Cible** | Interaction utilisateur requise (Transmission ID / Mot de passe temporaire) | Configuration flexible (Accès permanent ou temporaire via mot de passe) | Configuration préalable (Service actif et appairage PIN initial requis) |
