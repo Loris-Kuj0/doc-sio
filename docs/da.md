@@ -184,7 +184,7 @@ Contrairement à la lourdeur de déploiement de TeamViewer, RustDesk est disponi
     L'**AppImage** est un format d'encapsulation universel pour Linux. Il regroupe l'application et l'ensemble de ses dépendances dans un seul fichier binaire exécutable. Il ne nécessite **aucune installation**, aucun privilège d'administrateur (`root`), et n'altère en rien l'image système. C'est le format idéal aussi bien pour une distribution atomique comme Bazzite que pour un déploiement rapide sur une VM Debian 13.
 
 !!! warning "Gestion du serveur d'affichage : Wayland vs X11"
-    Les machines **PC1** et **PC2** fonctionnent nativement sous **Bazzite** avec le serveur d'affichage **Wayland**. La prise en main à distance sous Wayland s'appuie désormais sur les protocoles modernes **PipeWire** et **XDG-Desktop-Portal** pour l'injection des entrées et la capture d'écran. Cependant, le support de Wayland par RustDesk sous Bazzite présentant des instabilités et des limitations d'interaction, le poste cible **PC3 (VM Debian 13 KDE)** a été délibérément configuré avec une session **X11**. Ce choix technique garantit une compatibilité parfaite, un contrôle fluide des périphériques et un affichage sans dysfonctionnement lors de la prise en main à distance.
+    Les machines **PC1** et **PC2** fonctionnent nativement sous **Bazzite** avec le serveur d'affichage **Wayland**. Cependant, le support de Wayland par RustDesk sous Bazzite présentant des instabilités et des limitations d'interaction (pour en comprendre les raisons techniques, voir la [section 5. Comparatif technique : X11 vs Wayland](#5-comparatif-technique--x11-vs-wayland)), le poste cible **PC3 (VM Debian 13 KDE)** a été délibérément configuré avec une session **X11**. Ce choix technique garantit une compatibilité parfaite, un contrôle fluide des périphériques et un affichage sans dysfonctionnement lors de la prise en main à distance.
 
 #### Interface sur le client (PC1) :
 ![Interface RustDesk sur PC1](../images/da3.png)
@@ -211,7 +211,7 @@ Il suffit ensuite de saisir l'identifiant du PC3 dans le champ du PC1, puis de r
     * **Moonlight :** client de réception ultra-léger et optimisé pour le décodage matériel. Il s'installe sur la machine de contrôle (PC1).
 
 !!! warning "Avertissement et contexte d'utilisation"
-    Contrairement aux deux autres solutions présentées, le tandem Sunshine / Moonlight n'est utilisable à la base qu'au sein d'un réseau local (LAN), bien qu'il reste possible d'y accéder à distance en passant par un VPN. J'ai souhaité mettre en place cette solution un peu exotique, que j'ai déjà eu l'occasion d'utiliser à titre personnel, car je pense qu'elle conserve un réel intérêt en administration réseau grâce à ses performances.
+    Contrairement aux deux autres solutions présentées, le tandem Sunshine / Moonlight n'est utilisable à la base qu'au sein d'un réseau local (LAN), bien qu'il reste possible d'y accéder à distance en passant par un VPN. J'ai souhaité mettre en place cette solution un peu exotique, que j'ai déjà eu l'occasion d'utiliser à titre personnel, car je pense qu'elle conserve un réel intérêt en administration réseau grâce à ses performances (à condition d'utiliser un compositeur compatible, voir le [comparatif X11 vs Wayland](#5-comparatif-technique--x11-vs-wayland)).
 
 !!! info "Cas d'usage : TP actuel vs Utilisation globale (LAN / WAN)"
     * **Dans le cadre de ce TP :** Prise en main à très faible latence du **PC2**  depuis le **PC1** sur le réseau local LAN1.
@@ -241,8 +241,62 @@ Pour synthétiser les spécificités de chaque outil et guider le choix de la so
 | :--- | :--- | :--- | :--- |
 | **Licence & Philosophie** | Propriétaire / Commercial (Gratuit usage privé) | Open source (AGPLv3) & Auto-hébergeable | Open source (GPLv3) & 100 % Auto-hébergé |
 | **Environnement Réseau** | **LAN & WAN** (Traversée transparente des pare-feu via serveurs relais cloud propriétaires) | **LAN & WAN** (Serveurs de signalement publics ou serveur privé auto-hébergé) | **LAN prioritaire** (Accès WAN possible via VPN) |
-| **Compatibilité OS & Serveur d'affichage** | **Multiplateforme** (Linux X11 & Wayland via XWayland/PipeWire, Windows, macOS) | **Multiplateforme** (Linux X11 recommandé ; Wayland géré via PipeWire mais variable selon distributions), Windows, macOS | **Multiplateforme** (Linux X11 & Wayland avec KMS/PipeWire, Windows, macOS) |
+| **Compatibilité OS & Serveur d'affichage** *(Détails en [Section 5](#5-comparatif-technique--x11-vs-wayland))* | **Multiplateforme** (Linux X11 & Wayland via XWayland/PipeWire, Windows, macOS) | **Multiplateforme** (Linux X11 recommandé ; Wayland géré via PipeWire mais variable selon distributions), Windows, macOS | **Multiplateforme** (Linux X11 & Wayland avec KMS/PipeWire, Windows, macOS) |
 | **Type de Déploiement** | **Client lourd :** installation système (RPM/démon)<br>**QuickSupport :** binaire portable | **AppImage autonome** (Exécution directe sans installation ni privilèges) | **Serveur :** démon système de capture hôte<br>**Client :** application réceptrice légère |
 | **Performance & Latence** | Standard (Optimisé pour la bureautique et le transfert de fichiers) | Bonne à Très bonne (Ajustable selon le relais utilisé et le codec choisi) | **Ultra-haute performance** (Encodage matériel GPU, 60/120 FPS, latence imperceptible) |
 | **Prérequis Cible** | Interaction utilisateur requise (Transmission ID / Mot de passe temporaire) | Configuration flexible (Accès permanent ou temporaire via mot de passe) | Configuration préalable (Service actif et appairage PIN initial requis) |
 | **Cas d'usage idéal** | **Support utilisateur à chaud** et assistance ponctuelle grand public | **Support IT régulier** | **Station de travail graphique**, CAO/3D, montage vidéo à distance, Cloud Gaming |
+
+---
+
+## 5. Comparatif technique : X11 vs Wayland
+
+L'architecture d'affichage d'un système Linux conditionne directement le bon fonctionnement des logiciels de prise en main à distance. Comprendre les différences fondamentales entre **X11** et **Wayland** permet d'expliquer les contraintes rencontrées lors de la mise en œuvre de ce TP.
+
+### A. Origines et Philosophie
+
+* **X11 (X Window System Version 11) :**
+    * **Origines :** Développé au MIT en **1984**, X11 est un protocole vieux de plus de 40 ans conçu à une époque où le modèle informatique reposait sur un serveur central puissant et des terminaux légers clients.
+    * **Philosophie :** Architecture client-serveur stricte. Le serveur X (`Xorg`) gère l'affichage et les périphériques d'entrée. Chaque fenêtre est un client X qui discute avec le serveur via un protocole réseau textuel, même si le client et le serveur s'exécutent sur la même machine.
+
+* **Wayland :**
+    * **Origines :** Projet initié en **2008** par Kristian Høgsberg (développeur chez Red Hat) afin de remplacer le code vieillissant, complexe et maintenu difficilement de X11.
+    * **Philosophie :** Simplification radicale du pipeline graphique (*« every frame is perfect »*). Wayland n'est pas un serveur, mais un **protocole**. La fonction de serveur d'affichage et de gestionnaire de fenêtres est fusionnée au sein d'un composant unique appelé le **compositeur** (Mutter sous GNOME, KWin sous KDE).
+
+---
+
+### B. Caractéristiques spécifiques et différences d'architecture
+
+```
+Modèle X11 :
+[Application / Client X] <---> [Serveur Xorg] <---> [Gestionnaire de fenêtres] <---> [Matériel / GPU]
+
+Modèle Wayland :
+[Application] <---> [Compositeur Wayland (Mutter / KWin)] <---> [Matériel / GPU (via KMS/evdev)]
+```
+
+* **Gestion globale vs Isolation stricte :**
+    * Sous **X11**, l'architecture offre une visibilité globale non cloisonnée. N'importe quelle application connectée au serveur X peut lire la mémoire vidéo globale, capturer les fenêtres d'autres applications ou simuler des clics de souris et des touches de clavier de manière arbitraire.
+    * Sous **Wayland**, le compositeur isole hermétiquement chaque application. Une application n'a conscience que de sa propre surface de rendu et ne peut pas accéder aux fenêtres voisines ni intercepter les entrées clavier/souris globales.
+
+* **Performances et Sécurité :**
+    * **X11 :** Souffre de *tearing* (déchirure d'image) et de surcoûts d'IPC (communication inter-processus). Il est intrinsèquement vulnérable aux attaques de type *Keylogging* ou capture d'écran malveillante sans élévation de privilèges.
+    * **Wayland :** Offre une fluidité parfaite, la gestion native du multi-écran à fréquences/échelles d'affichage différentes, et une sécurité renforcée par défaut.
+
+---
+
+### C. Pourquoi Wayland pose problème aux solutions d'accès à distance ?
+
+L'isolation stricte garantie par Wayland casse le modèle de fonctionnement historique des logiciels de prise en main à distance (TeamViewer, RustDesk, VNC, etc.) qui s'appuyaient sur les API globales de X11 pour capturer l'écran et simuler des entrées.
+
+1. **Absence d'API de capture globale native :**
+   Sous Wayland, une application ne peut pas faire de simple « capture d'écran » directe. Pour capturer l'image sous Linux moderne, le logiciel doit obligatoirement passer par les sous-systèmes **XDG-Desktop-Portal** et **PipeWire**. Cela impose une demande d'autorisation explicite à l'utilisateur (pop-up système), ce qui complique les accès non supervisés.
+
+2. **Émulation des entrées utilisateur (Clavier / Souris) :**
+   Pour injecter des mouvements de souris ou des frappes au niveau du système, les logiciels doivent utiliser le module noyau **`uinput`** ou des protocoles spécifiques au compositeur (`virtual-keyboard`, `wlr-virtual-pointer`). Si la distribution (comme Bazzite) ou le binaire de l'application (ex. RustDesk en AppImage) gère mal ces interfaces, les clics et le clavier deviennent inopérants.
+
+3. **Incompatibilités inter-distributions / compositeurs :**
+   Chaque environnement (GNOME/Mutter, KDE/KWin, Sway/wlroots) implémente les extensions Wayland de manière parfois hétérogène. Une solution qui fonctionne sous Ubuntu GNOME peut échouer sur Bazzite ou Debian KDE.
+
+#### Choix technique dans ce TP :
+C'est pour cette raison précise que la machine virtuelle **PC3 (Debian 13)** a été configurée sur une session **X11**. L'AppImage RustDesk sur le client PC1 sous Wayland a pu capturer et injecter les commandes à travers le réseau sans se heurter au cloisonnement mémoire de la machine cible, garantissant une stabilité et un contrôle parfaits pendant le TP.
