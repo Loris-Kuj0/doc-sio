@@ -255,6 +255,13 @@ L'architecture d'affichage d'un système Linux conditionne directement le bon fo
 
 ---
 
+### Définitions préalables : Qu'est-ce que X11 et Wayland ?
+
+* **X11 (X Window System Version 11) :** C'est le système et protocole d'affichage historique du monde Unix/Linux, existant depuis 1984. Il repose sur un **serveur centralisé (`Xorg`)** qui gère la communication entre les applications et le matériel graphique. Sous X11, toutes les applications partagent un même espace graphique et une mémoire globale, ce qui permet à n'importe quelle application d'intercepter les fenêtres des autres ou de lire les frappes clavier au niveau du système.
+* **Wayland :** C'est un **protocole d'affichage moderne** conçu pour remplacer X11. Contrairement à X11, Wayland élimine le serveur centralisé `Xorg` et confie l'ensemble des tâches (affichage, gestion des fenêtres et composition) à un composant unique appelé le **compositeur** (Mutter sous GNOME, KWin sous KDE). Wayland intègre un **principe de sécurité et d'isolation stricte** : chaque application fonctionne dans sa propre « bulle » et n'a aucun accès aux images ou aux événements clavier/souris des autres applications.
+
+---
+
 ### A. Origines et Philosophie
 
 * **X11 (X Window System Version 11) :**
@@ -324,4 +331,4 @@ L'isolation stricte garantie par Wayland casse le modèle de fonctionnement hist
    Chaque environnement (GNOME/Mutter, KDE/KWin, Sway/wlroots) implémente les extensions Wayland de manière parfois hétérogène. Une solution qui fonctionne sous Ubuntu GNOME peut échouer sur Bazzite ou Debian KDE.
 
 #### Choix technique dans ce TP :
-C'est pour cette raison précise que la machine virtuelle **PC3 (Debian 13)** a été configurée sur une session **X11**. L'AppImage RustDesk sur le client PC1 sous Wayland a pu capturer et injecter les commandes à travers le réseau sans se heurter au cloisonnement mémoire de la machine cible, garantissant une stabilité et un contrôle parfaits pendant le TP.
+C'est pour cette raison précise que la machine virtuelle **PC3 (Debian 13)** a été configurée sur une session **X11**.
