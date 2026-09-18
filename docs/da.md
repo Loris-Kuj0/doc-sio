@@ -239,7 +239,7 @@ Pour synthétiser les spécificités de chaque outil et guider le choix de la so
 
 | Critère | TeamViewer & QuickSupport | RustDesk | Sunshine & Moonlight |
 | :--- | :--- | :--- | :--- |
-| **Licence & Philosophie** | Propriétaire / Commercial (Gratuit usage privé) | Open source (AGPLv3) & Auto-hébergeable | Open source (GPLv3) & 100 % Auto-hébergé |
+| **Licence & Philosophie** | Propriétaire / Commercial (Gratuit usage privé) | Open source & Auto-hébergeable | Open source & 100 % Auto-hébergé |
 | **Environnement Réseau** | **LAN & WAN** (Traversée transparente des pare-feu via serveurs relais cloud propriétaires) | **LAN & WAN** (Serveurs de signalement publics ou serveur privé auto-hébergé) | **LAN prioritaire** (Accès WAN possible via VPN) |
 | **Compatibilité OS & Serveur d'affichage** *(Détails en [Section 5](#5-comparatif-technique--x11-vs-wayland))* | **Multiplateforme** (Linux X11 & Wayland via XWayland/PipeWire, Windows, macOS) | **Multiplateforme** (Linux X11 recommandé ; Wayland instable), Windows, macOS | **Multiplateforme** (Linux X11 & Wayland avec KMS/PipeWire, Windows, macOS) |
 | **Type de Déploiement** | **Client lourd :** installation système (RPM/démon)<br>**QuickSupport :** binaire portable | **AppImage autonome** (Exécution directe sans installation ni privilèges) | **Serveur :** démon système de capture hôte<br>**Client :** application réceptrice légère |
