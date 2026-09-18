@@ -168,6 +168,9 @@ systemctl reboot
     * **Dans le cadre de ce TP :** Prise en main à travers deux sous-réseaux distincts du **PC3** (VM Debian 13 sous Proxmox) depuis le **PC1**.
     * **En contexte professionnel / Utilisation globale :** RustDesk s'adapte aussi bien aux environnements **LAN** qu'**WAN**. Son principal atout en entreprise réside dans la possibilité d'auto-héberger son propre serveur de relais, garantissant une souveraineté totale des données sans dépendre d'infrastructures tierces.
 
+!!! warning "Gestion du serveur d'affichage : Wayland vs X11"
+    Les machines **PC1** et **PC2** fonctionnent nativement sous **Bazzite** avec le serveur d'affichage **Wayland**. Cependant, le support de Wayland par RustDesk sous Bazzite présentant des instabilités et des limitations d'interaction (pour en comprendre les raisons techniques, voir la [section 5. Comparatif technique : X11 vs Wayland](#5-comparatif-technique--x11-vs-wayland)), le poste cible **PC3 (VM Debian 13 KDE)** a été délibérément configuré avec une session **X11**. Ce choix technique garantit une compatibilité parfaite.
+
 !!! note "Périmètre d'accès"
     * **Machine cliente (contrôle) :** PC1 (`192.168.1.91` — Bazzite)
     * **Machine cible (administrée) :** PC3 (`192.168.209.151` — VM Debian 13 KDE sur Proxmox)
@@ -182,9 +185,6 @@ Contrairement à la lourdeur de déploiement de TeamViewer, RustDesk est disponi
 
 !!! tip "L'intérêt du format AppImage sur un OS immuable ou une VM"
     L'**AppImage** est un format d'encapsulation universel pour Linux. Il regroupe l'application et l'ensemble de ses dépendances dans un seul fichier binaire exécutable. Il ne nécessite **aucune installation**, aucun privilège d'administrateur (`root`), et n'altère en rien l'image système. C'est le format idéal aussi bien pour une distribution atomique comme Bazzite que pour un déploiement rapide sur une VM Debian 13.
-
-!!! warning "Gestion du serveur d'affichage : Wayland vs X11"
-    Les machines **PC1** et **PC2** fonctionnent nativement sous **Bazzite** avec le serveur d'affichage **Wayland**. Cependant, le support de Wayland par RustDesk sous Bazzite présentant des instabilités et des limitations d'interaction (pour en comprendre les raisons techniques, voir la [section 5. Comparatif technique : X11 vs Wayland](#5-comparatif-technique--x11-vs-wayland)), le poste cible **PC3 (VM Debian 13 KDE)** a été délibérément configuré avec une session **X11**. Ce choix technique garantit une compatibilité parfaite, un contrôle fluide des périphériques et un affichage sans dysfonctionnement lors de la prise en main à distance.
 
 #### Interface sur le client (PC1) :
 ![Interface RustDesk sur PC1](../images/da3.png)
