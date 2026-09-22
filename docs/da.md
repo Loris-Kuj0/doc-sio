@@ -39,8 +39,8 @@ graph TD
         GW <--> PC3
     end
 
-    PC1 -.->|Session locale| PC2
-    PC1 -.->|Session distante| PC3
+    PC1 -.->|| PC2
+    PC1 -.->|| PC3
 ```
 
 ---
@@ -63,7 +63,7 @@ graph TD
 
 ### A. Déploiement sur le poste cible (PC2)
 
-Sur le **PC2 (Fedora KDE)**, la version légère **QuickSupport** a été récupérée sous forme d'archive compressée (`tar.gz`) directement depuis le site officiel de TeamViewer, puis extraite pour une exécution à la demande.
+Sur le **PC2 (Fedora KDE)**, la version légère **QuickSupport** a été récupérée sous forme d'archive compressée (`tar.gz`) directement depuis le site officiel de TeamViewer, puis extraite pour une exécution à la demande. 
 
 ```bash
 # Extraction de l'archive tarball
