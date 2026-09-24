@@ -153,3 +153,11 @@ mount -t nfs 192.168.1.100:/srv/nfs/data /mnt/nfs_partage
 | **Samba** | Partage de fichiers & Gestion d'identité | Interplateforme (Windows / Linux / macOS) | Gestion des droits NTFS/ACL, intégration Active Directory. |
 | **NFS** | Partage de fichiers haute performance | Linux / Unix | Faible empreinte CPU, idéal pour le stockage de VM et serveurs. |
 | **Clonezilla** | Sauvegarde & Déploiement système | Agnostique (Ext4, NTFS, FAT, Btrfs...) | Copie bloc par bloc, ultra-rapide, déploiement réseau de masse. |
+
+
+
+
+## Conexion via ssh
+
+
+![TeamViewer prêt sur le PC1](../images/ssh1.png)

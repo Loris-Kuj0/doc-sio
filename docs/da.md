@@ -39,8 +39,8 @@ graph TD
         GW <--> PC3
     end
 
-    PC1 -.->|| PC2
-    PC1 -.->|| PC3
+    PC1 -.-> PC2
+    PC1 -.-> PC3
 ```
 
 ---
