@@ -293,7 +293,7 @@ scp /etc/corosync/corosync.conf root@node2:/etc/corosync/corosync.conf
 ![Saisie de la commande de transfert SCP vers node2](../images/Capture%20d’écran%20du%202026-11-04%2014-22-22.png)
 
 !!! note "Droits d'écriture lors du transfert SCP"
-    L'écriture directe dans `/etc/corosync/` nécessitant les privilèges super-utilisateur, une tentative avec un compte standard (`sio@node2`) renvoie logiquement `Permission denied`. L'authentification avec `root@node2` permet de transférer les $1930\text{ octets}$ du fichier avec succès (`100%`).
+    L'écriture directe dans `/etc/corosync/` nécessitant les privilèges super-utilisateur, une tentative avec un compte standard (`sio@node2`) renvoie logiquement `Permission denied`. L'authentification avec `root@node2` permet de transférer le fichier avec succès.
 
 ![Exécution réussie du transfert SCP de corosync.conf en tant que root](../images/Capture%20d’écran%20du%202026-11-04%2014-28-55.png)
 
@@ -327,7 +327,7 @@ crm status
 
 ![Vérification de la mise en ligne des deux nœuds avec crm status](../images/Capture%20d’écran%20du%202026-11-04%2014-31-55.png)
 
-Les deux serveurs **`node1`** et **`node2`** sont désormais en ligne (`Online`) et le quorum est établi !
+Les deux serveurs **`node1`** et **`node2`** sont désormais en ligne (`Online`) et le quorum est établi.
 
 ---
 
@@ -345,7 +345,7 @@ Lors d'une première tentative de saisie, une légère faute de frappe sur le no
 Nous avons immédiatement corrigé les propriétés avec la syntaxe exacte attendue par Pacemaker, tout en déclarant nos deux ressources (`VIP` et `WebSite`) ainsi que leur groupe (`GroupeWeb`) :
 
 ```bash
-# 1. Désactivation du mécanisme STONITH (absence de dispositif matériel de fencing en labo)
+# 1. Désactivation du mécanisme STONITH
 crm configure property stonith-enabled=false
 
 # 2. Maintien du fonctionnement du cluster même en cas de perte du quorum (1 nœud sur 2)
@@ -378,11 +378,11 @@ crm configure group GroupeWeb VIP WebSite
     * `primitive VIP` : crée une ressource élémentaire baptisée `VIP`.
     * `ocf:heartbeat:IPaddr2` : appelle le script d'agent standard **OCF** (*Open Cluster Framework*) chargé d'ajouter ou de supprimer dynamiquement une adresse IP secondaire sur une carte réseau Linux.
     * `params ip="192.168.57.100" cidr_netmask="24" nic="ens18"` : fixe l'IP flottante à `.100/24` sur l'interface `ens18`.
-    * `op monitor interval="10s"` : ordonne à Pacemaker de vérifier toutes les $10\text{ secondes}$ que l'adresse IP est bien présente.
+    * `op monitor interval="10s"` : ordonne à Pacemaker de vérifier toutes les 10 secondes que l'adresse IP est bien présente.
 - `crm configure primitive WebSite ocf:heartbeat:apache ...` :
-    * Utilise l'agent OCF `apache` pointant vers `/etc/apache2/apache2.conf` avec une vérification d'état toutes les $30\text{ secondes}$.
+    * Utilise l'agent OCF `apache` pointant vers `/etc/apache2/apache2.conf` avec une vérification d'état toutes les 30 secondes.
 - `crm configure group GroupeWeb VIP WebSite` :
-    * Réunit `VIP` et `WebSite` au sein d'un groupe nommé `GroupeWeb`. Cela garantit que **les deux ressources tournent toujours sur le même serveur** (colocation implicite) et que **`VIP` est montée avant le démarrage de `WebSite`** (ordre implicite).
+    * Réunit `VIP` et `WebSite` au sein d'un groupe nommé `GroupeWeb`. Cela garantit que **les deux ressources tournent toujours sur le même serveur** et que **`VIP` est montée avant le démarrage de `WebSite`** .
 
 ![Création des ressources VIP, WebSite, application des propriétés et création du groupe GroupeWeb](../images/Capture%20d’écran%20du%202026-11-04%2014-42-09.png)
 
@@ -444,9 +444,8 @@ Le sujet demande de rechercher et d'exécuter les commandes permettant de refair
    ```
 
 *Explication technique :*
-- Lorsque `node1` revient en ligne avec `systemctl start pacemaker`, Pacemaker évite souvent de redéplacer les ressources immédiatement si elles fonctionnent bien sur `node2` afin de ne pas provoquer une micro-coupure supplémentaire inutile (*Resource Stickiness*).
+- Lorsque `node1` revient en ligne avec `systemctl start pacemaker`, Pacemaker évite souvent de redéplacer les ressources immédiatement si elles fonctionnent bien sur `node2` .
 - La commande `crm resource move GroupeWeb node1` crée une contrainte de localisation explicite qui ordonne à Pacemaker d'arrêter proprement `GroupeWeb` sur `node2` et de le redémarrer immédiatement sur **`node1`**.
-- *(Note : comme l'indique le message `INFO` de `crm`, on peut ensuite exécuter `crm resource clear GroupeWeb` pour effacer la contrainte manuelle une fois le retour sur `node1` effectué, afin que les futures bascules automatiques restent libres).*
 
 ![Redémarrage de pacemaker et déplacement du groupe GroupeWeb vers node1](../images/Capture%20d’écran%20du%202026-11-04%2014-47-50.png)
 
