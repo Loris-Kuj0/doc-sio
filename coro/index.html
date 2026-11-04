@@ -1,0 +1,1595 @@
+
+<!doctype html>
+<html lang="fr" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Documentation : Haute Disponibilité Web (Corosync & Pacemaker) - Documentations et cours BTS SIO Loris-R</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="green">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#documentation-haute-disponibilite-web-corosync-pacemaker" class="md-skip">
+          Aller au contenu
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="En-tête">
+    <a href=".." title="Documentations et cours BTS SIO Loris-R" class="md-header__button md-logo" aria-label="Documentations et cours BTS SIO Loris-R" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentations et cours BTS SIO Loris-R
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Documentation : Haute Disponibilité Web (Corosync &amp; Pacemaker)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="green"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Rechercher" placeholder="Rechercher" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Recherche">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Effacer" aria-label="Effacer" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initialisation de la recherche
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Loris-Kuj0/doc-sio" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Loris-Kuj0/doc-sio
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Documentations et cours BTS SIO Loris-R" class="md-nav__button md-logo" aria-label="Documentations et cours BTS SIO Loris-R" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Documentations et cours BTS SIO Loris-R
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Loris-Kuj0/doc-sio" title="Aller au dépôt" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Loris-Kuj0/doc-sio
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accueil
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B2 (SISR)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    B2 (SISR)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../InstallationGLPI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation GLPI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../UtilisationGLPI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utilisation GLPI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Sauvegarde/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sauvegardes
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../da/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Accès à distance
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B1 (Dev)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    B1 (Dev)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../InstallationMYT/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation My Tiny Todo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    B3 (Cybersécurité)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    B3 (Cybersécurité)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../b3-cyber/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    À venir
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stages
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Stages
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stage Première Année
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../stage2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Stage Deuxième Année
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linux
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Linux
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    À venir
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Bash/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bash
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Windows
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Windows
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../windows/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    À venir
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table des matières">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table des matières
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#topologie-reseau-et-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Topologie réseau et architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-lexique-et-concepts-fondamentaux-de-la-haute-disponibilite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Lexique et concepts fondamentaux de la Haute Disponibilité
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-preparation-du-nud-maitre-node1-avant-clonage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Préparation du nœud maître (node1) avant clonage
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Préparation du nœud maître (node1) avant clonage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-verification-de-lidentite-et-de-la-configuration-ip-de-node1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Vérification de l'identité et de la configuration IP de node1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-configuration-de-la-resolution-de-noms-locale-etchosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Configuration de la résolution de noms locale (/etc/hosts)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-installation-dapache2-et-de-la-pile-de-clustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Installation d'Apache2 et de la pile de clustering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-desactivation-du-demarrage-automatique-dapache2-au-boot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D. Désactivation du démarrage automatique d'Apache2 au boot
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-clonage-configuration-de-node2-et-personnalisation-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Clonage, configuration de node2 et personnalisation Web
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Clonage, configuration de node2 et personnalisation Web">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-renommage-et-adressage-ip-du-second-nud-node2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Renommage et adressage IP du second nœud (node2)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-personnalisation-de-len-tete-des-deux-sites-web" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Personnalisation de l'en-tête des deux sites Web
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-mise-en-place-de-la-couche-de-messagerie-corosync" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Mise en place de la couche de messagerie Corosync
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Mise en place de la couche de messagerie Corosync">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-configuration-du-fichier-etccorosynccorosyncconf" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Configuration du fichier /etc/corosync/corosync.conf
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-synchronisation-de-la-configuration-vers-node2-via-scp" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Synchronisation de la configuration vers node2 via SCP
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-demarrage-des-services-et-validation-du-quorum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Démarrage des services et validation du Quorum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-configuration-des-ressources-dans-pacemaker-crm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Configuration des ressources dans Pacemaker (crm)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Configuration des ressources dans Pacemaker (crm)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-proprietes-globales-du-cluster-stonith-et-quorum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Propriétés globales du cluster (STONITH et Quorum)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-creation-de-lip-flottante-vip-du-service-apache-website-et-du-groupe-groupeweb" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Création de l'IP Flottante (VIP), du service Apache (WebSite) et du groupe (GroupeWeb)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-verification-du-demarrage-des-ressources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Vérification du démarrage des ressources
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-phase-de-tests-simulation-de-panne-et-retour-sur-node1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Phase de tests : Simulation de panne et retour sur node1
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Phase de tests : Simulation de panne et retour sur node1">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-simulation-dune-panne-sur-node1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A. Simulation d'une panne sur node1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#b-verification-de-la-bascule-automatique-sur-node2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        B. Vérification de la bascule automatique sur node2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-redemarrage-et-rapatriement-du-service-sur-node1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        C. Redémarrage et rapatriement du service sur node1
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="documentation-haute-disponibilite-web-corosync-pacemaker">Documentation : Haute Disponibilité Web (Corosync &amp; Pacemaker)<a class="headerlink" href="#documentation-haute-disponibilite-web-corosync-pacemaker" title="Permanent link">&para;</a></h1>
+<p><strong>Auteur :</strong> Loris.R<br />
+<strong>Module :</strong> BTS SIO 2 - SISR<br />
+<strong>Sujet :</strong> Mise en œuvre d'un cluster de haute disponibilité Actif/Passif pour un service Web Apache2 sous Debian 13 avec Corosync et Pacemaker</p>
+<hr />
+<div class="admonition abstract">
+<p class="admonition-title">Notes</p>
+<p>Ce guide présente l'installation, la configuration et la validation d'une infrastructure de <strong>Haute Disponibilité (HA)</strong> reposant sur deux nœuds sous <strong>Debian 13 (Trixie)</strong>. L'objectif est de rendre un service Web (<strong>Apache2</strong>) résilient aux pannes grâce à l'utilisation conjointe de <strong>Corosync</strong> (gestion de la communication inter-nœuds et du quorum) et de <strong>Pacemaker</strong> (ordonnancement et gestion des ressources du cluster, dont l'adresse IP virtuelle flottante).</p>
+</div>
+<hr />
+<h2 id="topologie-reseau-et-architecture">Topologie réseau et architecture<a class="headerlink" href="#topologie-reseau-et-architecture" title="Permanent link">&para;</a></h2>
+<p>Pour l'ensemble des manipulations présentées dans cette documentation, l'infrastructure s'articule autour d'un réseau privé hôte (<code>192.168.57.0/24</code>) regroupant deux serveurs Web en cluster ainsi qu'un poste client pour les tests de continuité de service :</p>
+<ul>
+<li><strong>Sous-réseau du cluster (<code>192.168.57.0/24</code>) :</strong><ul>
+<li><strong><code>node1</code> (<code>192.168.57.10/24</code>) :</strong> Premier nœud du cluster sous Debian 13 (interface <code>ens18</code>, MAC <code>bc:24:11:a1:5b:47</code>). Héberge les ressources par défaut.</li>
+<li><strong><code>node2</code> (<code>192.168.57.20/24</code>) :</strong> Second nœud du cluster sous Debian 13 (clone de <code>node1</code> avec adresse MAC régénérée). Prend le relais en cas de défaillance de <code>node1</code>.</li>
+<li><strong>IP Flottante / VIP (<code>192.168.57.100/24</code>) :</strong> Adresse IP virtuelle partagée gérée dynamiquement par Pacemaker. C'est l'unique point d'entrée interrogé par les clients HTTP.</li>
+<li><strong>Passerelle (<code>192.168.57.254</code>) :</strong> Passerelle par défaut du segment réseau.</li>
+</ul>
+</li>
+</ul>
+<pre class="mermaid"><code>graph TD
+    subgraph LAN ["Réseau Privé Hôte (192.168.57.0/24)"]
+        Client["Poste Client Windows 11&lt;br/&gt;&lt;i&gt;Navigateur Web (Test HTTP)&lt;/i&gt;"]
+        VIP(("&lt;b&gt;IP Flottante (VIP)&lt;/b&gt;&lt;br/&gt;192.168.57.100/24&lt;br/&gt;&lt;i&gt;Ressource Pacemaker&lt;/i&gt;"))
+
+        subgraph CLUSTER ["Cluster Haute Disponibilité (debian_cluster)"]
+            N1["&lt;b&gt;node1 (Debian 13)&lt;/b&gt;&lt;br/&gt;IP réelle : 192.168.57.10&lt;/i&gt;"]
+            N2["&lt;b&gt;node2 (Debian 13)&lt;/b&gt;&lt;br/&gt;IP réelle : 192.168.57.20&lt;/i&gt;"]
+
+            N1 &lt;==&gt;|"Heartbeat / Quorum&lt;br/&gt;(Corosync - KNET)"| N2
+        end
+
+        Client --&gt;|Requête HTTP : http://192.168.57.100| VIP
+        VIP -.-&gt;|"1. Principal"| N1
+        VIP -.-&gt;|"2. Bascule sur panne"| N2
+    end</code></pre>
+<hr />
+<h2 id="1-lexique-et-concepts-fondamentaux-de-la-haute-disponibilite">1. Lexique et concepts fondamentaux de la Haute Disponibilité<a class="headerlink" href="#1-lexique-et-concepts-fondamentaux-de-la-haute-disponibilite" title="Permanent link">&para;</a></h2>
+<p>Afin d'appréhender le fonctionnement interne de notre architecture, voici la définition des concepts et composants clés mis en œuvre dans ce TP :</p>
+<ul>
+<li><strong>Haute Disponibilité (HA - <em>High Availability</em>) :</strong> Architecture visant à garantir la continuité opérationnelle d'un service informatique 24/7 en éliminant les points de défaillance uniques (<strong>SPOF</strong> - <em>Single Point of Failure</em>).</li>
+<li><strong>Cluster (Grappe de serveurs) :</strong> Regroupement de plusieurs serveurs indépendants (appelés <strong>nœuds</strong> ou <em>nodes</em>) interconnectés pour fonctionner comme un système unique aux yeux des clients.</li>
+<li><strong>IP Flottante (VIP - <em>Virtual IP</em>) :</strong> Adresse IP logique qui n'est pas attachée en dur dans la configuration système d'un serveur physique, mais attribuée dynamiquement par le gestionnaire de cluster au nœud actif. En cas de panne, cette IP « flotte » (bascule) instantanément sur la carte réseau du serveur de secours.</li>
+<li><strong>Corosync :</strong> Moteur de messagerie et d'appartenance du cluster (<em>Cluster Messaging Layer</em>). Il établit des battements de cœur (<em>heartbeats</em>) constants entre les nœuds via le protocole <strong>KNET</strong> (<em>Kronosnet</em>) pour détecter en temps réel quels serveurs sont présents ou hors ligne, et calcule le <strong>quorum</strong>.</li>
+<li><strong>Pacemaker :</strong> Gestionnaire de ressources du cluster (<strong>CRM</strong> - <em>Cluster Resource Manager</em>). En fonction de l'état de santé des nœuds communiqué par Corosync, c'est lui qui orchestre le démarrage, l'arrêt, la surveillance (<em>monitoring</em>) et la migration des services (IP virtuelle, Apache2).</li>
+<li><strong>Quorum :</strong> Mécanisme démocratique de vote garantissant l'intégrité du cluster. Pour qu'une partition du cluster soit autorisée à héberger des services, elle doit réunir la majorité stricte des voix (de ce que j'ai compris)<ul>
+<li><em>Cas particulier du cluster à 2 nœuds :</em> La perte d'un nœud laisse le survivant avec exactement 50% des voix (majorité stricte non atteinte). On active alors l'option <code>two_node: 1</code> (dans Corosync) et <code>no-quorum-policy=ignore</code> (dans Pacemaker) pour autoriser le nœud restant à maintenir la production.</li>
+</ul>
+</li>
+<li><strong>Split-Brain (<em>Cerveau scindé</em>) :</strong> Scénario critique dans lequel le lien réseau privé reliant les nœuds est rompu, alors que les deux serveurs sont toujours allumés. Ne recevant plus les battements de cœur de son pair, chaque nœud croit que l'autre est mort et s'approprie simultanément l'IP flottante et les services. Cela provoque des conflits d'adresse IP (ARP) et de graves corruptions de données.</li>
+<li><strong>STONITH (<em>Shoot The Other Node In The Head</em>) / Fencing :</strong> Mécanisme d'isolation radicale conçu pour prévenir le <em>Split-Brain</em>. Lorsqu'un nœud ne répond plus, le nœud survivant utilise un canal matériel externe pour arrêter le serveur douteux avant de monter les ressources.</li>
+<li><strong>Colocation et Ordre (Groupe de ressources) :</strong> Contraintes logiques définies dans Pacemaker. La <strong>colocation</strong> oblige deux ressources (la VIP et le serveur Web Apache2) à s'exécuter sur la même machine physique, tandis que l'<strong>ordre</strong> garantit que l'adresse IP virtuelle est montée sur l'interface réseau avant le lancement du démon Apache2.</li>
+</ul>
+<hr />
+<h2 id="2-preparation-du-nud-maitre-node1-avant-clonage">2. Préparation du nœud maître (<code>node1</code>) avant clonage<a class="headerlink" href="#2-preparation-du-nud-maitre-node1-avant-clonage" title="Permanent link">&para;</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Stratégie de déploiement par clonage</p>
+<p>Afin d'éviter tout problèmes, l'ensemble des paquets, la résolution de noms et les configurations de base est d'abord préparé sur <strong><code>node1</code></strong>. puis la machine virtuelle sera/est clonée pour générer <strong><code>node2</code></strong>, ce qui garantit une homogénéité logicielle parfaite entre les deux machines du cluster.</p>
+</div>
+<h3 id="a-verification-de-lidentite-et-de-la-configuration-ip-de-node1">A. Vérification de l'identité et de la configuration IP de <code>node1</code><a class="headerlink" href="#a-verification-de-lidentite-et-de-la-configuration-ip-de-node1" title="Permanent link">&para;</a></h3>
+<p>Le premier serveur est nommé <code>node1</code> et dispose d'une configuration réseau statique sur son interface principale <code>ens18</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Définition permanente du nom d'hôte (si nécessaire)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span>node1
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Configuration IP et DNS</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>nano<span class="w"> </span>/etc/network/interfaces
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>nano<span class="w"> </span>/etc/resolv.conf
+</code></pre></div>
+<p><em>Explication des commandes :</em>
+- <code>hostnamectl set-hostname node1</code> : modifie le fichier <code>/etc/hostname</code> et applique immédiatement le nom système <code>node1</code> au noyau.</p>
+<p><img alt="Vérification de l'adresse IP et MAC sur node1" src="../images/Capture%20d’écran%20du%202026-11-04%2013-49-13.png" /></p>
+<p>On relève ici les informations essentielles de <strong><code>node1</code></strong> :
+- <strong>Interface réseau :</strong> <code>ens18</code>
+- <strong>Adresse IPv4 :</strong> <code>192.168.57.10/24</code>
+- <strong>Adresse MAC :</strong> <code>bc:24:11:a1:5b:47</code></p>
+<hr />
+<h3 id="b-configuration-de-la-resolution-de-noms-locale-etchosts">B. Configuration de la résolution de noms locale (<code>/etc/hosts</code>)<a class="headerlink" href="#b-configuration-de-la-resolution-de-noms-locale-etchosts" title="Permanent link">&para;</a></h3>
+<p>Pour communiquer efficacement, Corosync et Pacemaker ne doivent jamais dépendre d'un serveur DNS externe susceptible de tomber en panne. La résolution mutuelle des noms <code>node1</code> et <code>node2</code> vers leurs adresses IP réelles est donc inscrite en dur dans <code>/etc/hosts</code> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>nano<span class="w"> </span>/etc/hosts
+</code></pre></div>
+<p>Contenu ajouté dans le fichier :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>127.0.0.1       localhost
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>127.0.1.1       debian13simple
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>192.168.57.10   node1
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>192.168.57.20   node2
+</code></pre></div>
+<p><img alt="Configuration du fichier /etc/hosts sur node1" src="../images/Capture%20d’écran%20du%202026-11-04%2013-52-16.png" /></p>
+<div class="admonition info">
+<p class="admonition-title">Synchronisation horaire (NTP)</p>
+<p>Sous Debian 13, le service <code>systemd-timesyncd</code> assure nativement la synchronisation de l'horloge système. Il est primordial que les deux nœuds soient parfaitement à la même heure (vérifiable via <code>timedatectl status</code>)</p>
+</div>
+<hr />
+<h3 id="c-installation-dapache2-et-de-la-pile-de-clustering">C. Installation d'Apache2 et de la pile de clustering<a class="headerlink" href="#c-installation-dapache2-et-de-la-pile-de-clustering" title="Permanent link">&para;</a></h3>
+<p>On procède à la mise à jour de l'index des dépôts puis à l'installation du serveur Web et des composants de haute disponibilité :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>apt<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>apache2<span class="w"> </span>pacemaker<span class="w"> </span>corosync<span class="w"> </span>pcs<span class="w"> </span>crmsh
+</code></pre></div>
+<p><em>Explication détaillée de la commande :</em>
+- <code>apt update</code> : rafraîchit la liste des paquets disponibles depuis les miroirs Debian 13.
+- <code>&amp;&amp;</code> : opérateur logique qui n'exécute la seconde commande que si la première s'est terminée sans erreur.
+- <code>apt install -y</code> : installe les paquets demandés en répondant automatiquement « oui » (<code>-y</code>) aux confirmations.
+- <code>apache2</code> : le serveur HTTP que l'on souhaite rendre hautement disponible.
+- <code>corosync</code> : la couche de communication inter-nœuds et de gestion du quorum.
+- <code>pacemaker</code> : le gestionnaire de ressources du cluster.
+- <code>pcs</code> et <code>crmsh</code> (<em>Cluster Resource Manager Shell</em>) : interfaces en ligne de commande permettant d'administrer facilement Pacemaker. nous n'utiliserons que <strong><code>crmsh</code></strong> (commande <code>crm</code>)
+(J'ai installé pcs en ayant mal compris ce à quoi il servait, bien qu'il aurait pu être utile).</p>
+<p><img alt="Installation des paquets apache2, pacemaker, corosync, pcs et crmsh" src="../images/Capture%20d’écran%20du%202026-11-04%2013-54-20.png" /></p>
+<hr />
+<h3 id="d-desactivation-du-demarrage-automatique-dapache2-au-boot">D. Désactivation du démarrage automatique d'Apache2 au boot<a class="headerlink" href="#d-desactivation-du-demarrage-automatique-dapache2-au-boot" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Gouvernance exclusive par Pacemaker</p>
+<p>Il est impératif que <code>systemd</code> ne démarre <strong>pas</strong> le service <code>apache2</code> automatiquement au lancement de Debian. Si Apache démarrait tout seul au boot des deux serveurs en dehors du contrôle de Pacemaker, cela fausserait l'état du cluster. C'est <strong>Pacemaker</strong> qui doit détenir la gouvernance complète du démon.</p>
+</div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Arrêt immédiat du démon Apache2</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>systemctl<span class="w"> </span>stop<span class="w"> </span>apache2
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1"># Désactivation du lancement automatique au démarrage du système</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>systemctl<span class="w"> </span>disable<span class="w"> </span>apache2
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="c1"># Vérification de l'état du service</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>systemctl<span class="w"> </span>status<span class="w"> </span>apache2
+</code></pre></div>
+<p><em>Explication des commandes :</em>
+- <code>systemctl stop apache2</code> : interrompt immédiatement le processus Apache2 en cours d'exécution.
+- <code>systemctl disable apache2</code> : supprime les liens symboliques du service dans <code>/etc/systemd/system/multi-user.target.wants/</code>, empêchant son exécution lors des prochains redémarrages.
+- <code>systemctl status apache2</code> : permet de confirmer que le service apparaît bien comme <code>Loaded: loaded (...; disabled)</code> et <code>Active: inactive (dead)</code>.</p>
+<p><img alt="Arrêt et désactivation du service apache2 au boot" src="../images/Capture%20d’écran%20du%202026-11-04%2014-04-45.png" /></p>
+<hr />
+<h2 id="3-clonage-configuration-de-node2-et-personnalisation-web">3. Clonage, configuration de <code>node2</code> et personnalisation Web<a class="headerlink" href="#3-clonage-configuration-de-node2-et-personnalisation-web" title="Permanent link">&para;</a></h2>
+<p>Une fois <code>node1</code> éteint proprement, un clone intégral de la machine virtuelle est réalisé depuis proxmox en veillant à ce que  <strong>l'adresse MAC soit bien régenerer</strong> afin d'éviter tout conflit.</p>
+<h3 id="a-renommage-et-adressage-ip-du-second-nud-node2">A. Renommage et adressage IP du second nœud (<code>node2</code>)<a class="headerlink" href="#a-renommage-et-adressage-ip-du-second-nud-node2" title="Permanent link">&para;</a></h3>
+<p>Au premier démarrage du clone, celui-ci porte encore le nom et l'adresse IP de <code>node1</code>. On modifie immédiatement son nom d'hôte :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>hostnamectl<span class="w"> </span>set-hostname<span class="w"> </span>node2
+</code></pre></div>
+<p><img alt="Changement du nom d'hôte en node2" src="../images/Capture%20d’écran%20du%202026-11-04%2014-10-55.png" /></p>
+<p>On édite ensuite le fichier de configuration réseau <code>/etc/network/interfaces</code> pour lui attribuer l'adresse statique <code>192.168.57.20</code> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>nano<span class="w"> </span>/etc/network/interfaces
+</code></pre></div>
+<p>Configuration appliquée sur <strong><code>node2</code></strong> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>source /etc/network/interfaces.d/*
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a># The loopback network interface
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>auto lo
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>iface lo inet loopback
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a># The primary network interface
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>allow-hotplug ens18
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>iface ens18 inet static
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>        address 192.168.57.20
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>        netmask 255.255.255.0
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        gateway 192.168.57.254
+</code></pre></div>
+<p><img alt="Configuration de l'adresse IP statique 192.168.57.20 dans /etc/network/interfaces sur node2" src="../images/Capture%20d’écran%20du%202026-11-04%2014-11-33.png" /></p>
+<p>Après un redémarrage du service réseau (<code>systemctl restart networking</code>) ou de la machine, <code>node1</code> (<code>192.168.57.10</code>) et <code>node2</code> (<code>192.168.57.20</code>) disposent chacun d'un couple IP / Adresse MAC unique et peuvent se joindre mutuellement par leurs noms d'hôtes grâce au fichier <code>/etc/hosts</code> hérité du clonage.</p>
+<hr />
+<h3 id="b-personnalisation-de-len-tete-des-deux-sites-web">B. Personnalisation de l'en-tête des deux sites Web<a class="headerlink" href="#b-personnalisation-de-len-tete-des-deux-sites-web" title="Permanent link">&para;</a></h3>
+<p>Afin d'identifier immédiatement quel nœud du cluster répond aux requêtes HTTP envoyées sur l'IP flottante (<code>192.168.57.100</code>), nous modifions la page d'accueil <code>/var/www/html/index.html</code> sur chacun des deux serveurs.</p>
+<ul>
+<li><strong>Sur <code>node1</code> :</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"&lt;h1&gt;Serveur Web : NODE 1&lt;/h1&gt;"</span><span class="w"> </span>&gt;<span class="w"> </span>/var/www/html/index.html
+</code></pre></div>
+<p><img alt="Personnalisation de la page index.html sur node1" src="../images/Capture%20d’écran%20du%202026-11-04%2014-13-55.png" /></p>
+<ul>
+<li><strong>Sur <code>node2</code> :</strong></li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">"&lt;h1&gt;Serveur Web : NODE 2&lt;/h1&gt;"</span><span class="w"> </span>&gt;<span class="w"> </span>/var/www/html/index.html
+</code></pre></div>
+<p><img alt="Personnalisation de la page index.html sur node2" src="../images/Capture%20d’écran%20du%202026-11-04%2014-15-07.png" /></p>
+<p><em>Explication de la commande :</em> <code>echo "..." &gt; /var/www/html/index.html</code> écrase (<code>&gt;</code>) la page par défaut d'Apache2 par un titre HTML de niveau 1 (<code>&lt;h1&gt;</code>) indiquant clairement l'identité du serveur actif.</p>
+<hr />
+<h2 id="4-mise-en-place-de-la-couche-de-messagerie-corosync">4. Mise en place de la couche de messagerie Corosync<a class="headerlink" href="#4-mise-en-place-de-la-couche-de-messagerie-corosync" title="Permanent link">&para;</a></h2>
+<h3 id="a-configuration-du-fichier-etccorosynccorosyncconf">A. Configuration du fichier <code>/etc/corosync/corosync.conf</code><a class="headerlink" href="#a-configuration-du-fichier-etccorosynccorosyncconf" title="Permanent link">&para;</a></h3>
+<p>Sur <strong><code>node1</code></strong>, on édite le fichier principal <code>/etc/corosync/corosync.conf</code> pour déclarer explicitement les deux membres du cluster et activer le mode spécifique à deux nœuds (<code>two_node: 1</code>) :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nano<span class="w"> </span>/etc/corosync/corosync.conf
+</code></pre></div>
+<p>Structure du fichier configuré :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>totem {
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    version: 2
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    cluster_name: debian_cluster
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    transport: knet
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    crypto_cipher: none
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    crypto_hash: none
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>}
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>nodelist {
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    node {
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>        ring0_addr: 192.168.57.10
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>        name: node1
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>        nodeid: 1
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>    }
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>    node {
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>        ring0_addr: 192.168.57.20
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>        name: node2
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>        nodeid: 2
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>    }
+<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>}
+<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>
+<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a>quorum {
+<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a>    provider: corosync_votequorum
+<a id="__codelineno-11-24" name="__codelineno-11-24" href="#__codelineno-11-24"></a>    two_node: 1
+<a id="__codelineno-11-25" name="__codelineno-11-25" href="#__codelineno-11-25"></a>}
+<a id="__codelineno-11-26" name="__codelineno-11-26" href="#__codelineno-11-26"></a>
+<a id="__codelineno-11-27" name="__codelineno-11-27" href="#__codelineno-11-27"></a>logging {
+<a id="__codelineno-11-28" name="__codelineno-11-28" href="#__codelineno-11-28"></a>    to_logfile: yes
+<a id="__codelineno-11-29" name="__codelineno-11-29" href="#__codelineno-11-29"></a>    logfile: /var/log/corosync/corosync.log
+<a id="__codelineno-11-30" name="__codelineno-11-30" href="#__codelineno-11-30"></a>    to_syslog: yes
+<a id="__codelineno-11-31" name="__codelineno-11-31" href="#__codelineno-11-31"></a>    timestamp: on
+<a id="__codelineno-11-32" name="__codelineno-11-32" href="#__codelineno-11-32"></a>}
+</code></pre></div>
+<p><em>Explication des directives :</em>
+- <strong>Section <code>totem</code> :</strong> configure le protocole d'échange des battements de cœur (<em>Heartbeat</em>) via le transport moderne <code>knet</code> et baptise le cluster <code>debian_cluster</code>.
+- <strong>Section <code>nodelist</code> :</strong> recense chaque nœud du cluster avec son adresse IP d'écoute (<code>ring0_addr</code>), son nom d'hôte (<code>name</code>) et son identifiant unique (<code>nodeid</code>).
+- <strong>Section <code>quorum</code> (<code>two_node: 1</code>) :</strong> indique au moteur de vote <code>corosync_votequorum</code> que le cluster ne possède que deux serveurs, autorisant ainsi le maintien du quorum même lorsqu'un seul nœud est actif.</p>
+<hr />
+<h3 id="b-synchronisation-de-la-configuration-vers-node2-via-scp">B. Synchronisation de la configuration vers <code>node2</code> via SCP<a class="headerlink" href="#b-synchronisation-de-la-configuration-vers-node2-via-scp" title="Permanent link">&para;</a></h3>
+<p>Le fichier <code>/etc/corosync/corosync.conf</code> doit être strictement identique sur tous les membres du cluster. On le transfère depuis <code>node1</code> vers <code>node2</code> à l'aide du protocole SSH/SCP :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>scp<span class="w"> </span>/etc/corosync/corosync.conf<span class="w"> </span>root@node2:/etc/corosync/corosync.conf
+</code></pre></div>
+<p><em>Explication de la commande :</em> <code>scp</code> (<em>Secure Copy</em>) copie de manière chiffrée via SSH le fichier local <code>/etc/corosync/corosync.conf</code> de <code>node1</code> directement à son emplacement cible sur <code>node2</code>.</p>
+<p><img alt="Saisie de la commande de transfert SCP vers node2" src="../images/Capture%20d’écran%20du%202026-11-04%2014-22-22.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Droits d'écriture lors du transfert SCP</p>
+<p>L'écriture directe dans <code>/etc/corosync/</code> nécessitant les privilèges super-utilisateur, une tentative avec un compte standard (<code>sio@node2</code>) renvoie logiquement <code>Permission denied</code>. L'authentification avec <code>root@node2</code> permet de transférer le fichier avec succès.</p>
+</div>
+<p><img alt="Exécution réussie du transfert SCP de corosync.conf en tant que root" src="../images/Capture%20d’écran%20du%202026-11-04%2014-28-55.png" /></p>
+<hr />
+<h3 id="c-demarrage-des-services-et-validation-du-quorum">C. Démarrage des services et validation du Quorum<a class="headerlink" href="#c-demarrage-des-services-et-validation-du-quorum" title="Permanent link">&para;</a></h3>
+<p>On active et on redémarre les démons <code>corosync</code> et <code>pacemaker</code> sur <strong><code>node1</code></strong> puis sur <strong><code>node2</code></strong> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># À exécuter sur node1 ET sur node2</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>corosync<span class="w"> </span>pacemaker
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>systemctl<span class="w"> </span>restart<span class="w"> </span>corosync<span class="w"> </span>pacemaker
+</code></pre></div>
+<p>En contrôlant le statut des services sur <strong><code>node1</code></strong> (<code>systemctl status corosync pacemaker</code>) juste avant le redémarrage de <code>node2</code>, on observe que <code>node1</code> a démarré son moteur KNET et attend que son pair rejoigne l'anneau (<code>Waiting for all cluster members. Current votes: 1 expected_votes: 2</code>) :</p>
+<p><img alt="Vérification de l'état des démons corosync et pacemaker sur node1" src="../images/Capture%20d’écran%20du%202026-11-04%2014-30-27.png" /></p>
+<p>On active et on relance aussitôt les services sur <strong><code>node2</code></strong> :</p>
+<p><img alt="Activation et redémarrage de corosync et pacemaker sur node2" src="../images/Capture%20d’écran%20du%202026-11-04%2014-31-13.png" /></p>
+<p>On vérifie maintenant l'état global du cluster à l'aide de l'outil <code>crm</code> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>crm<span class="w"> </span>status
+</code></pre></div>
+<p><em>Explication de la commande :</em> <code>crm status</code> interroge Pacemaker pour afficher la synthèse du cluster : l'état du quorum (<code>partition with quorum</code>), le nœud coordinateur désigné (<code>Current DC: node1</code>), la liste des nœuds connectés (<code>Online: [ node1 node2 ]</code>) et les ressources actives.</p>
+<p><img alt="Vérification de la mise en ligne des deux nœuds avec crm status" src="../images/Capture%20d’écran%20du%202026-11-04%2014-31-55.png" /></p>
+<p>Les deux serveurs <strong><code>node1</code></strong> et <strong><code>node2</code></strong> sont désormais en ligne (<code>Online</code>) et le quorum est établi.</p>
+<hr />
+<h2 id="5-configuration-des-ressources-dans-pacemaker-crm">5. Configuration des ressources dans Pacemaker (<code>crm</code>)<a class="headerlink" href="#5-configuration-des-ressources-dans-pacemaker-crm" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Réplication automatique de la CIB (<em>Cluster Information Base</em>)</p>
+<p>Toutes les commandes <code>crm configure</code> qui suivent sont exécutées sur un seul nœud (<strong><code>node1</code></strong>). Pacemaker stocke sa configuration au format XML dans la <strong>CIB</strong> et la synchronise instantanément sur tous les autres nœuds du cluster via Corosync.</p>
+</div>
+<h3 id="a-proprietes-globales-du-cluster-stonith-et-quorum">A. Propriétés globales du cluster (STONITH et Quorum)<a class="headerlink" href="#a-proprietes-globales-du-cluster-stonith-et-quorum" title="Permanent link">&para;</a></h3>
+<p>Lors d'une première tentative de saisie, une légère faute de frappe sur le nom des attributs (<code>stonith-enable</code> sans le <code>d</code> final et <code>no-quprum-policy</code>) a provoqué un avertissement de validation du schéma de la CIB (<code>unknown attribute</code>) :</p>
+<p><img alt="Avertissement de validation lors de la faute de frappe sur les attributs" src="../images/Capture%20d’écran%20du%202026-11-04%2014-34-02.png" /></p>
+<p>Nous avons immédiatement corrigé les propriétés avec la syntaxe exacte attendue par Pacemaker, tout en déclarant nos deux ressources (<code>VIP</code> et <code>WebSite</code>) ainsi que leur groupe (<code>GroupeWeb</code>) :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># 1. Désactivation du mécanisme STONITH</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>crm<span class="w"> </span>configure<span class="w"> </span>property<span class="w"> </span>stonith-enabled<span class="o">=</span><span class="nb">false</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="c1"># 2. Maintien du fonctionnement du cluster même en cas de perte du quorum (1 nœud sur 2)</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>crm<span class="w"> </span>configure<span class="w"> </span>property<span class="w"> </span>no-quorum-policy<span class="o">=</span>ignore
+</code></pre></div>
+<hr />
+<h3 id="b-creation-de-lip-flottante-vip-du-service-apache-website-et-du-groupe-groupeweb">B. Création de l'IP Flottante (<code>VIP</code>), du service Apache (<code>WebSite</code>) et du groupe (<code>GroupeWeb</code>)<a class="headerlink" href="#b-creation-de-lip-flottante-vip-du-service-apache-website-et-du-groupe-groupeweb" title="Permanent link">&para;</a></h3>
+<p>On déclare ensuite les deux ressources primitives et on les assemble dans un groupe logique :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># 3. Création de la ressource d'adresse IP virtuelle (VIP : 192.168.57.100/24 sur ens18)</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>crm<span class="w"> </span>configure<span class="w"> </span>primitive<span class="w"> </span>VIP<span class="w"> </span>ocf:heartbeat:IPaddr2<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span>params<span class="w"> </span><span class="nv">ip</span><span class="o">=</span><span class="s2">"192.168.57.100"</span><span class="w"> </span><span class="nv">cidr_netmask</span><span class="o">=</span><span class="s2">"24"</span><span class="w"> </span><span class="nv">nic</span><span class="o">=</span><span class="s2">"ens18"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span>op<span class="w"> </span>monitor<span class="w"> </span><span class="nv">interval</span><span class="o">=</span><span class="s2">"10s"</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="c1"># 4. Création de la ressource du serveur Web Apache2</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>crm<span class="w"> </span>configure<span class="w"> </span>primitive<span class="w"> </span>WebSite<span class="w"> </span>ocf:heartbeat:apache<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">    </span>params<span class="w"> </span><span class="nv">configfile</span><span class="o">=</span><span class="s2">"/etc/apache2/apache2.conf"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">    </span>op<span class="w"> </span>monitor<span class="w"> </span><span class="nv">interval</span><span class="o">=</span><span class="s2">"30s"</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="c1"># 5. Regroupement des deux ressources pour imposer la colocation et l'ordre de démarrage</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>crm<span class="w"> </span>configure<span class="w"> </span>group<span class="w"> </span>GroupeWeb<span class="w"> </span>VIP<span class="w"> </span>WebSite
+</code></pre></div>
+<p><em>Explication détaillée des commandes :</em>
+- <code>crm configure primitive VIP ocf:heartbeat:IPaddr2 ...</code> :
+    * <code>primitive VIP</code> : crée une ressource élémentaire baptisée <code>VIP</code>.
+    * <code>ocf:heartbeat:IPaddr2</code> : appelle le script d'agent standard <strong>OCF</strong> (<em>Open Cluster Framework</em>) chargé d'ajouter ou de supprimer dynamiquement une adresse IP secondaire sur une carte réseau Linux.
+    * <code>params ip="192.168.57.100" cidr_netmask="24" nic="ens18"</code> : fixe l'IP flottante à <code>.100/24</code> sur l'interface <code>ens18</code>.
+    * <code>op monitor interval="10s"</code> : ordonne à Pacemaker de vérifier toutes les 10 secondes que l'adresse IP est bien présente.
+- <code>crm configure primitive WebSite ocf:heartbeat:apache ...</code> :
+    * Utilise l'agent OCF <code>apache</code> pointant vers <code>/etc/apache2/apache2.conf</code> avec une vérification d'état toutes les 30 secondes.
+- <code>crm configure group GroupeWeb VIP WebSite</code> :
+    * Réunit <code>VIP</code> et <code>WebSite</code> au sein d'un groupe nommé <code>GroupeWeb</code>. Cela garantit que <strong>les deux ressources tournent toujours sur le même serveur</strong> et que <strong><code>VIP</code> est montée avant le démarrage de <code>WebSite</code></strong> .</p>
+<p><img alt="Création des ressources VIP, WebSite, application des propriétés et création du groupe GroupeWeb" src="../images/Capture%20d’écran%20du%202026-11-04%2014-42-09.png" /></p>
+<hr />
+<h3 id="c-verification-du-demarrage-des-ressources">C. Vérification du démarrage des ressources<a class="headerlink" href="#c-verification-du-demarrage-des-ressources" title="Permanent link">&para;</a></h3>
+<p>On contrôle l'état du cluster avec <code>crm status</code> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>crm<span class="w"> </span>status
+</code></pre></div>
+<p><img alt="Vérification du démarrage du groupe GroupeWeb (VIP + WebSite) sur node1" src="../images/Capture%20d’écran%20du%202026-11-04%2014-42-28.png" /></p>
+<p>Le <code>Resource Group: GroupeWeb</code> est opérationnel : les ressources <strong><code>VIP</code></strong> et <strong><code>WebSite</code></strong> affichent toutes deux l'état <strong><code>Started node1</code></strong>.</p>
+<hr />
+<h2 id="6-phase-de-tests-simulation-de-panne-et-retour-sur-node1">6. Phase de tests : Simulation de panne et retour sur <code>node1</code><a class="headerlink" href="#6-phase-de-tests-simulation-de-panne-et-retour-sur-node1" title="Permanent link">&para;</a></h2>
+<h3 id="a-simulation-dune-panne-sur-node1">A. Simulation d'une panne sur <code>node1</code><a class="headerlink" href="#a-simulation-dune-panne-sur-node1" title="Permanent link">&para;</a></h3>
+<p>Conformément aux consignes d'évaluation, nous n'éteignons aucune machine virtuelle mais nous simulons une défaillance du gestionnaire de cluster en arrêtant uniquement le service <code>pacemaker</code> sur <strong><code>node1</code></strong> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>systemctl<span class="w"> </span>stop<span class="w"> </span>pacemaker
+</code></pre></div>
+<p><em>Explication de la commande :</em> L'arrêt de <code>pacemaker</code> sur <code>node1</code> force ce dernier à libérer proprement les ressources qu'il hébergeait (<code>WebSite</code> puis <code>VIP</code>) avant de quitter le contrôle du cluster. Le nœud <code>node2</code> constate immédiatement que <code>node1</code> n'assure plus le service et démarre automatiquement <code>GroupeWeb</code> sur sa propre interface <code>ens18</code>.</p>
+<p><img alt="Arrêt du service pacemaker sur node1 pour simuler la panne" src="../images/Capture%20d’écran%20du%202026-11-04%2014-44-58.png" /></p>
+<hr />
+<h3 id="b-verification-de-la-bascule-automatique-sur-node2">B. Vérification de la bascule automatique sur <code>node2</code><a class="headerlink" href="#b-verification-de-la-bascule-automatique-sur-node2" title="Permanent link">&para;</a></h3>
+<p>Un simple <code>ip a</code> sur <code>node2</code> permet alors de constater que l'adresse <code>192.168.57.100/24</code> a bien migré sur la carte <code>ens18</code> de <code>node2</code> (tandis qu'elle a disparu de <code>node1</code>).</p>
+<p>En interrogeant l'adresse de l'IP flottante <strong><code>http://192.168.57.100/</code></strong> depuis le navigateur du poste client Windows 11, le site Web répond sans aucune interruption et affiche désormais la page hébergée par <strong><code>node2</code></strong> :</p>
+<p><img alt="Affichage de la page Serveur Web : NODE 2 sur l'IP flottante 192.168.57.100 après la panne de node1" src="../images/Capture%20d’écran%20du%202026-11-04%2014-45-51.png" /></p>
+<p>La continuité de service est totalement assurée !</p>
+<hr />
+<h3 id="c-redemarrage-et-rapatriement-du-service-sur-node1">C. Redémarrage et rapatriement du service sur <code>node1</code><a class="headerlink" href="#c-redemarrage-et-rapatriement-du-service-sur-node1" title="Permanent link">&para;</a></h3>
+<p>Le sujet demande de rechercher et d'exécuter les commandes permettant de refaire fonctionner le service sur le nœud n°1 (<code>node1</code>). Cette opération s'effectue en deux étapes :</p>
+<ol>
+<li><strong>Relancer le démon Pacemaker sur <code>node1</code></strong> pour qu'il réintègre le cluster :
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>systemctl<span class="w"> </span>start<span class="w"> </span>pacemaker
+</code></pre></div></li>
+<li><strong>Forcer la migration du groupe de ressources <code>GroupeWeb</code> vers <code>node1</code></strong> :
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>crm<span class="w"> </span>resource<span class="w"> </span>move<span class="w"> </span>GroupeWeb<span class="w"> </span>node1
+</code></pre></div></li>
+</ol>
+<p><em>Explication technique :</em>
+- Lorsque <code>node1</code> revient en ligne avec <code>systemctl start pacemaker</code>, Pacemaker évite souvent de redéplacer les ressources immédiatement si elles fonctionnent bien sur <code>node2</code> .
+- La commande <code>crm resource move GroupeWeb node1</code> crée une contrainte de localisation explicite qui ordonne à Pacemaker d'arrêter proprement <code>GroupeWeb</code> sur <code>node2</code> et de le redémarrer immédiatement sur <strong><code>node1</code></strong>.</p>
+<p><img alt="Redémarrage de pacemaker et déplacement du groupe GroupeWeb vers node1" src="../images/Capture%20d’écran%20du%202026-11-04%2014-47-50.png" /></p>
+<p>En actualisant une dernière fois la page <strong><code>http://192.168.57.100/</code></strong> sur le navigateur du poste client, nous constatons que le trafic de l'IP flottante est de nouveau servi par <strong><code>node1</code></strong> :</p>
+<p><img alt="Vérification finale sur le navigateur : retour effectif sur Serveur Web : NODE 1" src="../images/Capture%20d’écran%20du%202026-11-04%2014-48-05.png" /></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Retour en haut de la page
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  <div class="md-copyright__highlight">
+    &copy; 2026-2027 - Documentation par Loris.R
+  </div>
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.code.copy", "navigation.tracking", "navigation.top", "toc.follow"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copi\u00e9 dans le presse-papier", "clipboard.copy": "Copier dans le presse-papier", "search.result.more.one": "1 de plus sur cette page", "search.result.more.other": "# de plus sur cette page", "search.result.none": "Aucun document trouv\u00e9", "search.result.one": "1 document trouv\u00e9", "search.result.other": "# documents trouv\u00e9s", "search.result.placeholder": "Taper pour d\u00e9marrer la recherche", "search.result.term.missing": "Non trouv\u00e9", "select.version": "S\u00e9lectionner la version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>
