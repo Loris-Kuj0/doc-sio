@@ -128,7 +128,8 @@ apt update && apt install -y apache2 pacemaker corosync pcs crmsh
 - `apache2` : le serveur HTTP que l'on souhaite rendre hautement disponible.
 - `corosync` : la couche de communication inter-nœuds et de gestion du quorum.
 - `pacemaker` : le gestionnaire de ressources du cluster.
-- `pcs` et `crmsh` (*Cluster Resource Manager Shell*) : interfaces en ligne de commande permettant d'administrer facilement Pacemaker. nous n'utiliserons que **`crmsh`** (commande `crm`).
+- `pcs` et `crmsh` (*Cluster Resource Manager Shell*) : interfaces en ligne de commande permettant d'administrer facilement Pacemaker. nous n'utiliserons que **`crmsh`** (commande `crm`)
+(J'ai installé pcs en ayant mal compris ce à quoi il servait, bien qu'il aurait pu être utile).
 
 ![Installation des paquets apache2, pacemaker, corosync, pcs et crmsh](../images/Capture%20d’écran%20du%202026-11-04%2013-54-20.png)
 
