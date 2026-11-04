@@ -161,7 +161,7 @@ systemctl status apache2
 
 ## 3. Clonage, configuration de `node2` et personnalisation Web
 
-Une fois `node1` éteint proprement, un clone intégral de la machine virtuelle est réalisé depuis l'hyperviseur en veillant à **régénérer une nouvelle adresse MAC** sur l'interface réseau virtuelle de `node2` afin d'éviter tout conflit de couche 2 (Data Link / ARP) sur le commutateur virtuel.
+Une fois `node1` éteint proprement, un clone intégral de la machine virtuelle est réalisé depuis l'hyperviseur en veillant à **régénérer une nouvelle adresse MAC** sur proxmox de `node2` afin d'éviter tout conflit.
 
 ### A. Renommage et adressage IP du second nœud (`node2`)
 
@@ -171,7 +171,7 @@ Au premier démarrage du clone, celui-ci porte encore le nom et l'adresse IP de 
 hostnamectl set-hostname node2
 ```
 
-![Changement du nom d'hôte en node2](./Capture%20d’écran%20du%202026-11-04%2014-10-55.png)
+![Changement du nom d'hôte en node2](../images/Capture%20d’écran%20du%202026-11-04%2014-10-55.png)
 
 On édite ensuite le fichier de configuration réseau `/etc/network/interfaces` pour lui attribuer l'adresse statique `192.168.57.20` :
 
