@@ -28,7 +28,7 @@ graph TD
         VIP(("<b>IP Flottante (VIP)</b><br/>192.168.57.100/24<br/><i>Ressource Pacemaker</i>"))
 
         subgraph CLUSTER ["Cluster Haute Disponibilité (debian_cluster)"]
-            N1["<b>node1 (Debian 13)</b><br/>IP réelle : 192.168.57.10<</i>"]
+            N1["<b>node1 (Debian 13)</b><br/>IP réelle : 192.168.57.10</i>"]
             N2["<b>node2 (Debian 13)</b><br/>IP réelle : 192.168.57.20</i>"]
             
             N1 <==>|"Heartbeat / Quorum<br/>(Corosync - KNET)"| N2
