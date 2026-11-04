@@ -80,7 +80,7 @@ ip a
 - `hostnamectl set-hostname node1` : modifie le fichier `/etc/hostname` et applique immédiatement le nom système `node1` au noyau.
 - `ip a` (raccourci de `ip address show`) : affiche l'état des interfaces réseau, leurs adresses MAC (`link/ether`) et leurs adresses IPv4/IPv6.
 
-![Vérification de l'adresse IP et MAC sur node1](./Capture%20d’écran%20du%202026-11-04%2013-49-13.png)
+![Vérification de l'adresse IP et MAC sur node1](../images/Capture%20d’écran%20du%202026-11-04%2013-49-13.png)
 
 On relève ici les informations essentielles de **`node1`** :
 - **Interface réseau :** `ens18`
@@ -106,7 +106,7 @@ Contenu ajouté dans le fichier :
 192.168.57.20   node2
 ```
 
-![Configuration du fichier /etc/hosts sur node1](./Capture%20d’écran%20du%202026-11-04%2013-52-16.png)
+![Configuration du fichier /etc/hosts sur node1](../images/Capture%20d’écran%20du%202026-11-04%2013-52-16.png)
 
 !!! info "Synchronisation horaire (NTP)"
     Sous Debian 13, le service `systemd-timesyncd` assure nativement la synchronisation de l'horloge système. Il est primordial que les deux nœuds soient parfaitement à la même heure (vérifiable via `timedatectl status`) afin que l'horodatage des journaux et des jetons Corosync ne soit pas rejeté.
@@ -130,7 +130,7 @@ apt update && apt install -y apache2 pacemaker corosync pcs crmsh
 - `pacemaker` : le gestionnaire de ressources du cluster.
 - `pcs` et `crmsh` (*Cluster Resource Manager Shell*) : interfaces en ligne de commande permettant d'administrer facilement Pacemaker. Dans ce TP, nous utiliserons **`crmsh`** (commande `crm`).
 
-![Installation des paquets apache2, pacemaker, corosync, pcs et crmsh](./Capture%20d’écran%20du%202026-11-04%2013-54-20.png)
+![Installation des paquets apache2, pacemaker, corosync, pcs et crmsh](../images/Capture%20d’écran%20du%202026-11-04%2013-54-20.png)
 
 ---
 
@@ -155,7 +155,7 @@ systemctl status apache2
 - `systemctl disable apache2` : supprime les liens symboliques du service dans `/etc/systemd/system/multi-user.target.wants/`, empêchant son exécution lors des prochains redémarrages.
 - `systemctl status apache2` : permet de confirmer que le service apparaît bien comme `Loaded: loaded (...; disabled)` et `Active: inactive (dead)`.
 
-![Arrêt et désactivation du service apache2 au boot](./Capture%20d’écran%20du%202026-11-04%2014-04-45.png)
+![Arrêt et désactivation du service apache2 au boot](../images/Capture%20d’écran%20du%202026-11-04%2014-04-45.png)
 
 ---
 
@@ -196,7 +196,7 @@ iface ens18 inet static
         gateway 192.168.57.254
 ```
 
-![Configuration de l'adresse IP statique 192.168.57.20 dans /etc/network/interfaces sur node2](./Capture%20d’écran%20du%202026-11-04%2014-11-33.png)
+![Configuration de l'adresse IP statique 192.168.57.20 dans /etc/network/interfaces sur node2](../images/Capture%20d’écran%20du%202026-11-04%2014-11-33.png)
 
 Après un redémarrage du service réseau (`systemctl restart networking`) ou de la machine, `node1` (`192.168.57.10`) et `node2` (`192.168.57.20`) disposent chacun d'un couple IP / Adresse MAC unique et peuvent se joindre mutuellement par leurs noms d'hôtes grâce au fichier `/etc/hosts` hérité du clonage.
 
@@ -212,7 +212,7 @@ Afin d'identifier immédiatement quel nœud du cluster répond aux requêtes HTT
 echo "<h1>Serveur Web : NODE 1</h1>" > /var/www/html/index.html
 ```
 
-![Personnalisation de la page index.html sur node1](./Capture%20d’écran%20du%202026-11-04%2014-13-55.png)
+![Personnalisation de la page index.html sur node1](../images/Capture%20d’écran%20du%202026-11-04%2014-13-55.png)
 
 * **Sur `node2` :**
 
@@ -220,7 +220,7 @@ echo "<h1>Serveur Web : NODE 1</h1>" > /var/www/html/index.html
 echo "<h1>Serveur Web : NODE 2</h1>" > /var/www/html/index.html
 ```
 
-![Personnalisation de la page index.html sur node2](./Capture%20d’écran%20du%202026-11-04%2014-15-07.png)
+![Personnalisation de la page index.html sur node2](../images/Capture%20d’écran%20du%202026-11-04%2014-15-07.png)
 
 *Explication de la commande :* `echo "..." > /var/www/html/index.html` écrase (`>`) la page par défaut d'Apache2 par un titre HTML de niveau 1 (`<h1>`) indiquant clairement l'identité du serveur actif.
 
@@ -290,12 +290,12 @@ scp /etc/corosync/corosync.conf root@node2:/etc/corosync/corosync.conf
 
 *Explication de la commande :* `scp` (*Secure Copy*) copie de manière chiffrée via SSH le fichier local `/etc/corosync/corosync.conf` de `node1` directement à son emplacement cible sur `node2`.
 
-![Saisie de la commande de transfert SCP vers node2](./Capture%20d’écran%20du%202026-11-04%2014-22-22.png)
+![Saisie de la commande de transfert SCP vers node2](../images/Capture%20d’écran%20du%202026-11-04%2014-22-22.png)
 
 !!! note "Droits d'écriture lors du transfert SCP"
     L'écriture directe dans `/etc/corosync/` nécessitant les privilèges super-utilisateur, une tentative avec un compte standard (`sio@node2`) renvoie logiquement `Permission denied`. L'authentification avec `root@node2` permet de transférer les $1930\text{ octets}$ du fichier avec succès (`100%`).
 
-![Exécution réussie du transfert SCP de corosync.conf en tant que root](./Capture%20d’écran%20du%202026-11-04%2014-28-55.png)
+![Exécution réussie du transfert SCP de corosync.conf en tant que root](../images/Capture%20d’écran%20du%202026-11-04%2014-28-55.png)
 
 ---
 
@@ -311,11 +311,11 @@ systemctl restart corosync pacemaker
 
 En contrôlant le statut des services sur **`node1`** (`systemctl status corosync pacemaker`) juste avant le redémarrage de `node2`, on observe que `node1` a démarré son moteur KNET et attend que son pair rejoigne l'anneau (`Waiting for all cluster members. Current votes: 1 expected_votes: 2`) :
 
-![Vérification de l'état des démons corosync et pacemaker sur node1](./Capture%20d’écran%20du%202026-11-04%2014-30-27.png)
+![Vérification de l'état des démons corosync et pacemaker sur node1](../images/Capture%20d’écran%20du%202026-11-04%2014-30-27.png)
 
 On active et on relance aussitôt les services sur **`node2`** :
 
-![Activation et redémarrage de corosync et pacemaker sur node2](./Capture%20d’écran%20du%202026-11-04%2014-31-13.png)
+![Activation et redémarrage de corosync et pacemaker sur node2](../images/Capture%20d’écran%20du%202026-11-04%2014-31-13.png)
 
 On vérifie maintenant l'état global du cluster à l'aide de l'outil `crm` :
 
@@ -325,7 +325,7 @@ crm status
 
 *Explication de la commande :* `crm status` interroge Pacemaker pour afficher la synthèse du cluster : l'état du quorum (`partition with quorum`), le nœud coordinateur désigné (`Current DC: node1`), la liste des nœuds connectés (`Online: [ node1 node2 ]`) et les ressources actives.
 
-![Vérification de la mise en ligne des deux nœuds avec crm status](./Capture%20d’écran%20du%202026-11-04%2014-31-55.png)
+![Vérification de la mise en ligne des deux nœuds avec crm status](../images/Capture%20d’écran%20du%202026-11-04%2014-31-55.png)
 
 Les deux serveurs **`node1`** et **`node2`** sont désormais en ligne (`Online`) et le quorum est établi !
 
@@ -340,7 +340,7 @@ Les deux serveurs **`node1`** et **`node2`** sont désormais en ligne (`Online`)
 
 Lors d'une première tentative de saisie, une légère faute de frappe sur le nom des attributs (`stonith-enable` sans le `d` final et `no-quprum-policy`) a provoqué un avertissement de validation du schéma de la CIB (`unknown attribute`) :
 
-![Avertissement de validation lors de la faute de frappe sur les attributs](./Capture%20d’écran%20du%202026-11-04%2014-34-02.png)
+![Avertissement de validation lors de la faute de frappe sur les attributs](../images/Capture%20d’écran%20du%202026-11-04%2014-34-02.png)
 
 Nous avons immédiatement corrigé les propriétés avec la syntaxe exacte attendue par Pacemaker, tout en déclarant nos deux ressources (`VIP` et `WebSite`) ainsi que leur groupe (`GroupeWeb`) :
 
@@ -384,7 +384,7 @@ crm configure group GroupeWeb VIP WebSite
 - `crm configure group GroupeWeb VIP WebSite` :
     * Réunit `VIP` et `WebSite` au sein d'un groupe nommé `GroupeWeb`. Cela garantit que **les deux ressources tournent toujours sur le même serveur** (colocation implicite) et que **`VIP` est montée avant le démarrage de `WebSite`** (ordre implicite).
 
-![Création des ressources VIP, WebSite, application des propriétés et création du groupe GroupeWeb](./Capture%20d’écran%20du%202026-11-04%2014-42-09.png)
+![Création des ressources VIP, WebSite, application des propriétés et création du groupe GroupeWeb](../images/Capture%20d’écran%20du%202026-11-04%2014-42-09.png)
 
 ---
 
@@ -396,42 +396,13 @@ On contrôle l'état du cluster avec `crm status` :
 crm status
 ```
 
-![Vérification du démarrage du groupe GroupeWeb (VIP + WebSite) sur node1](./Capture%20d’écran%20du%202026-11-04%2014-42-28.png)
+![Vérification du démarrage du groupe GroupeWeb (VIP + WebSite) sur node1](../images/Capture%20d’écran%20du%202026-11-04%2014-42-28.png)
 
 Le `Resource Group: GroupeWeb` est opérationnel : les ressources **`VIP`** et **`WebSite`** affichent toutes deux l'état **`Started node1`**.
 
 ---
 
-## 6. Phase de tests : Simulation de panne (Failover) et retour sur `node1`
-
-```mermaid
-sequenceDiagram
-    autonumber
-    actor Client as Client HTTP (Navigateur)
-    participant VIP as IP Flottante (192.168.57.100)
-    participant N1 as node1 (192.168.57.10)
-    participant N2 as node2 (192.168.57.20)
-
-    Note over N1,N2: État initial : GroupeWeb (VIP + Apache2) actif sur node1
-    Client->>VIP: GET http://192.168.57.100/
-    VIP->>N1: Routage vers ens18 (node1)
-    N1-->>Client: HTTP 200 OK ("Serveur Web : NODE 1")
-
-    Note over N1: Simulation de panne : systemctl stop pacemaker
-    N1->>N2: Arrêt gracieux / Perte du gestionnaire Pacemaker sur node1
-    Note over N2: Détection par Corosync & Élection de node2
-    N2->>VIP: Montage de 192.168.57.100/24 sur ens18 (node2) & Démarrage Apache2
-
-    Client->>VIP: Actualisation F5 (http://192.168.57.100/)
-    VIP->>N2: Routage transparent vers ens18 (node2)
-    N2-->>Client: HTTP 200 OK ("Serveur Web : NODE 2")
-
-    Note over N1,N2: Remise en service : systemctl start pacemaker + crm resource move
-    N1->>VIP: Reprise de la VIP et d'Apache2 sur node1
-    Client->>VIP: Actualisation F5 (http://192.168.57.100/)
-    VIP->>N1: Routage vers ens18 (node1)
-    N1-->>Client: HTTP 200 OK ("Serveur Web : NODE 1")
-```
+## 6. Phase de tests : Simulation de panne et retour sur `node1`
 
 ### A. Simulation d'une panne sur `node1`
 
@@ -443,7 +414,7 @@ systemctl stop pacemaker
 
 *Explication de la commande :* L'arrêt de `pacemaker` sur `node1` force ce dernier à libérer proprement les ressources qu'il hébergeait (`WebSite` puis `VIP`) avant de quitter le contrôle du cluster. Le nœud `node2` constate immédiatement que `node1` n'assure plus le service et démarre automatiquement `GroupeWeb` sur sa propre interface `ens18`.
 
-![Arrêt du service pacemaker sur node1 pour simuler la panne](./Capture%20d’écran%20du%202026-11-04%2014-44-58.png)
+![Arrêt du service pacemaker sur node1 pour simuler la panne](../images/Capture%20d’écran%20du%202026-11-04%2014-44-58.png)
 
 ---
 
@@ -453,7 +424,7 @@ Un simple `ip a` sur `node2` permet alors de constater que l'adresse `192.168.57
 
 En interrogeant l'adresse de l'IP flottante **`http://192.168.57.100/`** depuis le navigateur du poste client Windows 11, le site Web répond sans aucune interruption et affiche désormais la page hébergée par **`node2`** :
 
-![Affichage de la page Serveur Web : NODE 2 sur l'IP flottante 192.168.57.100 après la panne de node1](./Capture%20d’écran%20du%202026-11-04%2014-45-51.png)
+![Affichage de la page Serveur Web : NODE 2 sur l'IP flottante 192.168.57.100 après la panne de node1](../images/Capture%20d’écran%20du%202026-11-04%2014-45-51.png)
 
 La continuité de service est totalement assurée !
 
@@ -477,8 +448,8 @@ Le sujet demande de rechercher et d'exécuter les commandes permettant de refair
 - La commande `crm resource move GroupeWeb node1` crée une contrainte de localisation explicite qui ordonne à Pacemaker d'arrêter proprement `GroupeWeb` sur `node2` et de le redémarrer immédiatement sur **`node1`**.
 - *(Note : comme l'indique le message `INFO` de `crm`, on peut ensuite exécuter `crm resource clear GroupeWeb` pour effacer la contrainte manuelle une fois le retour sur `node1` effectué, afin que les futures bascules automatiques restent libres).*
 
-![Redémarrage de pacemaker et déplacement du groupe GroupeWeb vers node1](./Capture%20d’écran%20du%202026-11-04%2014-47-50.png)
+![Redémarrage de pacemaker et déplacement du groupe GroupeWeb vers node1](../images/Capture%20d’écran%20du%202026-11-04%2014-47-50.png)
 
 En actualisant une dernière fois la page **`http://192.168.57.100/`** sur le navigateur du poste client, nous constatons que le trafic de l'IP flottante est de nouveau servi par **`node1`** :
 
-![Vérification finale sur le navigateur : retour effectif sur Serveur Web : NODE 1](./Capture%20d’écran%20du%202026-11-04%2014-48-05.png)
+![Vérification finale sur le navigateur : retour effectif sur Serveur Web : NODE 1](../images/Capture%20d’écran%20du%202026-11-04%2014-48-05.png)
