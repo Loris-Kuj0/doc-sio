@@ -28,15 +28,15 @@ graph TD
         VIP(("<b>IP Flottante (VIP)</b><br/>192.168.57.100/24<br/><i>Ressource Pacemaker</i>"))
 
         subgraph CLUSTER ["Cluster Haute Disponibilité (debian_cluster)"]
-            N1["<b>node1 (Debian 13)</b><br/>IP réelle : 192.168.57.10<br/>MAC : bc:24:11:a1:5b:47<br/><i>Service : Apache2</i>"]
-            N2["<b>node2 (Debian 13)</b><br/>IP réelle : 192.168.57.20<br/>MAC : distincte<br/><i>Service : Apache2</i>"]
+            N1["<b>node1 (Debian 13)</b><br/>IP réelle : 192.168.57.10<</i>"]
+            N2["<b>node2 (Debian 13)</b><br/>IP réelle : 192.168.57.20</i>"]
             
             N1 <==>|"Heartbeat / Quorum<br/>(Corosync - KNET)"| N2
         end
 
         Client -->|Requête HTTP : http://192.168.57.100| VIP
-        VIP -.->|"1. État nominal (Actif)"| N1
-        VIP -.->|"2. Bascule sur panne (Failover)"| N2
+        VIP -.->|"1. Principal"| N1
+        VIP -.->|"2. Bascule sur panne"| N2
     end
 ```
 
@@ -54,7 +54,7 @@ Afin d'appréhender le fonctionnement interne de notre architecture, voici la d�
 - **Quorum :** Mécanisme démocratique de vote garantissant l'intégrité du cluster. Pour qu'une partition du cluster soit autorisée à héberger des services, elle doit réunir la majorité stricte des voix (de ce que jai compris)
     * *Cas particulier du cluster à 2 nœuds :* La perte d'un nœud laisse le survivant avec exactement 50% des voix (majorité stricte non atteinte). On active alors l'option `two_node: 1` (dans Corosync) et `no-quorum-policy=ignore` (dans Pacemaker) pour autoriser le nœud restant à maintenir la production.
 - **Split-Brain (*Cerveau scindé*) :** Scénario critique dans lequel le lien réseau privé reliant les nœuds est rompu, alors que les deux serveurs sont toujours allumés. Ne recevant plus les battements de cœur de son pair, chaque nœud croit que l'autre est mort et s'approprie simultanément l'IP flottante et les services. Cela provoque des conflits d'adresse IP (ARP) et de graves corruptions de données.
-- **STONITH (*Shoot The Other Node In The Head*) / Fencing :** Mécanisme d'isolation radicale conçu pour prévenir le *Split-Brain*. Lorsqu'un nœud ne répond plus, le nœud survivant utilise un canal matériel externe (prise électrique connectée PDU, carte IPMI/iDRAC ou API de l'hyperviseur Proxmox/ESXi) pour couper électriquement le serveur douteux avant de monter les ressources.
+- **STONITH (*Shoot The Other Node In The Head*) / Fencing :** Mécanisme d'isolation radicale conçu pour prévenir le *Split-Brain*. Lorsqu'un nœud ne répond plus, le nœud survivant utilise un canal matériel externe pour arrêter le serveur douteux avant de monter les ressources.
 - **Colocation et Ordre (Groupe de ressources) :** Contraintes logiques définies dans Pacemaker. La **colocation** oblige deux ressources (la VIP et le serveur Web Apache2) à s'exécuter sur la même machine physique, tandis que l'**ordre** garantit que l'adresse IP virtuelle est montée sur l'interface réseau avant le lancement du démon Apache2.
 
 ---
@@ -62,7 +62,7 @@ Afin d'appréhender le fonctionnement interne de notre architecture, voici la d�
 ## 2. Préparation du nœud maître (`node1`) avant clonage
 
 !!! tip "Stratégie de déploiement par clonage"
-    Conformément aux bonnes pratiques d'administration système, l'ensemble des paquets, de la résolution de noms et des configurations de base est d'abord préparé sur **`node1`**. Une fois ce socle validé, la machine virtuelle est clonée pour générer **`node2`**, ce qui garantit une homogénéité logicielle parfaite entre les deux membres du cluster.
+    Afin d'éviter tout problèmes, l'ensemble des paquets, la résolution de noms et les configurations de base est d'abord préparé sur **`node1`**. puis la machine virtuelle sera/est clonée pour générer **`node2`**, ce qui garantit une homogénéité logicielle parfaite entre les deux machines du cluster.
 
 ### A. Vérification de l'identité et de la configuration IP de `node1`
 
@@ -72,13 +72,13 @@ Le premier serveur est nommé `node1` et dispose d'une configuration réseau sta
 # Définition permanente du nom d'hôte (si nécessaire)
 hostnamectl set-hostname node1
 
-# Contrôle de l'adressage IP et de l'adresse MAC
-ip a
+# Configuration IP et DNS
+nano /etc/network/interfaces
+nano /etc/resolv.conf
 ```
 
 *Explication des commandes :*
 - `hostnamectl set-hostname node1` : modifie le fichier `/etc/hostname` et applique immédiatement le nom système `node1` au noyau.
-- `ip a` (raccourci de `ip address show`) : affiche l'état des interfaces réseau, leurs adresses MAC (`link/ether`) et leurs adresses IPv4/IPv6.
 
 ![Vérification de l'adresse IP et MAC sur node1](../images/Capture%20d’écran%20du%202026-11-04%2013-49-13.png)
 
@@ -109,7 +109,7 @@ Contenu ajouté dans le fichier :
 ![Configuration du fichier /etc/hosts sur node1](../images/Capture%20d’écran%20du%202026-11-04%2013-52-16.png)
 
 !!! info "Synchronisation horaire (NTP)"
-    Sous Debian 13, le service `systemd-timesyncd` assure nativement la synchronisation de l'horloge système. Il est primordial que les deux nœuds soient parfaitement à la même heure (vérifiable via `timedatectl status`) afin que l'horodatage des journaux et des jetons Corosync ne soit pas rejeté.
+    Sous Debian 13, le service `systemd-timesyncd` assure nativement la synchronisation de l'horloge système. Il est primordial que les deux nœuds soient parfaitement à la même heure (vérifiable via `timedatectl status`)
 
 ---
 
@@ -128,7 +128,7 @@ apt update && apt install -y apache2 pacemaker corosync pcs crmsh
 - `apache2` : le serveur HTTP que l'on souhaite rendre hautement disponible.
 - `corosync` : la couche de communication inter-nœuds et de gestion du quorum.
 - `pacemaker` : le gestionnaire de ressources du cluster.
-- `pcs` et `crmsh` (*Cluster Resource Manager Shell*) : interfaces en ligne de commande permettant d'administrer facilement Pacemaker. Dans ce TP, nous utiliserons **`crmsh`** (commande `crm`).
+- `pcs` et `crmsh` (*Cluster Resource Manager Shell*) : interfaces en ligne de commande permettant d'administrer facilement Pacemaker. nous n'utiliserons que **`crmsh`** (commande `crm`).
 
 ![Installation des paquets apache2, pacemaker, corosync, pcs et crmsh](../images/Capture%20d’écran%20du%202026-11-04%2013-54-20.png)
 
@@ -161,7 +161,7 @@ systemctl status apache2
 
 ## 3. Clonage, configuration de `node2` et personnalisation Web
 
-Une fois `node1` éteint proprement, un clone intégral de la machine virtuelle est réalisé depuis l'hyperviseur en veillant à **régénérer une nouvelle adresse MAC** sur proxmox de `node2` afin d'éviter tout conflit.
+Une fois `node1` éteint proprement, un clone intégral de la machine virtuelle est réalisé depuis proxmox en veillant à ce que  **l'adresse MAC soit bien régenerer** afin d'éviter tout conflit.
 
 ### A. Renommage et adressage IP du second nœud (`node2`)
 
