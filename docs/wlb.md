@@ -41,9 +41,9 @@ graph TD
         C2["<b>R57-02 (Windows 11)</b><br/>Client DHCP (192.168.57.150)"]
         C3["<b>R57-03 (Windows 11)</b><br/>Client DHCP"]
 
-        S1 -.->|"DORA / Baux IP (50%)"| C1
-        S2 -.->|"DORA / Baux IP (50%)"| C2
-        S2 -.->|"DORA / Baux IP (50%)"| C3
+        S1 -.->|"Baux IP (50%)"| C1
+        S2 -.->|"Baux IP (50%)"| C2
+        S2 -.->|"Baux IP (50%)"| C3
         C1 & C2 & C3 -->|Passerelle par défaut : .254| Router
     end
 
