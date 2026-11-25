@@ -328,7 +328,7 @@ ipconfig /renew
 ipconfig /all | Select-String "Adresse IPv4|Masque|Passerelle|Serveur DHCP"
 ```
 
-![Renouvellement du bail DHCP (192.168.57.150) sur le client R57-02 assuré par dhcpd2 (192.168.57.2)](../images/Capture%20d’écran%20du%202026-11-25%2015-51-XX.png)
+![Renouvellement du bail DHCP (192.168.57.150) sur le client R57-02 assuré par dhcpd2 (192.168.57.2)](../images/Capture%20d’écran%20du%202026-11-25%2015-51-57.png)
 *Légende : Renouvellement du bail sur le poste client `R57-02` pendant la panne de `dhcpd1` — obtention immédiate de l'IP `192.168.57.150` avec la passerelle `192.168.57.254` directement auprès du serveur partenaire (`Serveur DHCP : 192.168.57.2`).*
 
 ---
