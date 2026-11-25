@@ -82,6 +82,7 @@ ip a
 ```
 
 ![Vérification des interfaces réseau ens18 et ens19 sur LR-Routeur57](../images/Capture%20d’écran%20du%202026-11-25%2013-50-53.png)
+*Légende : Console Proxmox de la VM LR-Routeur57 exécutant `ip a` — confirmation de l'état `UP` de l'interface WAN `ens18` (`192.168.209.102/24`) et de l'interface LAN `ens19` (`192.168.57.254/24`) servant de passerelle au réseau interne.*
 
 On relève sur cette capture les paramètres réseau de référence :
 - **Interface WAN (`ens18`) :** `192.168.209.102/24` (MAC `bc:24:11:1d:1d:da`)
@@ -142,10 +143,12 @@ Le même script est exécuté sur **`dhcpd2`** en adaptant uniquement `$Hostname
 Après redémarrage des deux serveurs, on valide l'identité (`hostname`) et la résolution mutuelle par `ping` depuis `dhcpd1` puis depuis `dhcpd2` :
 
 ![Vérification du nom d'hôte dhcpd1 et test de connectivité ping vers dhcpd2](../images/Capture%20d’écran%20du%202026-11-25%2014-36-23.png)
+*Légende : Terminal PowerShell sur `dhcpd1` — validation du nom d'hôte (`dhcpd1`) et de la résolution locale via le fichier `hosts` vers `dhcpd2` (`192.168.57.2`) avec 0 % de perte après son redémarrage.*
 
 *(Nota : sur `dhcpd1`, la première tentative `ping dhcpd2` a échoué pendant le redémarrage de `dhcpd2`, puis a immédiatement abouti avec 0 % de perte vers `192.168.57.2` dès la fin du démarrage.)*
 
 ![Vérification du nom d'hôte dhcpd2 et test de connectivité ping vers dhcpd1](../images/Capture%20d’écran%20du%202026-11-25%2014-36-41.png)
+*Légende : Terminal PowerShell sur `dhcpd2` — vérification du renommage (`dhcpd2`) et test de connectivité ICMP réussi vers le serveur principal `dhcpd1` (`192.168.57.1`).*
 
 ---
 
@@ -166,6 +169,7 @@ Get-Service dhcpserver
 - `Restart-Service dhcpserver` : redémarre le démon DHCP pour prendre en compte les groupes de sécurité.
 
 ![Finalisation des groupes de sécurité et vérification de l'état Running du service DHCP sur dhcpd2](../images/Capture%20d’écran%20du%202026-11-25%2014-39-14.png)
+*Légende : Finalisation post-déploiement sur `dhcpd2` — création des groupes de sécurité locaux (`netsh dhcp add securitygroups`), redémarrage du service et confirmation de son état actif (`Running`).*
 
 ---
 
@@ -218,6 +222,7 @@ Add-DhcpServerv4Failover `
 Dans la console graphique `dhcpmgmt.msc` de **`dhcpd1`**, l'étendue `[192.168.57.0] Etendue-R57` apparaît immédiatement active et associée à la relation **`Failover-R57`** :
 
 ![Console DHCP sur dhcpd1 affichant l'étendue active et la relation Failover-R57](../images/Capture%20d’écran%20du%202026-11-25%2014-43-01.png)
+*Légende : Console graphique DHCP sur `dhcpd1` — affichage de l'étendue `[192.168.57.0] Etendue-R57` en état `** Actif **` et associée à la relation de basculement `Failover-R57`.*
 
 ---
 
@@ -234,15 +239,18 @@ Test-NetConnection -ComputerName "dhcpd2" -Port 647
 - **Sur `dhcpd1` :** la relation `Failover-R57` affiche `Mode : LoadBalance`, `LoadBalancePercent : 50` et `State : Normal`, avec l'interface `Ethernet` (`192.168.57.1`) liée (`BindingState : True`). *(Le test local sur `dhcpd1:647` renvoie logiquement `False` car seul le partenaire `dhcpd2` écoute en entrée sur le port TCP 647.)*
 
 ![Vérification PowerShell de la relation Failover-R57 et de la liaison réseau sur dhcpd1](../images/Capture%20d’écran%20du%202026-11-25%2015-12-26.png)
+*Légende : Contrôle PowerShell sur `dhcpd1` — relation `Failover-R57` en état `Normal` (`LoadBalance` à `50` %), liaison active (`BindingState : True`) sur `192.168.57.1` et absence logique d'écoute entrante TCP 647 côté initiateur.*
 
 - **Sur `dhcpd2` :** l'étendue `192.168.57.0` s'est automatiquement répliquée avec l'état `Active`, la relation `Failover-R57` est en état `Normal` et le port d'écoute `TCP 647` sur `192.168.57.2` répond positivement (`TcpTestSucceeded : True`) :
 
 ![Vérification de l'état Normal et de l'étendue répliquée Active sur dhcpd2](../images/Capture%20d’écran%20du%202026-11-25%2015-15-26.png)
+*Légende : Contrôle PowerShell sur `dhcpd2` — confirmation de la réplication automatique de l'étendue `Etendue-R57` (`State : Active`) et de la synchronisation en état `Normal` avec `dhcpd1`.*
 
 !!! note "Comportement de la console MMC (`dhcpmgmt.msc`) sur le serveur partenaire en Workgroup"
     Sur `dhcpd2`, bien que l'étendue `[192.168.57.0]` et la relation `Failover-R57` apparaissent dans la console graphique `dhcpmgmt.msc`, l'option contextuelle *« Afficher les statistiques... »* reste grisée. En environnement **Workgroup** (sans domaine Active Directory), les restrictions de sécurité DCOM/RPC entre serveurs limitent l'affichage de certains compteurs graphiques distants. L'interrogation directe en PowerShell via `Get-DhcpServerv4ScopeStatistics -ScopeId 192.168.57.0 -Failover` contourne cette limitation graphique et expose l'intégralité des compteurs répliqués.
 
 ![Console MMC sur dhcpd2 montrant l'étendue répliquée et l'option graphique grisée hors domaine AD](../images/Capture%20d’écran%20du%202026-11-25%2015-03-29.png)
+*Légende : Console graphique DHCP sur `dhcpd2` — présence de l'étendue répliquée et de la relation `Failover-R57`, mais menu « Afficher les statistiques... » grisé en raison des restrictions DCOM/RPC hors domaine Active Directory.*
 
 ---
 
@@ -274,12 +282,12 @@ Conformément aux exigences du sujet, quatre scénarios de validation (**T1** à
 
 ### Synthèse du cahier de tests
 
-| ID | Scénario testé | Action menée | Résultat attendu | Résultat obtenu | Preuve associée |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **T1** | **Obtention d'adresse IP par les clients** | Passage des postes clients Windows 11 en DHCP et exécution de `ipconfig /renew`. | Attribution d'une adresse dans `192.168.57.100–200`, masque `/24`, passerelle `.254`. | **Validé** (`R57-02` obtient `192.168.57.151` puis `192.168.57.150` ; 3 baux actifs enregistrés). | Captures `15-15-51.png` et `15-27-35.png` |
-| **T2** | **Répartition 50/50 et réplication des baux** | Consultation des statistiques d'étendue et des compteurs Failover sur `dhcpd1` et `dhcpd2`. | Partage équitable des 101 adresses (~50/51) et visibilité des baux sur les deux serveurs. | **Validé :** 50 adresses disponibles sur `dhcpd1` et 51 sur `dhcpd2` (48 libres + 3 attribuées). | Captures `15-03-11.png` et `15-15-51.png` |
-| **T3** | **Indisponibilité de `dhcpd1`** | Arrêt du service DHCP sur `dhcpd1` (`Stop-Service dhcpserver`), contrôle de l'état de `dhcpd2` et renouvellement client sur `R57-02`. | `dhcpd2` détecte la coupure (`CommunicationInterrupted`) et délivre seul les baux clients (`192.168.57.2`). | **Validé :** `dhcpd1` `Stopped`, `dhcpd2` en `CommunicationInterrupted` et `R57-02` obtient `192.168.57.150` via `192.168.57.2`. | Captures `15-20-44.png`, `15-24-40.png` et `15-51-XX.png` |
-| **T4** | **Remise en service de `dhcpd1`** | Redémarrage du service sur `dhcpd1` (`Start-Service dhcpserver`) et vérification de la resynchronisation. | Passage par l'état `RecoverWait`, resynchronisation des baux et retour à l'état `Normal`. | **Validé :** `dhcpd1` passe par `RecoverWait`, synchronise les baux et revient en état `Normal`. | Captures `15-27-35.png` et `15-46-57.png` |
+| ID | Scénario testé | Action menée | Résultat attendu | Résultat obtenu |
+| :--- | :--- | :--- | :--- | :--- |
+| **T1** | **Obtention d'adresse IP par les clients** | Passage des postes clients Windows 11 en DHCP et exécution de `ipconfig /renew`. | Attribution d'une adresse dans `192.168.57.100–200`, masque `/24`, passerelle `.254`. | **Validé** (`R57-02` obtient `192.168.57.151` puis `192.168.57.150` ; 3 baux actifs enregistrés). |
+| **T2** | **Répartition 50/50 et réplication des baux** | Consultation des statistiques d'étendue et des compteurs Failover sur `dhcpd1` et `dhcpd2`. | Partage équitable des 101 adresses (~50/51) et visibilité des baux sur les deux serveurs. | **Validé :** 50 adresses disponibles sur `dhcpd1` et 51 sur `dhcpd2` (48 libres + 3 attribuées). |
+| **T3** | **Indisponibilité de `dhcpd1`** | Arrêt du service DHCP sur `dhcpd1` (`Stop-Service dhcpserver`), contrôle de l'état de `dhcpd2` et renouvellement client sur `R57-02`. | `dhcpd2` détecte la coupure (`CommunicationInterrupted`) et délivre seul les baux clients (`192.168.57.2`). | **Validé :** `dhcpd1` `Stopped`, `dhcpd2` en `CommunicationInterrupted` et `R57-02` obtient `192.168.57.150` via `192.168.57.2`. |
+| **T4** | **Remise en service de `dhcpd1`** | Redémarrage du service sur `dhcpd1` (`Start-Service dhcpserver`) et vérification de la resynchronisation. | Passage par l'état `RecoverWait`, resynchronisation des baux et retour à l'état `Normal`. | **Validé :** `dhcpd1` passe par `RecoverWait`, synchronise les baux et revient en état `Normal`. |
 
 ---
 
@@ -290,10 +298,12 @@ Conformément aux exigences du sujet, quatre scénarios de validation (**T1** à
 Sur **`dhcpd1`**, la fenêtre graphique **Statistiques sur l'étendue 192.168.57.0** confirme que les **101 adresses** de la plage sont équitablement réparties entre les deux partenaires (**50 adresses** disponibles sur `dhcpd1` et **51 adresses** gérées par `dhcpd2`, dont 49 libres et 2 déjà octroyées au moment de la capture) :
 
 ![Statistiques d'étendue sur dhcpd1 montrant la répartition 50/50 des adresses](../images/Capture%20d’écran%20du%202026-11-25%2015-03-11.png)
+*Légende : Fenêtre de statistiques sur `dhcpd1` — preuve visuelle de la répartition 50/50 des 101 adresses du pool (50 disponibles sur `dhcpd1`, 49 disponibles et 2 déjà octroyées par le partenaire `dhcpd2`).*
 
 Sur **`dhcpd2`**, l'exécution de `Get-DhcpServerv4ScopeStatistics -ScopeId 192.168.57.0 -Failover` confirme la symétrie parfaite des compteurs après connexion du troisième client : `AddressesFree : 98`, `AddressesInUse : 3` (`AddressesInUseOnThisServer : 3`, `AddressesFreeOnThisServer : 48`, `AddressesFreeOnPartnerServer : 50`) :
 
 ![Statistiques Failover détaillées et vérification du port TCP 647 sur dhcpd2](../images/Capture%20d’écran%20du%202026-11-25%2015-15-51.png)
+*Légende : Compteurs Failover détaillés sur `dhcpd2` — confirmation des 3 baux actifs répliqués (48 adresses libres sur `dhcpd2` et 50 sur `dhcpd1`) et validation de l'écoute sur le port TCP 647 (`TcpTestSucceeded : True`).*
 
 ---
 
@@ -302,10 +312,12 @@ Sur **`dhcpd2`**, l'exécution de `Get-DhcpServerv4ScopeStatistics -ScopeId 192.
 1. **Arrêt du service DHCP sur `dhcpd1` :** on simule la défaillance du serveur principal à l'aide de `Stop-Service dhcpserver` et on vérifie que le statut passe à `Stopped` :
 
 ![Arrêt du service dhcpserver sur dhcpd1 pour simuler la panne](../images/Capture%20d’écran%20du%202026-11-25%2015-20-44.png)
+*Légende : Simulation d'incident sur `dhcpd1` — exécution de `Stop-Service dhcpserver` et vérification de l'arrêt complet du démon DHCP (`Status : Stopped`).*
 
 2. **Détection de l'incident sur `dhcpd2` :** en interrogeant `Get-DhcpServerv4Failover` sur `dhcpd2`, la relation `Failover-R57` passe immédiatement en état **`CommunicationInterrupted`**, permettant à `dhcpd2` d'assurer seul la continuité des attributions et renouvellements de baux sur `192.168.57.0/24` :
 
 ![État CommunicationInterrupted observé sur dhcpd2 lors de l'indisponibilité de dhcpd1](../images/Capture%20d’écran%20du%202026-11-25%2015-24-40.png)
+*Légende : Détection de la panne par `dhcpd2` — passage immédiat de la relation `Failover-R57` en état `CommunicationInterrupted`, autorisant `dhcpd2` à assurer seul la continuité du service DHCP.*
 
 3. **Renouvellement côté client Windows 11 (`R57-02`) :** après avoir libéré son bail (`ipconfig /release`) et demandé un renouvellement (`ipconfig /renew`) alors que `dhcpd1` est hors service, le poste client `R57-02` reçoit immédiatement l'adresse IPv4 **`192.168.57.150`** avec le masque `255.255.255.0`, la passerelle `192.168.57.254` et la mention explicite **`Serveur DHCP : 192.168.57.2`** (`dhcpd2`) :
 
@@ -317,6 +329,7 @@ ipconfig /all | Select-String "Adresse IPv4|Masque|Passerelle|Serveur DHCP"
 ```
 
 ![Renouvellement du bail DHCP (192.168.57.150) sur le client R57-02 assuré par dhcpd2 (192.168.57.2)](../images/Capture%20d’écran%20du%202026-11-25%2015-51-XX.png)
+*Légende : Renouvellement du bail sur le poste client `R57-02` pendant la panne de `dhcpd1` — obtention immédiate de l'IP `192.168.57.150` avec la passerelle `192.168.57.254` directement auprès du serveur partenaire (`Serveur DHCP : 192.168.57.2`).*
 
 ---
 
@@ -325,7 +338,9 @@ ipconfig /all | Select-String "Adresse IPv4|Masque|Passerelle|Serveur DHCP"
 On relance le service DHCP sur **`dhcpd1`** via `Start-Service dhcpserver`. Immédiatement après le redémarrage, `Get-DhcpServerv4Failover` indique la phase transitoire de synchronisation **`RecoverWait`** tout en affichant les baux actifs répliqués :
 
 ![Phase transitoire RecoverWait et liste des baux actifs lors de la reprise de dhcpd1](../images/Capture%20d’écran%20du%202026-11-25%2015-27-35.png)
+*Légende : Reprise de service sur `dhcpd1` — entrée dans l'état transitoire `RecoverWait` juste après `Start-Service dhcpserver` et vérification de la présence des baux actifs synchronisés.*
 
 Une fois la resynchronisation achevée, un nouveau contrôle sur **`dhcpd1`** confirme le retour complet de la relation `Failover-R57` à l'état **`State : Normal`** avec la répartition `LoadBalancePercent : 50` :
 
 ![Retour effectif de la relation Failover-R57 à l'état Normal sur dhcpd1](../images/Capture%20d’écran%20du%202026-11-25%2015-46-57.png)
+*Légende : Fin de la resynchronisation sur `dhcpd1` — retour complet de la relation `Failover-R57` à l'état `Normal` et reprise de l'équilibrage de charge 50/50 avec `dhcpd2`.*
